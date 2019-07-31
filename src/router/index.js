@@ -6,7 +6,8 @@ import index from '@/components/index/index'
 import userInfo from '@/components/userInfo/userInfo'
 import registerShop from '@/components/registerShop/registerShop'
 import shopInfo from '@/components/shopInfo/shopInfo'
-import list from '@/components/list/list'
+import listSupplier from '@/components/list/listSupplier'
+import listPurchase from '@/components/list/listPurchase'
 import listDetail from '@/components/listDetail/listDetail'
 
 // 省市县三级联动
@@ -18,13 +19,14 @@ Vue.use(Distpicker)
 export default new Router({
   routes: [
     {path: '/', name: 'index', component: index},
-    {path: '/login/login', name: 'login', component: login},
-    {path: '/register/register', name: 'register', component: register},
-    {path: '/userInfo/userInfo', name: 'userInfo', component: userInfo},
-    {path: '/registerShop/registerShop', name: 'registerShop', component: registerShop},
-    {path: '/shopInfo/shopInfo', name: 'shopInfo', component: shopInfo},
-    {path: '/list/list', name: 'list', component: list},
-    {path: '/listDetail/listDetail', name: 'listDetail', component: listDetail},
+    {path: '/login', name: 'login', component: login},
+    {path: '/register', name: 'register', component: register},
+    {path: '/userInfo', name: 'userInfo', component: userInfo},
+    {path: '/registerShop', name: 'registerShop', component: registerShop},
+    {path: '/shopInfo', name: 'shopInfo', component: shopInfo},
+    {path: '/listSupplier', name: 'listSupplier', component: listSupplier},
+    {path: '/listPurchase', name: 'listPurchase', component: listPurchase},
+    {path: '/listDetail', name: 'listDetail', component: listDetail}
 
   ]
 })

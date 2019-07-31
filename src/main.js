@@ -9,7 +9,8 @@ import qs from 'qs'
 import 'normalize.css'
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = process.env.API_ROOT //这里写上自己的基础url
+// 这里写上自己的基础url
+axios.defaults.baseURL = process.env.API_ROOT
 Vue.prototype.$axios = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 Vue.prototype.qs = qs
