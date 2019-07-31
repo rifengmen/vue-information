@@ -6,6 +6,7 @@ import router from './router'
 import store from './vuex/store'
 import axios from 'axios'
 import qs from 'qs'
+import 'normalize.css'
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = process.env.API_ROOT //这里写上自己的基础url

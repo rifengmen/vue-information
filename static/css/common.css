@@ -141,3 +141,6 @@
   text-align: right;
 }
 /* 布局方式 end */
+.pointer {
+  cursor: pointer
+}

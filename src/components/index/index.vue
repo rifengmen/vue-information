@@ -1,38 +1,43 @@
 <template>
-  <!--<div>-->
-    <!--<div class="city" @click="toAddress">{{city}}</div>-->
-    <!--<v-distpicker type="mobile" @selected='selected' v-show="addInp"></v-distpicker>-->
-  <!--</div>-->
   <div class="container">
     <!-- 用户信息 start -->
     <div class="userinfo">
-      <router-link class="user fl" to="/userInfo/userInfo">
-        <div class="userimg fl">
+      <div class="user fl">
+        <router-link tag="div" class="userimg fl" to="/userInfo/userInfo">
           <img :src="(userInfo.pic || './static/images/userimg.png')">
+        </router-link>
+        <div class="username font34 font_blod color1470cc fl">
+          <router-link tag="span" class="username" v-if="userInfo.username" to="/userInfo/userInfo">{{userInfo.username}}</router-link>
+          <router-link tag="span" class="username" v-else to="/login/login">{{'请登录'}}</router-link>
         </div>
-        <div class="username fl">
-          <span class="font34 font_blod color1470cc">{{userInfo.username || '请登录'}}</span>
-        </div>
-      </router-link>
-      <router-link class="shopbtn fr font26 colorff9500 bgfff tc" v-if="userInfo.username" to="(isSetShop ? '/shopInfo/shopInfo' : '/registerShop/registerShop')">{{isSetShop ? "进入店铺" : "开设店铺"}}</router-link>
+      </div>
+      <router-link tag="div" class="shopbtn fr font26 colorff9500 bgfff tc" v-if="userInfo.username" to="(isSetShop ? '/shopInfo/shopInfo' : '/registerShop/registerShop')">{{isSetShop ? "进入店铺" : "开设店铺"}}</router-link>
     </div>
     <!-- 用户信息 end -->
-    <!--&lt;!&ndash; 搜索 start &ndash;&gt;-->
-    <!--<div class="search_cont color666 font26">-->
-      <!--<div class="category">-->
-        <!--<select bindchange="categoryChange" value="{{categoryIndex}}" range="{{categoryArray}}" class="selected_options fl tc">店铺分类▽</select>-->
-        <!--<select mode="region" bindchange="regionChange" value="{{region}}" custom-item="{{customItem}}" class="selected_options fl tc">所在地区▽</select>-->
-        <!--<select bindchange="sortChange" value="{{sortIndex}}" range="{{sortArray}}" class="selected_options fl tc">排序方式▽</select>-->
-      <!--</div>-->
-      <!--<div class="search">-->
-        <!--<div class="search_input fl">-->
-          <!--<input type="text" bindinput="getSearchVal" placeholder="请输入标签进行搜索" class="fl" />-->
-          <!--<img src="//images/search.png" class="fr">-->
-        <!--</div>-->
-        <!--<button class="search_btn font26 fr colorff9500" disabled="{{search_val==='' ? true : false}}">搜索</button>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash; 搜索 end &ndash;&gt;-->
+    <!-- 搜索 start -->
+    <div class="search_cont color666 font26">
+      <div class="category">
+        <select class="selected_options fl tc">
+          <option value="0">店铺分类▽</option>
+          <option :value="index" v-for="(item, index) in category" :key="index">{{item}}</option>
+        </select>
+        <select class="selected_options fl tc">
+          <option value="0">所在地区▽</option>
+        </select>
+        <select class="selected_options fl tc">
+          <option value="0">排序方式▽</option>
+          <option :value="index" v-for="(item, index) in sort" :key="index">{{item}}</option>
+        </select>
+      </div>
+      <div class="search">
+        <div class="search_input fl">
+          <input type="text" v-model="search_val" placeholder="请输入标签进行搜索" class="fl" />
+          <img src="./static/images/search.png" class="fr">
+        </div>
+        <button class="search_btn font26 fr colorff9500 bgfff">搜索</button>
+      </div>
+    </div>
+    <!-- 搜索 end -->
     <!--&lt;!&ndash; 店铺列表 start &ndash;&gt;-->
     <!--<ul class="shopslist">-->
       <!--&lt;!&ndash; 店铺简介 start &ndash;&gt;-->
@@ -71,45 +76,51 @@
 </template>
 
 <script>
-  import VDistpicker from 'v-distpicker';
   export default {
     name: 'index',
-    components: {
-      VDistpicker
-    },
     data() {
       return {
-        city: '请选择',
-        addInp: false,
         // 用户信息
         userInfo: this.$store.state.userInfo,
         // 是否已注册商铺
         isSetShop: false,
+        // 店铺分类
+        category: ['测试分类1', '测试分类2', '测试分类3', '测试分类4', '测试分类5', '测试分类6'],
+        // 搜索内容
+        search_val: '',
+        // 排序方式
+        sort: ['时间排序', '名称排序', '**排序']
       }
     },
     methods: {
-      // 获取用户商铺注册信息
-      getIsSetShop() {
-        this.$axios.get('/construction/login/vueTest').then(result => {
-          console.log(result)
-          // if (result.data.code === 0) {
-          //   this.isSetShop = false
-          // } else if (result.data.code === 1) {
-          //   this.isSetShop = true
-          // }
-        }).catch(error => {
-          throw error
-        })
-      },
-      // 省市县三级联动
-      selected(data){
-        this.addInp = false;
-        this.city = data.province.value + ' ' + data.city.value + ' ' + data.area.value;
-      },
-      // 选择地区
-      toAddress() {
-        this.addInp = true;
-      }
+      // 测试请求路径  /construction/login/vueTest
+
+      // // 获取用户商铺注册信息
+      // getIsSetShop() {
+      //   this.$axios.get('').then(result => {
+      //     if (result.data.code === 0) {
+      //       this.isSetShop = false
+      //     } else if (result.data.code === 1) {
+      //       this.isSetShop = true
+      //     }
+      //   }).catch(error => {
+      //     throw error
+      //   })
+      // },
+
+      // // 获取店铺分类
+      // getCategory() {
+      //   this.$axios.get('').then(result => {
+      //     if (result.data.code === 0) {
+      //     } else if (result.data.code === 1) {
+      //       this.category = result.data.data
+      //     }
+      //   }).catch(error => {
+      //     throw error
+      //   })
+      // },
+
+
     },
     created() {
       this.getIsSetShop();
