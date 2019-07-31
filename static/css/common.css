@@ -147,4 +147,8 @@
 .container {
   width: 7.02rem;
   padding: 0 .24rem;
+  overflow: hidden;
+}
+li {
+  list-style: none;
 }

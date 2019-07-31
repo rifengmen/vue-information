@@ -1,5 +1,5 @@
 <template>
-    <div class="userinfo">
+    <div class="userinfo bgfff">
         <div class="user fl">
             <router-link tag="div" class="userimg fl" :to="{name: 'userInfo'}">
                 <img src="userInfo.pic" v-if="userInfo.pic">

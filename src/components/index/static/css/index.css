@@ -57,6 +57,9 @@
 /* 商铺列表 */
 .shopslist {
   width: 100%;
+  margin: 0;
+  height: 11.8rem;
+  overflow-y: auto;
 }
 .shopslist .shopinfo {
   width: 100%;

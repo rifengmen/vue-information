@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div class="footer bgfff">
         <div class="footer-main">
             <router-link :to="{name:'index'}" class="tc">
                 <img src="./static/img/index.png">

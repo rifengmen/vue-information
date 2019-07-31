@@ -27,40 +27,40 @@
       </div>
     </div>
     <!-- 搜索 end -->
-    <!--&lt;!&ndash; 店铺列表 start &ndash;&gt;-->
-    <!--<ul class="shopslist">-->
-      <!--&lt;!&ndash; 店铺简介 start &ndash;&gt;-->
-      <!--<li v-for="(item, index) in shopsList" :key="index">-->
-        <!--<a class="shopinfo" url="/pages/shopInfo/shopInfo">-->
-          <!--<div class="shoptit">-->
-            <!--<div class="shopimg fl">-->
-              <!--<img class="img" src="{{item.img}}">-->
-            <!--</div>-->
-            <!--<div class="shopname fr color666">-->
-              <!--<div class="vip_name">-->
-                <!--<img class="vipclass fl" v-if="vipClass[item.vip]" :src="vipClass[item.vip]">-->
-                <!--<div class="name font30 color333 ellipsis fl">{{item.name}}</div>-->
-              <!--</div>-->
-              <!--<div class="shopcategory font24 colorfff bg1470cc">{{categoryArray[item.category]}}</div>-->
-              <!--<div class="area_box">-->
-                <!--<img class="area" src="//img/area.png">-->
-                <!--<span class="font26">{{item.area}}</span>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="shoptags">-->
-            <!--&lt;!&ndash; 店铺标签 start &ndash;&gt;-->
-            <!--<span v-for="(tag, tIndex) in item.tags" :key="tIndex" class="tags font24 color333 bgcecece">{{tag}}</span>-->
-            <!--&lt;!&ndash; 店铺标签 end &ndash;&gt;-->
-          <!--</div>-->
-          <!--<div class="shopdes">-->
-            <!--<view class="font28 color666 ellipsis">{{item.des}}</view>-->
-          <!--</div>-->
-        <!--</a>-->
-      <!--</li>-->
-      <!--&lt;!&ndash; 店铺简介 end &ndash;&gt;-->
-    <!--</ul>-->
-    <!--&lt;!&ndash; 店铺列表 end &ndash;&gt;-->
+    <!-- 店铺列表 start -->
+    <ul class="shopslist">
+      <!-- 店铺简介 start -->
+      <li v-for="(item, index) in shopsList" :key="index">
+        <router-link class="shopinfo" :to="{name: 'shopInfo'}">
+          <div class="shoptit">
+            <div class="shopimg fl">
+              <img class="img" :src="item.img">
+            </div>
+            <div class="shopname fr color666">
+              <div class="vip_name">
+                <img class="vipclass fl" v-if="vipClass[item.vip]" :src="vipClass[item.vip]">
+                <div class="name font30 color333 ellipsis fl">{{item.name}}</div>
+              </div>
+              <div class="shopcategory font24 colorfff bg1470cc">{{category[item.category]}}</div>
+              <div class="area_box">
+                <img class="area" src="./static/img/area.png">
+                <span class="font26">{{item.area}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="shoptags">
+            <!-- 店铺标签 start -->
+            <span v-for="(tag, tIndex) in item.tags" :key="tIndex" class="tags font24 color333 bgcecece">{{tag}}</span>
+            <!-- 店铺标签 end -->
+          </div>
+          <div class="shopdes">
+            <view class="font28 color666 ellipsis">{{item.des}}</view>
+          </div>
+        </router-link>
+      </li>
+      <!-- 店铺简介 end -->
+    </ul>
+    <!-- 店铺列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
     <!-- 底部导航 end -->
@@ -80,7 +80,102 @@ export default {
       // 搜索内容
       search_val: '',
       // 排序方式
-      sort: ['时间排序', '名称排序', '**排序']
+      sort: ['时间排序', '名称排序', '**排序'],
+      // 店铺等级
+      vipClass: this.$store.state.vip,
+      // 商铺列表
+      shopsList: [
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业1',
+          category: '0',
+          vip: '',
+          area: '测试城市1',
+          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业2',
+          category: '1',
+          vip: '4',
+          area: '测试城市2',
+          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业3',
+          category: '3',
+          vip: '6',
+          area: '测试城市3',
+          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业1',
+          category: '2',
+          vip: '2',
+          area: '测试城市1',
+          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业3',
+          category: '0',
+          vip: '',
+          area: '测试城市3',
+          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业1',
+          category: '2',
+          vip: '1',
+          area: '测试城市1',
+          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业2',
+          category: '3',
+          vip: '10',
+          area: '测试城市2',
+          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业3',
+          category: '0',
+          vip: '1',
+          area: '测试城市3',
+          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业1',
+          category: '2',
+          vip: '1',
+          area: '测试城市1',
+          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
+        },
+        {
+          img: './static/img/userimg.png',
+          name: '测试企业3',
+          category: '1',
+          vip: '1',
+          area: '测试城市3',
+          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+        }
+      ]
     }
   },
   components: {
