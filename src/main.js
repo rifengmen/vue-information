@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 axios.defaults.baseURL = process.env.API_ROOT
 Vue.prototype.$axios = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-Vue.prototype.qs = qs
+Vue.prototype.$qs = qs
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,0 +1,74 @@
+/* 商铺列表 */
+.shopslist {
+  width: 100%;
+  margin: 0;
+  height: 11.8rem;
+  overflow-y: auto;
+}
+.shopslist > li {
+  border-bottom: .2rem #e7e7e7 solid;
+}
+.shopslist .shopinfo {
+  width: 100%;
+  padding: .20rem 0;
+}
+.shopinfo .shoptit {
+  width: 100%;
+  height: 1.40rem;
+
+}
+.shopinfo .shopimg {
+  width: 1.40rem;
+  height: 1.40rem;
+  border-radius: .14rem;
+  overflow: hidden;
+}
+.shopinfo .shopimg img {
+  width: 100%;
+  height: 100%;
+}
+.shopinfo .shopname {
+  width: 5.30rem;
+  height: 100%;
+  margin-right: .20rem;
+}
+.shopinfo .shopname .vip_name {
+  width: 100%;
+  overflow: hidden;
+}
+.shopinfo .shopname .name {
+  width: 4.70rem;
+}
+.shopinfo .shopcategory {
+  display: inline-block;
+  margin: .1rem 0;
+  padding: .04rem .16rem;
+  border-radius: .20rem;
+}
+.shopinfo .shopname .areabox {
+  width: 100%;
+}
+.shopinfo .shopname .area {
+  width: .24rem;
+  height: .24rem;
+  margin-right: .06rem;
+}
+.shopinfo .vipclass {
+  width: .40rem;
+  height: .40rem;
+  border-radius: 50%;
+  margin-right: .10rem;
+}
+.shopinfo .shoptags {
+  padding: .20rem 0;
+}
+.shopinfo .tags {
+  display: inline-block;
+  padding: .02rem .08rem;
+  margin-right: .20rem;
+  border-radius: .14rem;
+}
+.shopinfo .shopdes {
+  padding: .10rem 0;
+}
+/* 商铺列表 end */

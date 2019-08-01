@@ -1,8 +1,6 @@
-import state from './state'
-
 const getters = {
   // 登录状态
-  isLogin() {
+  isLogin(state) {
     if (Object.keys(state.userInfo).length  !== 0) {
       return true;
     } else {
