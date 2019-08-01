@@ -228,7 +228,6 @@ export default {
       let data = this.$qs.stringify(this.searchData)
       setTimeout(() => {
         this.isShowLoading = false
-        this.$store.commit('setIsPullingDown', true)
       }, 500)
       // this.$axios.get('',data).then(result => {
       //   this.$store.commit('setIsPullingDown', true)
@@ -240,6 +239,7 @@ export default {
       // }).catch(error => {
       //   throw error
       // })
+      this.$store.commit('setIsPullingDown', true)
       console.log(data, 1)
     },
     // 刷新数据
@@ -266,6 +266,7 @@ export default {
         //   throw error
         // })
       }
+      this.$store.commit('setIsPullingUp', true)
       console.log(data, 2)
     }
   },

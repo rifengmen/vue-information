@@ -96,17 +96,20 @@ export default {
           },
           // 上啦加载配置项
           pullUpLoad: {
-            threshold: 50
+            threshold: -50
           }
         })
         // 是否触发下拉刷新
         if (this.isPullingDown) {
           this.scroll.on('pullingDown', () => {
-            this.$store.commit('setIsPullingDown', false)
-            if (!this.isPullingDown) {
-              this.scroll.finishPullDown()
-            }
+            // this.$store.commit('setIsPullingDown', false)
             this.$emit('pullingDown')
+            console.log('下拉刷新1')
+            setTimeout(() => {
+              this.scroll.finishPullDown()
+              this.scroll.refresh()
+            }, 500)
+            console.log('下拉刷新2')
           })
         }
         // 是否触发上拉加载
@@ -114,10 +117,13 @@ export default {
           this.scroll.on('pullingUp', () => {
             this.$store.commit('setIsPullingUp', false)
             this.loading = true
-            if (!this.isPullingUp) {
-              this.scroll.finishPullUp()
-            }
             this.$emit('pullingup')
+            console.log('上拉加载1')
+            setTimeout(() => {
+              this.scroll.finishPullUp()
+              this.scroll.refresh()
+            }, 500)
+            console.log('上拉加载1')
             this.loading = false
           })
         }
@@ -130,12 +136,15 @@ export default {
     })
   },
   watch: {
-    shopsList () {
-      this.$nextTick(() => {
-        this.scroll.finishPullUp()
-        this.scroll.finishPullDown()
-        this.scroll.refresh()
-      })
+    shopsList: {
+      handler: function () {
+        this.$nextTick(() => {
+          this.scroll.finishPullUp()
+          this.scroll.finishPullDown()
+          this.scroll.refresh()
+        })
+      },
+      deep: true
     }
   }
 }
