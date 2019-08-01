@@ -1,7 +1,7 @@
 <template>
 
   <div class="loading bgfff">
-    <img src="./static/img/loading.gif">
+    <img src="static/img/loading.gif">
   </div>
 
 </template>
@@ -17,7 +17,7 @@ export default {
   .loading {
     position: fixed;
     left: 0;
-    top: 2rem;
+    top: 3.12rem;
     z-index: 999;
     width: 100vw;
     height: 100vh;
@@ -28,6 +28,8 @@ export default {
 
   img {
     width: 2rem;
+    position: absolute;
+    top: 4rem;
   }
 
 </style>

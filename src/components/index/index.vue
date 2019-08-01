@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <loading v-if="isShowLoading"></loading>
     <!-- 用户信息 start -->
     <my-header></my-header>
     <!-- 用户信息 end -->
@@ -22,14 +21,17 @@
       <div class="search">
         <div class="search_input fl">
           <input type="text" v-model="searchData.search" placeholder="请输入标签进行搜索" class="fl"/>
-          <img :src="'../../static/img/search.png'" class="fr">
+          <img src="static/img/search.png" class="fr">
         </div>
         <div class="search_btn font26 tc fr colorff9500 bgfff" @click="setSearch">搜索</div>
       </div>
     </div>
     <!-- 搜索 end -->
+    <!-- 下拉刷新动画 start -->
+    <loading v-if="isShowLoading"></loading>
+    <!-- 下拉刷新动画 end -->
     <!-- 店铺列表 start -->
-    <my-scroll :shopsList="shopsList" @pullingup="getShopsList"></my-scroll>
+    <my-scroll :shopsList="shopsList" :loadText="loadText" @pullingDown="_getShopsList" @pullingup="_getMoreShopsList"></my-scroll>
     <!-- 店铺列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
@@ -58,14 +60,18 @@ export default {
         // 排序方式
         sort: '0',
         // 标签搜索
-        search: ''
+        search: '',
+        // 页码
+        page: '1',
+        // 总页数
+        total: '0'
       },
       // 排序方式
       sort: ['时间排序', '名称排序', '**排序'],
       // 商铺列表
       shopsList: [
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '0',
           vip: '',
@@ -74,7 +80,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业2',
           category: '1',
           vip: '4',
@@ -83,7 +89,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '3',
           vip: '6',
@@ -92,7 +98,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '2',
           vip: '2',
@@ -101,7 +107,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '0',
           vip: '',
@@ -110,7 +116,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '2',
           vip: '1',
@@ -119,7 +125,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业2',
           category: '3',
           vip: '10',
@@ -128,7 +134,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '0',
           vip: '1',
@@ -137,7 +143,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '2',
           vip: '1',
@@ -146,7 +152,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
-          img: './static/img/userimg.png',
+          img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '1',
           vip: '1',
@@ -154,7 +160,9 @@ export default {
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         }
-      ]
+      ],
+      // 加载提示语
+      loadText: '加载更多...'
     }
   },
   computed: {
@@ -170,6 +178,12 @@ export default {
     },
     searchSort () {
       return this.searchData.sort
+    },
+    page () {
+      return this.searchData.page
+    },
+    total () {
+      return this.searchData.total
     }
   },
   components: {
@@ -180,7 +194,6 @@ export default {
   },
   methods: {
     // 测试请求路径  /construction/login/vueTest
-
     // 获取店铺分类
     getCategory () {
       console.log(this.category)
@@ -193,19 +206,32 @@ export default {
       //   throw error
       // })
     },
-
     // 标签搜索
     setSearch () {
       this.getShopsList()
     },
-
+    // 获取信息总页数
+    getTotal () {
+      this.searchData.total = 8
+      // this.$axios.get('').then(result => {
+      //   if (result.data.code === 0) {
+      //   } else if (result.data.code === 1) {
+      //     this.searchData.total = result.data.data
+      //   }
+      // }).catch(error => {
+      //   throw error
+      // })
+    },
     // 获取店铺列表资料公共方法
     getShopsList () {
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
-      console.log(data)
-      this.isShowLoading = false
+      setTimeout(() => {
+        this.isShowLoading = false
+        this.$store.commit('setIsPullingDown', true)
+      }, 500)
       // this.$axios.get('',data).then(result => {
+      //   this.$store.commit('setIsPullingDown', true)
       //   if (result.data.code === 0) {
       //   } else if (result.data.code === 1) {
       //     this.isShowLoading = false
@@ -214,21 +240,51 @@ export default {
       // }).catch(error => {
       //   throw error
       // })
+      console.log(data, 1)
+    },
+    // 刷新数据
+    _getShopsList () {
+      this.getShopsList()
+    },
+    // 下拉加载更多
+    _getMoreShopsList () {
+      this.searchData.page++
+      let page = this.searchData.page
+      let total = this.searchData.total
+      let data = this.$qs.stringify(this.searchData)
+      if (page > total) {
+        this.loadText = '暂无更多数据'
+      } else {
+        // this.$axios.get('',data).then(result => {
+        //   this.$store.commit('setIsPullingUp', true)
+        //   if (result.data.code === 0) {
+        //   } else if (result.data.code === 1) {
+        //     this.isShowLoading = false
+        //     this.shopsList = result.data.data
+        //   }
+        // }).catch(error => {
+        //   throw error
+        // })
+      }
+      console.log(data, 2)
     }
-
   },
   watch: {
     classify (newval, oldval) {
+      this.getTotal()
       this.getShopsList()
     },
     site (newval, oldval) {
+      this.getTotal()
       this.getShopsList()
     },
     searchSort (newval, oldval) {
+      this.getTotal()
       this.getShopsList()
     }
   },
   created () {
+    this.getTotal()
     this.getCategory()
     this.getShopsList()
   }
@@ -237,6 +293,6 @@ export default {
 
 <style scoped>
 
-  @import "./static/css/index.css";
+  @import "static/css/index.css";
 
 </style>

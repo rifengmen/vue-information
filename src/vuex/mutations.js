@@ -6,6 +6,14 @@ const mutations = {
   // 获取店铺分类
   getCategory (state, category) {
     state.category = category
+  },
+  // 设置下拉刷新请求开关
+  setIsPullingDown (state, isPullingDown) {
+    state.isPullingDown = isPullingDown
+  },
+  // 设置上拉加载请求开关
+  setIsPullingUp (state, isPullingUp) {
+    state.isPullingUp = isPullingUp
   }
 }
 

@@ -2,7 +2,7 @@
     <div class="userinfo bgfff">
         <div class="user fl">
             <router-link tag="div" class="userimg fl" :to="{name: 'userInfo'}">
-                <img :src="(userInfo.pic || '../../static/img/userimg.png')">
+                <img :src="(userInfo.pic || 'static/img/userimg.png')">
             </router-link>
             <div class="username font34 font_blod color1470cc fl">
                 <router-link tag="span" class="username" v-if="userInfo.username" :to="{name: 'userInfo'}">{{userInfo.username}}</router-link>
