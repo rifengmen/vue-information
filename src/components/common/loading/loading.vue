@@ -21,7 +21,7 @@ export default {
     bottom: auto;
     z-index: 999;
     width: 100vw;
-    height: calc(100vh - 4.44rem);
+    height: calc(100vh - 4.64rem);
     display: flex;
     justify-content: center;
     align-items: center;

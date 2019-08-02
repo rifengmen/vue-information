@@ -6,7 +6,7 @@
 input,
 select,
 textarea {
-  border: none;
+  border: none!important;
   outline: none;
   width: 4.5rem;
 }

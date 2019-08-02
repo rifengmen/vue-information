@@ -5,18 +5,29 @@
     <!-- 用户信息 end -->
     <!-- 搜索 start -->
     <div class="search_cont color666 font26">
-      <div class="category">
-        <select class="selected_options fl tc bgfff" title="店铺分类" v-model="searchData.classify">
-          <option value="0">店铺分类</option>
-          <option :value="index+1" v-for="(item, index) in category" :key="index">{{item}}</option>
-        </select>
-        <select class="selected_options fl tc bgfff" title="所在地区" v-model="searchData.site">
-          <option value="0">所在地区</option>
-        </select>
-        <select class="selected_options fl tc bgfff" title="排序方式" v-model="searchData.sort">
-          <option value="0">排序方式</option>
-          <option :value="index+1" v-for="(item, index) in sort" :key="index">{{item}}</option>
-        </select>
+      <div class="category font20">
+        <el-select v-model="searchData.classify" placeholder="店铺分类">
+          <el-option
+            v-for="(item, index) in category"
+            :key="index"
+            :label="item"
+            :value="index">
+          </el-option>
+        </el-select>
+        <div class="site">
+          <div @click="choose">地区选择</div>
+          <p class="pwrap" v-if="show">
+            <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
+          </p>
+        </div>
+        <el-select v-model="searchData.sort" placeholder="排序方式">
+          <el-option
+            v-for="(item, index) in category"
+            :key="index"
+            :label="item"
+            :value="index">
+          </el-option>
+        </el-select>
       </div>
       <div class="search">
         <div class="search_input fl">
@@ -44,6 +55,7 @@ import MyHeader from '@/components/common/header/myheader'
 import MyFooter from '@/components/common/footer/myfooter'
 import MyScroll from '@/components/common/myscroll/myscroll'
 import loading from '@/components/common/loading/loading'
+import VDistpicker from 'v-distpicker'
 
 export default {
   name: 'index',
@@ -54,11 +66,11 @@ export default {
       // 搜索
       searchData: {
         // 分类搜索
-        classify: '0',
+        classify: '',
         // 地区搜索
-        site: '0',
+        site: '',
         // 排序方式
-        sort: '0',
+        sort: '',
         // 标签搜索
         search: '',
         // 页码
@@ -75,7 +87,7 @@ export default {
           name: '测试企业1',
           category: '0',
           vip: '',
-          area: '测试城市1',
+          site: '测试城市1',
           tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
@@ -84,7 +96,7 @@ export default {
           name: '测试企业2',
           category: '1',
           vip: '4',
-          area: '测试城市2',
+          site: '测试城市2',
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
         },
@@ -93,7 +105,7 @@ export default {
           name: '测试企业3',
           category: '3',
           vip: '6',
-          area: '测试城市3',
+          site: '测试城市3',
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
@@ -102,7 +114,7 @@ export default {
           name: '测试企业1',
           category: '2',
           vip: '2',
-          area: '测试城市1',
+          site: '测试城市1',
           tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
@@ -111,7 +123,7 @@ export default {
           name: '测试企业3',
           category: '0',
           vip: '',
-          area: '测试城市3',
+          site: '测试城市3',
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
@@ -120,7 +132,7 @@ export default {
           name: '测试企业1',
           category: '2',
           vip: '1',
-          area: '测试城市1',
+          site: '测试城市1',
           tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
@@ -129,7 +141,7 @@ export default {
           name: '测试企业2',
           category: '3',
           vip: '10',
-          area: '测试城市2',
+          site: '测试城市2',
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
         },
@@ -138,7 +150,7 @@ export default {
           name: '测试企业3',
           category: '0',
           vip: '1',
-          area: '测试城市3',
+          site: '测试城市3',
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
@@ -147,7 +159,7 @@ export default {
           name: '测试企业1',
           category: '2',
           vip: '1',
-          area: '测试城市1',
+          site: '测试城市1',
           tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
@@ -156,13 +168,15 @@ export default {
           name: '测试企业3',
           category: '1',
           vip: '1',
-          area: '测试城市3',
+          site: '测试城市3',
           tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         }
       ],
       // 加载提示语
-      loadText: '加载更多...'
+      loadText: '加载更多...',
+      // 显示省市县下拉框
+      show: false
     }
   },
   computed: {
@@ -190,7 +204,8 @@ export default {
     MyHeader,
     MyFooter,
     MyScroll,
-    loading
+    loading,
+    VDistpicker
   },
   methods: {
     // 测试请求路径  /construction/login/vueTest
@@ -235,7 +250,7 @@ export default {
         name: '测试企业3',
         category: '1',
         vip: '1',
-        area: '测试城市3',
+        site: '测试城市3',
         tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
         des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
       }
@@ -278,13 +293,35 @@ export default {
         name: '测试企业3',
         category: '1',
         vip: '1',
-        area: '测试城市3',
+        site: '测试城市3',
         tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
         des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
       }
       this.shopsList.push(tests)
       this.$store.commit('setIsPullingUp', true)
       console.log(data, '上拉加载发送data')
+    },
+    // 选择省份
+    onChangeProvince: function (a) {
+      this.province = a.value
+    },
+    // 现在城市
+    onChangeCity: function (a) {
+      this.city = a.value
+    },
+    // 选择县区
+    onChangeArea: function (a) {
+      this.area = a.value
+      this.searchData.site = this.province + this.city + this.area
+    },
+    // 显示隐藏省市县下拉框
+    choose () {
+      this.show = !this.show
+    },
+    // 省市县三级联动
+    onSelected (data) {
+      this.searchData.site = data.province.value + data.city.value + data.area.value
+      this.show = false
     }
   },
   watch: {
