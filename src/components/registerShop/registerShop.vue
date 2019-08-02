@@ -74,9 +74,12 @@
             <div class="categoryimg">
               <img src="static/img/category.png">
             </div>
-            <select class="bgfff color666" title="请选择所在地区" v-model="registerData.area">
-              <option value="0" selected>请选择所在地区</option>
-            </select>
+            <div class="site">
+              <div @click="choose" class="tc">{{registerData.site || '请选择地区'}}</div>
+              <p class="pwrap bgfff" v-if="show">
+                <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
+              </p>
+            </div>
           </div>
         </li>
         <!-- 所在地区 end -->
@@ -108,10 +111,14 @@
           </div>
         </li>
         <!-- 是否认证 end -->
+        <!-- 提示信息 start -->
+        <li class="register_li">
+          <div class="color999">
+            带<span class="coloree410c">❈</span>为必填项，请认证填写
+          </div>
+        </li>
+        <!-- 提示信息 end -->
       </ul>
-      <div class="color999">
-        带<span class="coloree410c">❈</span>为必填项，请认证填写
-      </div>
     </div>
     <!-- 注册信息 end -->
     <!-- 提交按钮 start -->
@@ -121,6 +128,7 @@
 </template>
 
 <script>
+import VDistpicker from 'v-distpicker'
 export default {
   name: 'registerShop',
   data () {
@@ -129,17 +137,19 @@ export default {
       userInfo: this.$store.state.userInfo,
       // 店铺注册信息
       registerData: {
-        // img: '',
+        img: '',
         name: '',
         category: '',
-        // area: '',
+        site: '',
         tags: [],
         des: '',
         phone: '',
         authentication: '1'
       },
       // 店铺标签
-      tags: ''
+      tags: '',
+      // 省市县三级联动显示隐藏
+      show: false
     }
   },
   computed: {
@@ -193,7 +203,19 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    },
+    // 显示隐藏省市县下拉框
+    choose () {
+      this.show = !this.show
+    },
+    // 省市县三级联动
+    onSelected (data) {
+      this.registerData.site = data.province.value + data.city.value + data.area.value
+      this.show = false
     }
+  },
+  components: {
+    VDistpicker
   },
   watch: {
     // 监听店铺标签变化

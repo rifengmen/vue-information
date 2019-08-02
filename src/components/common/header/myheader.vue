@@ -8,7 +8,7 @@
                 <router-link tag="span" class="username" :to="{name: 'userInfo'}">{{userInfo.username || '新用户'}}</router-link>
             </div>
         </div>
-        <router-link tag="div" class="shopbtn fr font26 colorff9500 bgfff tc" :to="(isSetShop ? {name: 'shopInfo'} : {name: 'registerShop'})">{{isSetShop ? "进入店铺" : "注册店铺"}}</router-link>
+        <router-link tag="div" class="shopbtn fr font26 colorff9500 bgfff tc" :to="(!isSetShop ? {name: 'shopInfo'} : {name: 'registerShop'})">{{!isSetShop ? "进入店铺" : "注册店铺"}}</router-link>
     </div>
 </template>
 

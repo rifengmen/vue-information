@@ -24,11 +24,14 @@
 }
 .register_li {
   width: 100%;
-  min-height: .8rem;
+  min-height: 1rem;
   display: flex;
   justify-content: start;
   align-items: center;
   border-bottom: .2rem #e7e7e7 solid;
+}
+.register_li:last-child {
+  border-bottom: none;
 }
 .register_li .tip {
   width: .26rem;

@@ -5,8 +5,9 @@
     <!-- 用户信息 end -->
     <!-- 搜索 start -->
     <div class="search_cont color666 font26">
-      <div class="category font20">
+      <div class="category">
         <el-select v-model="searchData.classify" placeholder="店铺分类">
+          <option value="店铺分类"></option>
           <el-option
             v-for="(item, index) in category"
             :key="index"
@@ -15,8 +16,8 @@
           </el-option>
         </el-select>
         <div class="site">
-          <div @click="choose">地区选择</div>
-          <p class="pwrap" v-if="show">
+          <div @click="choose" class="tc">{{searchData.site || '地区选择'}}</div>
+          <p class="pwrap bgfff" v-if="show">
             <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
           </p>
         </div>
@@ -42,7 +43,7 @@
     <loading v-if="isShowLoading"></loading>
     <!-- 下拉刷新动画 end -->
     <!-- 店铺列表 start -->
-    <my-scroll :shopsList="shopsList" :loadText="loadText" @pullingDown="getShopsList" @pullingup="getMoreShopsList"></my-scroll>
+    <my-scroll :shopsList="shopsList" :loadText="loadText" @pullingDown="_getShopsList" @pullingup="getMoreShopsList"></my-scroll>
     <!-- 店铺列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
@@ -268,7 +269,11 @@ export default {
       this.$store.commit('setIsPullingDown', true)
       console.log(data, '下拉刷新发送data')
     },
-    // 下拉加载更多
+    // 下拉刷新
+    _getShopsList () {
+      this.$router.go(0)
+    },
+    // 上拉加载更多
     getMoreShopsList () {
       this.searchData.page++
       let page = this.searchData.page
@@ -300,19 +305,6 @@ export default {
       this.shopsList.push(tests)
       this.$store.commit('setIsPullingUp', true)
       console.log(data, '上拉加载发送data')
-    },
-    // 选择省份
-    onChangeProvince: function (a) {
-      this.province = a.value
-    },
-    // 现在城市
-    onChangeCity: function (a) {
-      this.city = a.value
-    },
-    // 选择县区
-    onChangeArea: function (a) {
-      this.area = a.value
-      this.searchData.site = this.province + this.city + this.area
     },
     // 显示隐藏省市县下拉框
     choose () {

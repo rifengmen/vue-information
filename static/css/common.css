@@ -162,6 +162,42 @@ li {
   text-align: right;
 }
 /* 布局方式 end */
+/* 省市县三级联动 start */
+.site {
+  width: 3rem;
+}
+.pwrap {
+  height: 6rem;
+  overflow-y: auto;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
+.pwrap .distpicker-address-wrapper {
+  color: #999;
+}
+.pwrap .address-header {
+  position: fixed;
+  bottom: 6rem;
+  width: 100%;
+  background: #000;
+  color: #fff;
+}
+.pwrap .address-header ul li {
+  flex-grow: 1;
+  text-align: center;
+}
+.pwrap .address-header .active {
+  color: #fff;
+  border-bottom: #666 solid .08rem
+}
+.pwrap .address-container .active {
+  color: #000;
+}
+/* 省市县三级联动 end */
+/* 公共样式 start */
 .pointer {
   cursor: pointer
 }
@@ -170,3 +206,4 @@ li {
   padding: 0 .24rem;
   overflow: hidden;
 }
+/* 公共样式 end */
