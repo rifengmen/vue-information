@@ -2,14 +2,13 @@
     <div class="userinfo bgfff">
         <div class="user fl">
             <router-link tag="div" class="userimg fl" :to="{name: 'userInfo'}">
-                <img :src="(userInfo.pic || 'static/img/userimg.png')">
+                <img :src="userInfo.pic || 'static/img/userimg.png'">
             </router-link>
             <div class="username font34 font_blod color1470cc fl">
-                <router-link tag="span" class="username" v-if="userInfo.username" :to="{name: 'userInfo'}">{{userInfo.username}}</router-link>
-                <router-link tag="span" class="username" v-else :to="{name: 'login'}">游客，请登录</router-link>
+                <router-link tag="span" class="username" :to="{name: 'userInfo'}">{{userInfo.username || '新用户'}}</router-link>
             </div>
         </div>
-        <router-link tag="div" class="shopbtn fr font26 colorff9500 bgfff tc" v-if="isLogin" :to="(isSetShop ? {name: 'shopInfo'} : {name: 'registerShop'})">{{isSetShop ? "进入店铺" : "开设店铺"}}</router-link>
+        <router-link tag="div" class="shopbtn fr font26 colorff9500 bgfff tc" :to="(isSetShop ? {name: 'shopInfo'} : {name: 'registerShop'})">{{isSetShop ? "进入店铺" : "注册店铺"}}</router-link>
     </div>
 </template>
 

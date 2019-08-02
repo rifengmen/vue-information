@@ -1,9 +1,14 @@
 /* 商铺列表 */
-.shopslist {
+.wrapper {
   width: 100%;
   margin: 0;
-  height: 11.8rem;
-  overflow-y: auto;
+  height: calc(100vh - 4.44rem);
+  z-index: -1;
+  overflow: hidden;
+}
+.shopslist {
+  width: 100%;
+  height: auto;
 }
 .shopslist > li {
   border-bottom: .2rem #e7e7e7 solid;

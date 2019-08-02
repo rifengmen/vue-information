@@ -4,6 +4,7 @@
   height: 1.0rem;
   border-bottom: .01rem #cecece solid;
   padding: .2rem 0;
+  z-index: 9999;
 }
 .userinfo .user {
   width: 60%;
@@ -35,7 +36,7 @@
   width: 1.50rem;
   height: .60rem;
   line-height: .60rem;
-  margin-top: .40rem;
+  margin-top: .20rem;
   border: .01rem #cecece solid;
   border-radius: .06rem;
 }

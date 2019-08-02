@@ -2,11 +2,15 @@
 .search_cont {
   width: 100%;
   height: 1.82rem;
+  z-index: 9999;
 }
 .search_cont .category {
   width: 100%;
   height: .80rem;
   border-bottom: .01rem #cecece solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .search_cont .category .selected_options {
   padding: 0 .44rem;
@@ -45,7 +49,7 @@
   width: 80%;
   height: .48rem;
   border: none;
-  margin-top: .02rem;
+  margin-top: .08rem;
   outline: none;
 }
 .search_input img {

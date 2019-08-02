@@ -3,6 +3,16 @@
   margin: 0;
   padding: 0;
 }
+input,
+select,
+textarea {
+  border: none;
+  outline: none;
+  width: 4.5rem;
+}
+textarea {
+  padding: .2rem;
+}
 li {
   list-style: none;
 }
@@ -106,6 +116,9 @@ li {
 /* 背景颜色 start */
 .bgfff {
   background-color: #fff;
+}
+.bg000_a30 {
+  background-color: rgba(0, 0, 0, .5);
 }
 .bg1470cc {
   background-color: #1470cc;

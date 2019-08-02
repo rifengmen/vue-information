@@ -8,14 +8,14 @@
       <div class="category">
         <select class="selected_options fl tc bgfff" title="店铺分类" v-model="searchData.classify">
           <option value="0">店铺分类</option>
-          <option :value="index+1" v-for="(item, index) in category" :key="index+1">{{item}}</option>
+          <option :value="index+1" v-for="(item, index) in category" :key="index">{{item}}</option>
         </select>
         <select class="selected_options fl tc bgfff" title="所在地区" v-model="searchData.site">
           <option value="0">所在地区</option>
         </select>
         <select class="selected_options fl tc bgfff" title="排序方式" v-model="searchData.sort">
           <option value="0">排序方式</option>
-          <option :value="index+1" v-for="(item, index) in sort" :key="index+1">{{item}}</option>
+          <option :value="index+1" v-for="(item, index) in sort" :key="index">{{item}}</option>
         </select>
       </div>
       <div class="search">
@@ -31,7 +31,7 @@
     <loading v-if="isShowLoading"></loading>
     <!-- 下拉刷新动画 end -->
     <!-- 店铺列表 start -->
-    <my-scroll :shopsList="shopsList" :loadText="loadText" @pullingDown="_getShopsList" @pullingup="_getMoreShopsList"></my-scroll>
+    <my-scroll :shopsList="shopsList" :loadText="loadText" @pullingDown="getShopsList" @pullingup="getMoreShopsList"></my-scroll>
     <!-- 店铺列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
@@ -67,7 +67,7 @@ export default {
         total: '0'
       },
       // 排序方式
-      sort: ['时间排序', '名称排序', '**排序'],
+      sort: ['时间排序', '等级排序'],
       // 商铺列表
       shopsList: [
         {
@@ -224,11 +224,22 @@ export default {
     },
     // 获取店铺列表资料公共方法
     getShopsList () {
+      this.searchData.page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
       setTimeout(() => {
         this.isShowLoading = false
-      }, 500)
+      }, 1000)
+      let tests = {
+        img: 'static/img/userimg.png',
+        name: '测试企业3',
+        category: '1',
+        vip: '1',
+        area: '测试城市3',
+        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+      }
+      this.shopsList.unshift(tests)
       // this.$axios.get('',data).then(result => {
       //   this.$store.commit('setIsPullingDown', true)
       //   if (result.data.code === 0) {
@@ -240,14 +251,10 @@ export default {
       //   throw error
       // })
       this.$store.commit('setIsPullingDown', true)
-      console.log(data, 1)
-    },
-    // 刷新数据
-    _getShopsList () {
-      this.getShopsList()
+      console.log(data, '下拉刷新发送data')
     },
     // 下拉加载更多
-    _getMoreShopsList () {
+    getMoreShopsList () {
       this.searchData.page++
       let page = this.searchData.page
       let total = this.searchData.total
@@ -266,8 +273,18 @@ export default {
         //   throw error
         // })
       }
+      let tests = {
+        img: 'static/img/userimg.png',
+        name: '测试企业3',
+        category: '1',
+        vip: '1',
+        area: '测试城市3',
+        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+      }
+      this.shopsList.push(tests)
       this.$store.commit('setIsPullingUp', true)
-      console.log(data, 2)
+      console.log(data, '上拉加载发送data')
     }
   },
   watch: {
