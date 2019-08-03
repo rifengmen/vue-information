@@ -4,10 +4,9 @@
     <my-header></my-header>
     <!-- 用户信息 end -->
     <!-- 搜索 start -->
-    <div class="search_cont color666 font26">
+    <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.classify" placeholder="店铺分类">
-          <option value="店铺分类"></option>
+        <el-select v-model="searchData.classify" placeholder="全部分类">
           <el-option
             v-for="(item, index) in category"
             :key="index"
@@ -16,14 +15,17 @@
           </el-option>
         </el-select>
         <div class="site">
-          <div @click="choose" class="tc">{{searchData.site || '地区选择'}}</div>
+          <div @click="choose" class="choose tc colorcecece">
+            <div class="font26">{{searchData.site || '地区选择'}}</div>
+            <img src="static/img/turnup.png">
+          </div>
           <p class="pwrap bgfff" v-if="show">
             <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
           </p>
         </div>
-        <el-select v-model="searchData.sort" placeholder="排序方式">
+        <el-select v-model="searchData.sort" placeholder="时间排序">
           <el-option
-            v-for="(item, index) in category"
+            v-for="(item, index) in sort"
             :key="index"
             :label="item"
             :value="index">
@@ -271,7 +273,7 @@ export default {
     },
     // 下拉刷新
     _getShopsList () {
-      this.$router.go(0)
+      this.searchData.site = ''
     },
     // 上拉加载更多
     getMoreShopsList () {

@@ -82,6 +82,11 @@
   display: block;
 }
 /* 门脸图片上传 end */
+/* 店铺认证样式修改 start */
+.el-radio {
+  margin-right: .1rem;
+}
+/* 店铺认证样式修改 end */
 /* 注册信息 end */
 /* 提交按钮 start */
 .register_btn {

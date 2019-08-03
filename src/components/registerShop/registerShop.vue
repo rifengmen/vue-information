@@ -5,7 +5,7 @@
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">注册店铺</div>
+      <div class="font26 font_blod color1470cc">{{userInfo.shopid ? '管理店铺' : '注册店铺'}}</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
@@ -35,6 +35,7 @@
                 :key="index"
                 :label="item"
                 :value="index">
+                :selected="category[registerData.category]"
               </el-option>
             </el-select>
           </div>
@@ -75,7 +76,10 @@
               <img src="static/img/category.png">
             </div>
             <div class="site">
-              <div @click="choose" class="tc">{{registerData.site || '请选择地区'}}</div>
+              <div @click="choose" class="choose tc colorcecece">
+                <div class="font26">{{registerData.site || '请选择地区'}}</div>
+                <img src="static/img/turnup.png">
+              </div>
               <p class="pwrap bgfff" v-if="show">
                 <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
               </p>
@@ -107,7 +111,8 @@
           <div class="li_name color333 font_blod">店铺认证：</div>
           <div class="register_val">
             <el-radio v-model="registerData.authentication" label="1">不认证</el-radio>
-            <el-radio v-model="registerData.authentication" label="2">认证</el-radio>
+            <el-radio v-model="registerData.authentication" label="2">个人认证</el-radio>
+            <el-radio v-model="registerData.authentication" label="3">企业认证</el-radio>
           </div>
         </li>
         <!-- 是否认证 end -->
@@ -122,7 +127,7 @@
     </div>
     <!-- 注册信息 end -->
     <!-- 提交按钮 start -->
-    <div class="register_btn bge7e7e7 colorff9500 tc font_blod font26" @click="registerSend">注册</div>
+    <div :class="'register_btn bge7e7e7 colorff9500 tc font_blod font26' + (send ? 'bg1470cc' : '')" @click="registerSend">注册</div>
     <!-- 提交按钮 end -->
   </div>
 </template>
@@ -133,26 +138,38 @@ export default {
   name: 'registerShop',
   data () {
     return {
-      // 用户信息
-      userInfo: this.$store.state.userInfo,
       // 店铺注册信息
       registerData: {
+        // 店铺门脸照片
         img: '',
+        // 店铺名字
         name: '',
+        // 店铺分类
         category: '',
+        // 店铺位置
         site: '',
+        // 店铺标签
         tags: [],
+        // 店铺介绍
         des: '',
+        // 店铺电话
         phone: '',
+        // 认证类型，1：未认证；2：个人认证；3：企业认证
         authentication: '1'
       },
       // 店铺标签
       tags: '',
       // 省市县三级联动显示隐藏
-      show: false
+      show: false,
+      // 是否发送注册信息
+      send: true
     }
   },
   computed: {
+    // 用户信息
+    userInfo () {
+      return this.$store.state.userInfo
+    },
     // 店铺分类
     category () {
       return this.$store.state.category
@@ -163,13 +180,20 @@ export default {
     backs () {
       this.$router.back()
     },
-    // 发送注册信息
-    registerSend () {
+    // 验证是否可以发送注册信息
+    isSend () {
       for (let registerDataKey in this.registerData) {
-        console.log(this.registerData.tags === '')
         if (this.registerData[registerDataKey] === '' || this.registerData.tags.length === 0) {
+          this.send = false
           return
         }
+        this.send = true
+      }
+    },
+    // 发送注册信息
+    registerSend () {
+      // this.isSend()
+      if (this.send) {
         // this.$axios.post('', this.registerData).then(result => {
         //   if (result.data.code === 0) {
         //     this.$message.error(result.data.msg)
@@ -178,7 +202,7 @@ export default {
         //     this.$message.success({
         //       message: result.data.msg,
         //       onClose () {
-        //         _this.$router.push({name: 'shopInfo', params: {userId: this.userInfo.userId}})
+        //         _this.$router.push({name: 'index'})
         //       }
         //     })
         //   }
@@ -186,6 +210,7 @@ export default {
         //   throw error
         // })
       }
+      console.log(this.registerData)
     },
     // 图片上传成功后返回图片路径
     handleAvatarSuccess (res, file) {
@@ -221,6 +246,37 @@ export default {
     // 监听店铺标签变化
     tags (newval, oldval) {
       this.registerData.tags = newval.split('，')
+    }
+  },
+  created () {
+    // 判断是否注册店铺，如已注册则在页面加载前抓取注册星稀进行展示
+    if (this.userInfo.shopid) {
+      // this.$axios.get('', this.userInfo.shopid).then(result => {
+      //   if (result.data.code === 0) {
+      //     this.$message.error(result.data.msg)
+      //   } else if (result.data.code === 1) {
+      //     let _this = this
+      //     this.$message.success({
+      //       message: result.data.msg,
+      //       onClose () {
+      //         _this.registerData = result.data.data
+      //         _this.tags = _this.registerData.tags.join('，')
+      //       }
+      //     })
+      //   }
+      // })
+      let data = {
+        img: 'static/img/userimg.png',
+        name: '测试店铺',
+        category: '2',
+        site: '山西省太原市小店区',
+        tags: ['测试一', '测试二'],
+        des: '这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，',
+        phone: '18735605086',
+        authentication: '3'
+      }
+      this.registerData = data
+      this.tags = data.tags.join('，')
     }
   }
 }

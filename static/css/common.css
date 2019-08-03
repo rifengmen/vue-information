@@ -99,6 +99,12 @@ li {
 .color999 {
   color: #999;
 }
+.colorcecece {
+  color: #cecece;
+}
+.colore7e7e7 {
+  color: #e7e7e7;
+}
 .colorfff {
   color: #fff;
 }
@@ -164,7 +170,19 @@ li {
 /* 布局方式 end */
 /* 省市县三级联动 start */
 .site {
-  width: 3rem;
+  height: 100%;
+}
+.site .choose {
+  width: 2.1rem;
+  height: 100%;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site .choose img {
+  width: .28rem;
+  height: .28rem;
 }
 .pwrap {
   height: 6rem;
