@@ -3,7 +3,7 @@
     <!-- 用户信息 start -->
     <my-header></my-header>
     <!-- 用户信息 end -->
-    <!-- 搜索 start -->
+    <!-- 选择 搜索 start -->
     <div class="search_cont color666">
       <div class="category">
         <el-select v-model="searchData.classify">
@@ -17,7 +17,7 @@
         <div class="site">
           <div @click="choose" class="choose tc colorcecece">
             <div class="font26">{{searchData.site || '地区选择'}}</div>
-            <img src="static/img/turnup.png">
+            <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
           </div>
           <p class="pwrap bgfff" v-if="show">
             <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
@@ -40,7 +40,7 @@
         <div class="search_btn font26 tc fr colorff9500 bgfff" @click="setSearch">搜索</div>
       </div>
     </div>
-    <!-- 搜索 end -->
+    <!-- 选择 搜索 end -->
     <!-- 下拉刷新动画 start -->
     <loading v-if="isShowLoading"></loading>
     <!-- 下拉刷新动画 end -->
@@ -179,7 +179,9 @@ export default {
       // 加载提示语
       loadText: '加载更多...',
       // 显示省市县下拉框
-      show: false
+      show: false,
+      // 箭头旋转
+      turnimg: false
     }
   },
   computed: {
@@ -311,11 +313,13 @@ export default {
     // 显示隐藏省市县下拉框
     choose () {
       this.show = !this.show
+      this.turnimg = !this.turnimg
     },
     // 省市县三级联动
     onSelected (data) {
       this.searchData.site = data.province.value + data.city.value + data.area.value
       this.show = false
+      this.turnimg = false
     }
   },
   watch: {

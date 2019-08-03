@@ -20,6 +20,7 @@
 .register_cont {
   width: 100%;
   height: calc(100vh - 2.02rem);
+  overflow: hidden;
   overflow-y: auto;
 }
 .register_li {

@@ -77,7 +77,7 @@
             <div class="site">
               <div @click="choose" class="choose tc colorcecece">
                 <div class="font26">{{registerData.site || '请选择地区'}}</div>
-                <img src="static/img/turnup.png">
+                <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
               </div>
               <p class="pwrap bgfff" v-if="show">
                 <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
@@ -161,7 +161,9 @@ export default {
       // 省市县三级联动显示隐藏
       show: false,
       // 是否发送注册信息
-      send: false
+      send: false,
+      // 箭头旋转
+      turnimg: false
     }
   },
   computed: {
@@ -230,11 +232,13 @@ export default {
     // 显示隐藏省市县下拉框
     choose () {
       this.show = !this.show
+      this.turnimg = !this.turnimg
     },
     // 省市县三级联动
     onSelected (data) {
       this.registerData.site = data.province.value + data.city.value + data.area.value
       this.show = false
+      this.turnimg = false
     }
   },
   components: {
