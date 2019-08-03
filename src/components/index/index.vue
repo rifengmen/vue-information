@@ -6,7 +6,7 @@
     <!-- 搜索 start -->
     <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.classify" placeholder="全部分类">
+        <el-select v-model="searchData.classify">
           <el-option
             v-for="(item, index) in category"
             :key="index"
@@ -23,7 +23,7 @@
             <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
           </p>
         </div>
-        <el-select v-model="searchData.sort" placeholder="时间排序">
+        <el-select v-model="searchData.sort">
           <el-option
             v-for="(item, index) in sort"
             :key="index"
@@ -69,11 +69,11 @@ export default {
       // 搜索
       searchData: {
         // 分类搜索
-        classify: '',
+        classify: 0,
         // 地区搜索
         site: '',
-        // 排序方式
-        sort: '',
+        // 排序方式，0：时间顺序；1：时间倒序；2：等级顺序；3：等级倒序
+        sort: 0,
         // 标签搜索
         search: '',
         // 页码
@@ -82,7 +82,7 @@ export default {
         total: '0'
       },
       // 排序方式
-      sort: ['时间排序', '等级排序'],
+      sort: ['时间顺序', '时间倒序', '等级顺序', '等级倒序'],
       // 商铺列表
       shopsList: [
         {

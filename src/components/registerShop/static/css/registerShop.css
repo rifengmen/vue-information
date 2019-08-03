@@ -62,6 +62,7 @@
   border: .01rem dashed #999;
   border-radius: .1rem;
   margin: .2rem 0;
+  padding: .04rem;
 }
 .avatar-uploader .el-upload {
   cursor: pointer;

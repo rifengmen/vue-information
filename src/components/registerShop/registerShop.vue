@@ -35,7 +35,6 @@
                 :key="index"
                 :label="item"
                 :value="index">
-                :selected="category[registerData.category]"
               </el-option>
             </el-select>
           </div>
@@ -127,7 +126,7 @@
     </div>
     <!-- 注册信息 end -->
     <!-- 提交按钮 start -->
-    <div :class="'register_btn bge7e7e7 colorff9500 tc font_blod font26' + (send ? 'bg1470cc' : '')" @click="registerSend">注册</div>
+    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">提交信息</div>
     <!-- 提交按钮 end -->
   </div>
 </template>
@@ -144,8 +143,8 @@ export default {
         img: '',
         // 店铺名字
         name: '',
-        // 店铺分类
-        category: '',
+        // 店铺分类，0：全部分类
+        category: 0,
         // 店铺位置
         site: '',
         // 店铺标签
@@ -162,7 +161,7 @@ export default {
       // 省市县三级联动显示隐藏
       show: false,
       // 是否发送注册信息
-      send: true
+      send: false
     }
   },
   computed: {
@@ -192,7 +191,6 @@ export default {
     },
     // 发送注册信息
     registerSend () {
-      // this.isSend()
       if (this.send) {
         // this.$axios.post('', this.registerData).then(result => {
         //   if (result.data.code === 0) {
@@ -246,6 +244,13 @@ export default {
     // 监听店铺标签变化
     tags (newval, oldval) {
       this.registerData.tags = newval.split('，')
+    },
+    // 监听注册信息填写情况
+    registerData: {
+      handler () {
+        this.isSend()
+      },
+      deep: true
     }
   },
   created () {
@@ -268,7 +273,7 @@ export default {
       let data = {
         img: 'static/img/userimg.png',
         name: '测试店铺',
-        category: '2',
+        category: 2,
         site: '山西省太原市小店区',
         tags: ['测试一', '测试二'],
         des: '这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，',
