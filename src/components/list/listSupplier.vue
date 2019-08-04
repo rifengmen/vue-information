@@ -6,7 +6,7 @@
     <!-- 筛选条件 start -->
     <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.classify">
+        <el-select v-model="searchData.category_msg">
           <el-option
             v-for="(item, index) in category_msg"
             :key="index"
@@ -26,6 +26,14 @@
       </div>
     </div>
     <!-- 筛选条件 end -->
+    <!-- 信息列表 start -->
+    <my-scrollmsg
+      :shopsList="msgList"
+      :loadText="loadText"
+      @pullingDown="_getMsgList"
+      @pullingup="getMoreMsgList">
+    </my-scrollmsg>
+    <!-- 信息列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
     <!-- 底部导航 end -->
@@ -35,6 +43,10 @@
 <script>
 import MyHeader from '@/components/common/header/myheader'
 import MyFooter from '@/components/common/footer/myfooter'
+import MyScrollmsg from '@/components/common/myscrollmsg/myscrollmsg'
+import loading from '@/components/common/loading/loading'
+import VDistpicker from 'v-distpicker'
+
 export default {
   name: 'listSupplier',
   data () {
@@ -44,8 +56,20 @@ export default {
         // 信息分类
         category_msg: 0,
         // 地区查询
-        site: ''
-      }
+        site: '',
+        // 页码
+        page: '1',
+        // 总页数
+        total: '0'
+      },
+      // 信息列表
+      msgList: [],
+      // 加载提示语
+      loadText: '加载更多...',
+      // 显示省市县下拉框
+      show: false,
+      // 箭头旋转
+      turnimg: false
 
     }
   },
@@ -53,11 +77,140 @@ export default {
     // 信息分类
     category_msg () {
       return this.$store.state.category_msg
+    },
+    searchData_category_msg () {
+      return this.searchData.category_msg
+    },
+    site () {
+      return this.searchData.site
     }
   },
   components: {
     MyHeader,
-    MyFooter
+    MyFooter,
+    MyScrollmsg,
+    loading,
+    VDistpicker
+  },
+  methods: {
+    // // 获取信息分类
+    // getCategory_msg () {
+    //   console.log(this.category_msg)
+    //   this.$axios.get('').then(result => {
+    //     if (result.data.code === 0) {
+    //     } else if (result.data.code === 1) {
+    //       this.$store.commit('getCategory_msg', result.data.data)
+    //     }
+    //   }).catch(error => {
+    //     throw error
+    //   })
+    // },
+    // 获取信息总页数
+    getTotal () {
+      this.searchData.total = 8
+      // this.$axios.get('').then(result => {
+      //   if (result.data.code === 0) {
+      //   } else if (result.data.code === 1) {
+      //     this.searchData.total = result.data.data
+      //   }
+      // }).catch(error => {
+      //   throw error
+      // })
+    },
+    // 获取信息列表资料公共方法
+    getMsgList () {
+      this.searchData.page = '1'
+      this.isShowLoading = true
+      let data = this.$qs.stringify(this.searchData)
+      setTimeout(() => {
+        this.isShowLoading = false
+      }, 1000)
+      let tests = {
+        img: 'static/img/userimg.png',
+        name: '测试企业3',
+        category: '1',
+        vip: '1',
+        site: '测试城市3',
+        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+      }
+      this.msgList.unshift(tests)
+      // this.$axios.get('',data).then(result => {
+      //   this.$store.commit('setIsPullingDown', true)
+      //   if (result.data.code === 0) {
+      //   } else if (result.data.code === 1) {
+      //     this.isShowLoading = false
+      //     this.shopsList = result.data.data
+      //   }
+      // }).catch(error => {
+      //   throw error
+      // })
+      this.$store.commit('setIsPullingDown', true)
+      console.log(data, '下拉刷新发送data')
+    },
+    // 下拉刷新
+    _getMsgList () {
+      this.searchData.site = ''
+    },
+    // 上拉加载更多
+    getMoreMsgList () {
+      this.searchData.page++
+      let page = this.searchData.page
+      let total = this.searchData.total
+      let data = this.$qs.stringify(this.searchData)
+      if (page > total) {
+        this.loadText = '暂无更多数据'
+      } else {
+        // this.$axios.get('',data).then(result => {
+        //   this.$store.commit('setIsPullingUp', true)
+        //   if (result.data.code === 0) {
+        //   } else if (result.data.code === 1) {
+        //     this.isShowLoading = false
+        //     this.shopsList = result.data.data
+        //   }
+        // }).catch(error => {
+        //   throw error
+        // })
+      }
+      let tests = {
+        img: 'static/img/userimg.png',
+        name: '测试企业3',
+        category: '1',
+        vip: '1',
+        site: '测试城市3',
+        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
+        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+      }
+      this.msgList.push(tests)
+      this.$store.commit('setIsPullingUp', true)
+      console.log(data, '上拉加载发送data')
+    },
+    // 显示隐藏省市县下拉框
+    choose () {
+      this.show = !this.show
+      this.turnimg = !this.turnimg
+    },
+    // 省市县三级联动
+    onSelected (data) {
+      this.searchData.site = data.province.value + data.city.value + data.area.value
+      this.show = false
+      this.turnimg = false
+    }
+  },
+  watch: {
+    searchData_category_msg (newval, oldval) {
+      this.getTotal()
+      this.getMsgList()
+    },
+    site (newval, oldval) {
+      this.getTotal()
+      this.getMsgList()
+    }
+  },
+  created () {
+    this.getTotal()
+    // this.getCategory_msg()
+    this.getMsgList()
   }
 }
 </script>

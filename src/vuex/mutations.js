@@ -7,6 +7,10 @@ const mutations = {
   getCategory (state, category) {
     state.category = category
   },
+  // 获取信息分类
+  getCategory_msg (state, category_msg) {
+    state.category_msg = category_msg
+  },
   // 设置下拉刷新请求开关
   setIsPullingDown (state, isPullingDown) {
     state.isPullingDown = isPullingDown

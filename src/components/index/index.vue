@@ -6,7 +6,7 @@
     <!-- 选择 搜索 start -->
     <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.classify">
+        <el-select v-model="searchData.category">
           <el-option
             v-for="(item, index) in category"
             :key="index"
@@ -45,7 +45,12 @@
     <loading v-if="isShowLoading"></loading>
     <!-- 下拉刷新动画 end -->
     <!-- 店铺列表 start -->
-    <my-scroll :shopsList="shopsList" :loadText="loadText" @pullingDown="_getShopsList" @pullingup="getMoreShopsList"></my-scroll>
+    <my-scroll
+      :shopsList="shopsList"
+      :loadText="loadText"
+      @pullingDown="_getShopsList"
+      @pullingup="getMoreShopsList">
+    </my-scroll>
     <!-- 店铺列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
@@ -69,10 +74,10 @@ export default {
       // 搜索
       searchData: {
         // 分类搜索
-        classify: 0,
+        category: 0,
         // 地区搜索
         site: '',
-        // 排序方式，0：时间顺序；1：时间倒序；2：等级顺序；3：等级倒序
+        // 排序方式，0：时间顺序(默认)；1：时间倒序；2：等级顺序；3：等级倒序
         sort: 0,
         // 标签搜索
         search: '',
@@ -189,20 +194,14 @@ export default {
     category () {
       return this.$store.state.category
     },
-    classify () {
-      return this.searchData.classify
+    searchData_category () {
+      return this.searchData.category
     },
     site () {
       return this.searchData.site
     },
     searchSort () {
       return this.searchData.sort
-    },
-    page () {
-      return this.searchData.page
-    },
-    total () {
-      return this.searchData.total
     }
   },
   components: {
@@ -214,18 +213,18 @@ export default {
   },
   methods: {
     // 测试请求路径  /construction/login/vueTest
-    // 获取店铺分类
-    getCategory () {
-      console.log(this.category)
-      // this.$axios.get('').then(result => {
-      //   if (result.data.code === 0) {
-      //   } else if (result.data.code === 1) {
-      //     this.$store.commit('getCategory', result.data.data)
-      //   }
-      // }).catch(error => {
-      //   throw error
-      // })
-    },
+    // // 获取店铺分类
+    // getCategory () {
+    //   console.log(this.category)
+    //   this.$axios.get('').then(result => {
+    //     if (result.data.code === 0) {
+    //     } else if (result.data.code === 1) {
+    //       this.$store.commit('getCategory', result.data.data)
+    //     }
+    //   }).catch(error => {
+    //     throw error
+    //   })
+    // },
     // 标签搜索
     setSearch () {
       this.getShopsList()
@@ -323,7 +322,7 @@ export default {
     }
   },
   watch: {
-    classify (newval, oldval) {
+    searchData_category (newval, oldval) {
       this.getTotal()
       this.getShopsList()
     },
@@ -338,7 +337,7 @@ export default {
   },
   created () {
     this.getTotal()
-    this.getCategory()
+    // this.getCategory()
     this.getShopsList()
   }
 }
