@@ -126,7 +126,7 @@
     </div>
     <!-- 注册信息 end -->
     <!-- 提交按钮 start -->
-    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">提交信息</div>
+    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">发布<span v-if="pay.total">未支付￥{{pay.total}}</span></div>
     <!-- 提交按钮 end -->
   </div>
 </template>
@@ -163,7 +163,16 @@ export default {
       // 是否发送注册信息
       send: false,
       // 箭头旋转
-      turnimg: false
+      turnimg: false,
+      // 支付金额
+      pay: {
+        // 支付总额
+        total: '',
+        // 个人认证金额
+        pers: '',
+        // 企业认证金额
+        company: ''
+      }
     }
   },
   computed: {
@@ -174,9 +183,44 @@ export default {
     // 店铺分类
     category () {
       return this.$store.state.category
+    },
+    // 认证类型，方便监听
+    authentication () {
+      return this.registerData.authentication
     }
   },
   methods: {
+    // 判断是否注册店铺，如已注册则在页面加载前抓取注册信息进行展示
+    isRegister () {
+      if (this.userInfo.shopid) {
+        // this.$axios.get('', this.userInfo.shopid).then(result => {
+        //   if (result.data.code === 0) {
+        //     this.$message.error(result.data.msg)
+        //   } else if (result.data.code === 1) {
+        //     let _this = this
+        //     this.$message.success({
+        //       message: result.data.msg,
+        //       onClose () {
+        //         _this.registerData = result.data.data
+        //         _this.tags = _this.registerData.tags.join('，')
+        //       }
+        //     })
+        //   }
+        // })
+        let data = {
+          img: 'static/img/userimg.png',
+          name: '测试店铺',
+          category: 2,
+          site: '山西省太原市小店区',
+          tags: ['测试一', '测试二'],
+          des: '这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，',
+          phone: '18735605086',
+          authentication: '1'
+        }
+        this.registerData = data
+        this.tags = data.tags.join('，')
+      }
+    },
     // 后退
     backs () {
       this.$router.back()
@@ -239,6 +283,21 @@ export default {
       this.registerData.site = data.province.value + data.city.value + data.area.value
       this.show = false
       this.turnimg = false
+    },
+    // 加载获取认证金额
+    getPay () {
+      // this.$axios.get('').then(result => {
+      //   if (result.data.code === 0) {
+      //     this.$message.error(result.data.msg)
+      //   } else if (result.data.code === 1) {
+      //     this.pay.pers = result.data.data.pers
+      //     this.pay.company = result.data.data.company
+      //   }
+      // }).catch(error => {
+      //   throw error
+      // })
+      this.pay.pers = '888'
+      this.pay.company = '1888'
     }
   },
   components: {
@@ -255,38 +314,25 @@ export default {
         this.isSend()
       },
       deep: true
+    },
+    // 监听认证类型
+    authentication (newval, oldval) {
+      if (newval === '1') {
+        this.pay.total = ''
+      } else if (newval === '2') {
+        this.$message('个人认证需支付一次性费用￥' + this.pay.pers)
+        this.pay.total = this.pay.pers
+      } else if (newval === '3') {
+        this.$message('企业认证需支付一次性费用￥' + this.pay.company)
+        this.pay.total = this.pay.company
+      }
     }
   },
   created () {
-    // 判断是否注册店铺，如已注册则在页面加载前抓取注册星稀进行展示
-    if (this.userInfo.shopid) {
-      // this.$axios.get('', this.userInfo.shopid).then(result => {
-      //   if (result.data.code === 0) {
-      //     this.$message.error(result.data.msg)
-      //   } else if (result.data.code === 1) {
-      //     let _this = this
-      //     this.$message.success({
-      //       message: result.data.msg,
-      //       onClose () {
-      //         _this.registerData = result.data.data
-      //         _this.tags = _this.registerData.tags.join('，')
-      //       }
-      //     })
-      //   }
-      // })
-      let data = {
-        img: 'static/img/userimg.png',
-        name: '测试店铺',
-        category: 2,
-        site: '山西省太原市小店区',
-        tags: ['测试一', '测试二'],
-        des: '这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，',
-        phone: '18735605086',
-        authentication: '3'
-      }
-      this.registerData = data
-      this.tags = data.tags.join('，')
-    }
+    // 加载店铺信息
+    this.isRegister()
+    // 获取认证金额
+    this.getPay()
   }
 }
 </script>

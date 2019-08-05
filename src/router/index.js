@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '@/components/login/login'
-import register from '@/components/register/register'
 import index from '@/components/index/index'
 import userInfo from '@/components/userInfo/userInfo'
 import registerShop from '@/components/registerShop/registerShop'

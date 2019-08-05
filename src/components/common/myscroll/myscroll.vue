@@ -17,7 +17,7 @@
               <span class="shopcategory font24 colorfff bg1470cc">{{category[item.category]}}</span>
               <div class="area_box">
                 <img class="area" src="static/img/area.png">
-                <span class="font26">{{item.area}}</span>
+                <span class="font26">{{item.site}}</span>
               </div>
             </div>
           </div>

@@ -23,20 +23,17 @@ export default {
     // 用户信息
     userInfo () {
       return this.$store.state.userInfo
-    },
-    // 是否登录
-    isLogin () {
-      return this.$store.getters.isLogin
     }
   },
   methods: {
-    // 获取用户商铺注册信息
-    getIsSetShop () {
+    // 获取登录用户信息
+    getUserInfo () {
+      console.log('获取登录用户信息')
       // this.$axios.get('').then(result => {
       //   if (result.data.code === 0) {
-      //     this.isSetShop = false
+      //     this.$message.error(result.data.msg)
       //   } else if (result.data.code === 1) {
-      //     this.isSetShop = true
+      //     this.$store.commit('setUserInfo', result.data.data)
       //   }
       // }).catch(error => {
       //   throw error
@@ -44,7 +41,7 @@ export default {
     }
   },
   created () {
-    this.getIsSetShop()
+    this.getUserInfo()
   }
 }
 </script>

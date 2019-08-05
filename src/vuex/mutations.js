@@ -1,6 +1,6 @@
 const mutations = {
   // 获取用户登录信息
-  login (state, userInfo) {
+  setUserInfo (state, userInfo) {
     state.userInfo = userInfo
   },
   // 获取店铺分类
@@ -8,8 +8,8 @@ const mutations = {
     state.category = category
   },
   // 获取信息分类
-  getCategory_msg (state, category_msg) {
-    state.category_msg = category_msg
+  getCategory_msg (state, categorymsg) {
+    state.categoryimg = categorymsg
   },
   // 设置下拉刷新请求开关
   setIsPullingDown (state, isPullingDown) {

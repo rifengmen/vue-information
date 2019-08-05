@@ -1,28 +1,20 @@
 <template>
-  <div class="container">
-    <!-- 用户信息 start -->
-    <my-header></my-header>
-    <!-- 用户信息 end -->
-    <div>{{test}}</div>
-    <!-- 底部导航 start -->
-    <my-footer></my-footer>
-    <!-- 底部导航 end -->
-  </div>
+  <list-msg :msg_status="msg_status"></list-msg>
 </template>
 
 <script>
-import MyHeader from '@/components/common/header/myheader'
-import MyFooter from '@/components/common/footer/myfooter'
+import ListMsg from '@/components/common/listmsg/listmsg'
+
 export default {
   name: 'listPurchase',
   data () {
     return {
-      test: '这是求购信息列表页面'
+      // 列表信息 2：采购信息
+      msg_status: 2
     }
   },
   components: {
-    MyHeader,
-    MyFooter
+    ListMsg
   }
 }
 </script>
