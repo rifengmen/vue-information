@@ -17,14 +17,11 @@ Vue.use(Distpicker)
 export default new Router({
   routes: [
     {path: '/', name: 'index', component: index},
-    {path: '/login', name: 'login', component: login},
-    {path: '/register', name: 'register', component: register},
     {path: '/userInfo', name: 'userInfo', component: userInfo},
     {path: '/registerShop', name: 'registerShop', component: registerShop},
     {path: '/shopInfo', name: 'shopInfo', component: shopInfo},
     {path: '/listSupplier', name: 'listSupplier', component: listSupplier},
     {path: '/listPurchase', name: 'listPurchase', component: listPurchase},
     {path: '/listDetail', name: 'listDetail', component: listDetail}
-
   ]
 })

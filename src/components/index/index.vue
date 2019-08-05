@@ -91,15 +91,25 @@ export default {
       // 商铺列表
       shopsList: [
         {
+          // 店铺id
+          shopid: '1',
+          // 店铺门脸图片
           img: 'static/img/userimg.png',
+          // 店铺名称
           name: '测试企业1',
+          // 所属分类
           category: '0',
+          // vip等级
           vip: '',
+          // 所处地区
           site: '测试城市1',
+          // 店铺标签
           tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+          // 店铺介绍
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
+          shopid: '2',
           img: 'static/img/userimg.png',
           name: '测试企业2',
           category: '1',
@@ -109,6 +119,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
         },
         {
+          shopid: '3',
           img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '3',
@@ -118,6 +129,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
         {
+          shopid: '4',
           img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '2',
@@ -127,6 +139,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
+          shopid: '5',
           img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '0',
@@ -136,6 +149,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
         {
+          shopid: '6',
           img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '2',
@@ -145,6 +159,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
+          shopid: '7',
           img: 'static/img/userimg.png',
           name: '测试企业2',
           category: '3',
@@ -154,6 +169,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介'
         },
         {
+          shopid: '8',
           img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '0',
@@ -163,6 +179,7 @@ export default {
           des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
         },
         {
+          shopid: '9',
           img: 'static/img/userimg.png',
           name: '测试企业1',
           category: '2',
@@ -172,6 +189,7 @@ export default {
           des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介'
         },
         {
+          shopid: '10',
           img: 'static/img/userimg.png',
           name: '测试企业3',
           category: '1',
@@ -250,6 +268,7 @@ export default {
         this.isShowLoading = false
       }, 1000)
       let tests = {
+        shopid: '101',
         img: 'static/img/userimg.png',
         name: '测试企业3',
         category: '1',
@@ -297,6 +316,7 @@ export default {
         // })
       }
       let tests = {
+        shopid: '102',
         img: 'static/img/userimg.png',
         name: '测试企业3',
         category: '1',

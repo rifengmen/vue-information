@@ -69,6 +69,14 @@ li {
   font-size: .40rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
+.font50 {
+  font-size: .50rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.font60 {
+  font-size: .60rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
 /* 字体尺寸 end */
 
 /* 字体粗细 start */
@@ -168,6 +176,33 @@ li {
   text-align: right;
 }
 /* 布局方式 end */
+/* 公共样式 start */
+.pointer {
+  cursor: pointer
+}
+.container {
+  width: 7.02rem;
+  padding: 0 .24rem;
+  overflow: hidden;
+}
+.list_cont {
+  width: 100%;
+  height: calc(100vh - 2.72rem);
+}
+/* 选择 搜索 start */
+.search_cont {
+  width: 100%;
+  z-index: 9999;
+}
+.search_cont .category {
+  width: 100%;
+  height: .90rem;
+  border-bottom: .01rem #cecece solid;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+/* 选择 搜索 end */
 /* 省市县三级联动 start */
 .site {
   height: 100%;
@@ -219,31 +254,22 @@ li {
   color: #000;
 }
 /* 省市县三级联动 end */
-/* 公共样式 start */
-.pointer {
-  cursor: pointer
-}
-.container {
-  width: 7.02rem;
-  padding: 0 .24rem;
-  overflow: hidden;
-}
-.list_cont {
+/* 带返回键头部 start */
+.tit {
   width: 100%;
-  height: calc(100vh - 2.72rem);
-}
-/* 选择 搜索 start */
-.search_cont {
-  width: 100%;
-  z-index: 9999;
-}
-.search_cont .category {
-  width: 100%;
-  height: .90rem;
+  height: 1rem;
   border-bottom: .01rem #cecece solid;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
-/* 选择 搜索 end */
+.tit .backs {
+  width: .5rem;
+  height: .5rem;
+}
+.tit .backs img {
+  width: 100%;
+  height: 100%;
+}
+/* 带返回键头部 end */
 /* 公共样式 end */

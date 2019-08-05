@@ -1,7 +1,11 @@
 const mutations = {
-  // 获取用户登录信息
+  // 设置用户登录信息
   setUserInfo (state, userInfo) {
     state.userInfo = userInfo
+  },
+  // 设置用户煤球数量
+  setPointsA (state, pointsA) {
+    state.userInfo.pointsA = pointsA
   },
   // 获取店铺分类
   getCategory (state, category) {

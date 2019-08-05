@@ -64,7 +64,7 @@ export default {
     return {
       // 加载动画
       loading: false,
-      // 店铺等级
+      // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
       // 店铺分类
       category: this.$store.state.category

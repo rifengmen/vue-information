@@ -106,7 +106,7 @@
         <!-- 业务介绍 end -->
         <!-- 是否认证 start -->
         <li class="register_li">
-          <div class="tip coloree410c">❈</div>
+          <div class="tip coloree410c"></div>
           <div class="li_name color333 font_blod">店铺认证：</div>
           <div class="register_val">
             <el-radio v-model="registerData.authentication" label="1">不认证</el-radio>
@@ -115,6 +115,23 @@
           </div>
         </li>
         <!-- 是否认证 end -->
+        <!-- 购买煤球 start -->
+        <li class="register_li">
+          <div class="tip coloree410c"></div>
+          <div class="li_name color333 font_blod">购买煤球：</div>
+          <div class="register_val2">
+            <div class="font28 color666">距头把交椅还差 <span class="font50 font_blod coloree410c">{{userInfo.difference}}</span> 个煤球 </div>
+            <div class="pointsAnum">
+              今日购买数量：
+              <input
+                type="number"
+                class="font50 font_blod coloree410c"
+                v-model.number="registerData.pointsAnum">
+              <img src="static/img/pointsA.png" @click="showmsg">
+            </div>
+          </div>
+        </li>
+        <!-- 购买煤球 end -->
         <!-- 提示信息 start -->
         <li class="register_li">
           <div class="color999">
@@ -126,7 +143,7 @@
     </div>
     <!-- 注册信息 end -->
     <!-- 提交按钮 start -->
-    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">发布<span v-if="pay.total">未支付￥{{pay.total}}</span></div>
+    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">发布<span v-if="(goPay > 0)">未支付￥{{goPay}}</span></div>
     <!-- 提交按钮 end -->
   </div>
 </template>
@@ -154,7 +171,9 @@ export default {
         // 店铺电话
         phone: '',
         // 认证类型，1：未认证；2：个人认证；3：企业认证
-        authentication: '1'
+        authentication: '1',
+        // 购买煤球数量，1煤球=1块钱
+        pointsAnum: '0'
       },
       // 店铺标签
       tags: '',
@@ -164,15 +183,15 @@ export default {
       send: false,
       // 箭头旋转
       turnimg: false,
-      // 支付金额
+      // 认证费用
       pay: {
-        // 支付总额
-        total: '',
         // 个人认证金额
         pers: '',
         // 企业认证金额
         company: ''
-      }
+      },
+      // 支付认证费用
+      payTotal: ''
     }
   },
   computed: {
@@ -187,24 +206,22 @@ export default {
     // 认证类型，方便监听
     authentication () {
       return this.registerData.authentication
+    },
+    // 去支付总金额
+    goPay () {
+      return (parseInt(this.registerData.pointsAnum || 0) + parseInt(this.payTotal || 0)).toFixed(2)
     }
   },
   methods: {
     // 判断是否注册店铺，如已注册则在页面加载前抓取注册信息进行展示
     isRegister () {
-      if (this.userInfo.shopid) {
+      if (this.userInfo.shopid && this.userInfo.shopid !== '0') {
         // this.$axios.get('', this.userInfo.shopid).then(result => {
         //   if (result.data.code === 0) {
         //     this.$message.error(result.data.msg)
         //   } else if (result.data.code === 1) {
-        //     let _this = this
-        //     this.$message.success({
-        //       message: result.data.msg,
-        //       onClose () {
-        //         _this.registerData = result.data.data
-        //         _this.tags = _this.registerData.tags.join('，')
-        //       }
-        //     })
+        //     this.registerData = result.data.data
+        //     this.tags = this.registerData.tags.join('，')
         //   }
         // })
         let data = {
@@ -284,20 +301,38 @@ export default {
       this.show = false
       this.turnimg = false
     },
-    // 加载获取认证金额
+    // 获取认证金额
     getPay () {
       // this.$axios.get('').then(result => {
       //   if (result.data.code === 0) {
       //     this.$message.error(result.data.msg)
       //   } else if (result.data.code === 1) {
-      //     this.pay.pers = result.data.data.pers
-      //     this.pay.company = result.data.data.company
+      //     this.pay = result.data.data
       //   }
       // }).catch(error => {
       //   throw error
       // })
-      this.pay.pers = '888'
-      this.pay.company = '1888'
+      this.pay = {
+        pers: '888',
+        company: '1888'
+      }
+    },
+    // 显示煤球提示消息
+    showmsg () {
+      this.$message({
+        message:
+        '<div class="color666" style="padding: .1rem">\n' +
+        '  <div class="font28 font_blod color1470cc" style="margin: .1rem 0">关于煤球</div>\n' +
+        '  <div style="padding: .06rem 0;line-height: 1.5">1.  煤球是一种平台内用于短时间（一天内）提自身排名及等级加速的方式。</div>\n' +
+        '  <div style="padding: .06rem 0;line-height: 1.5">2.  煤球需要购买，是一种全平台用户自由竞价的产品。</div>\n' +
+        '  <div style="padding: .06rem 0;line-height: 1.5">3.  享受煤球加速的用户，除了提升自然排名，还享有加速图标显示权限。</div>\n' +
+        '  <div style="padding: .06rem 0;line-height: 1.5">4.  煤球设计的目的是为短时间有广告需求的用户提供的推广方式，为体现公平，煤球有效期只为一天，而且一天之内只能购买一次（数量由用户自定），因为系统排名时刻变化，用户可以自己判定及其选择该日竞价的煤球数量，系统会自动进行推荐并综合排序。</div>\n' +
+        '  <div style="padding: .06rem 0;line-height: 1.5">5.  煤球使用的最终解释权归平台所有。</div>\n' +
+        '</div>',
+        showClose: true,
+        dangerouslyUseHTMLString: true,
+        duration: 0
+      })
     }
   },
   components: {
@@ -318,13 +353,13 @@ export default {
     // 监听认证类型
     authentication (newval, oldval) {
       if (newval === '1') {
-        this.pay.total = ''
+        this.payTotal = ''
       } else if (newval === '2') {
         this.$message('个人认证需支付一次性费用￥' + this.pay.pers)
-        this.pay.total = this.pay.pers
+        this.payTotal = parseInt(this.pay.pers).toFixed(2)
       } else if (newval === '3') {
         this.$message('企业认证需支付一次性费用￥' + this.pay.company)
-        this.pay.total = this.pay.company
+        this.payTotal = parseInt(this.pay.company).toFixed(2)
       }
     }
   },
