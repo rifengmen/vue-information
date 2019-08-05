@@ -76,10 +76,10 @@
           </div>
           <div>{{shopInfo.like}}</div>
         </div>
-        <div class="shopslist color666">
+        <router-link :to="{name: 'index'}" tag="div" class="shopslist color666">
           <div class="shopsimg"><img src="static/img/index.png"></div>
           <div>店铺列表</div>
-        </div>
+        </router-link>
       </div>
       <div class="checkpay">
         <check-pay></check-pay>
@@ -163,11 +163,14 @@ export default {
       // }).catch(error => {
       //   throw error
       // })
-      this.likes = !this.likes
+      this.likes = true
     },
-    // 添加喜欢店铺
+    // 是否添加喜欢店铺
     addLike () {
-      this.$axios.get().then().catch()
+      this.likes = !this.likes
+      // this.$axios.get('', this.shopid).then(result => {
+      //   this.shopInfo.like = result.data
+      // }).catch()
     },
     // 免责声明
     tip () {
