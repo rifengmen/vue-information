@@ -185,10 +185,6 @@ li {
   padding: 0 .24rem;
   overflow: hidden;
 }
-.list_cont {
-  width: 100%;
-  height: calc(100vh - 2.72rem);
-}
 /* 选择 搜索 start */
 .search_cont {
   width: 100%;

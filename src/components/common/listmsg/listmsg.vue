@@ -6,9 +6,9 @@
     <!-- 筛选条件 start -->
     <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.categoryimg">
+        <el-select v-model="searchData.categorymsg">
           <el-option
-            v-for="(item, index) in categoryimg"
+            v-for="(item, index) in categorymsg"
             :key="index"
             :label="item"
             :value="index">
@@ -26,9 +26,12 @@
       </div>
     </div>
     <!-- 筛选条件 end -->
+    <!-- 下拉刷新动画 start -->
+    <loading v-if="isShowLoading"></loading>
+    <!-- 下拉刷新动画 end -->
     <!-- 信息列表 start -->
     <my-scrollmsg
-      :shopsList="msgList"
+      :msgList="msgList"
       :loadText="loadText"
       @pullingDown="_getMsgList"
       @pullingup="getMoreMsgList">
@@ -76,7 +79,125 @@ export default {
         total: '0'
       },
       // 信息列表
-      msgList: [],
+      msgList: [
+        {
+          category_msg: '1，5，8，3',
+          site: '测试城市1',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '刚刚发布',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '4，5，8，3',
+          site: '测试城市4',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '5分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '6，5，8，3',
+          site: '测试城市6',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '10分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '2，5，8，3',
+          site: '测试城市2',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '11分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '4，5，8，3',
+          site: '测试城市4',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '15分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '8，5，1，3',
+          site: '测试城市8',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '25分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '9，5，8，3',
+          site: '测试城市9',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '35分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '3，5，8，1',
+          site: '测试城市3',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '45分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '6，5，8，3',
+          site: '测试城市6',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '55分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '1，5，8，3',
+          site: '测试城市1',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '58分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '4，5，8，3',
+          site: '测试城市4',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '59分钟前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '8，5，1，3',
+          site: '测试城市8',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '1小时前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        },
+        {
+          category_msg: '3，5，8，1',
+          site: '测试城市3',
+          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          time: '1小时前',
+          msgcode: '5-258741',
+          send_time: '2019-08-06 06:44:25',
+          phone: '18888888888'
+        }
+      ],
       // 加载提示语
       loadText: '加载更多...',
       // 显示省市县下拉框
@@ -88,12 +209,14 @@ export default {
   },
   computed: {
     // 信息分类
-    categoryimg () {
-      return this.$store.state.categoryimg
+    categorymsg () {
+      return this.$store.state.categorymsg
     },
+    // 查询信息类别
     searchData_category_msg () {
-      return this.searchData.categoryimg
+      return this.searchData.categorymsg
     },
+    // 查询地区
     site () {
       return this.searchData.site
     }
@@ -108,7 +231,7 @@ export default {
   methods: {
     // // 获取信息分类
     // getCategory_msg () {
-    //   console.log(this.categoryimg)
+    //   console.log(this.categorymsg)
     //   this.$axios.get('').then(result => {
     //     if (result.data.code === 0) {
     //     } else if (result.data.code === 1) {
@@ -139,13 +262,13 @@ export default {
         this.isShowLoading = false
       }, 1000)
       let tests = {
-        img: 'static/img/userimg.png',
-        name: '测试企业3',
-        category: '1',
-        vip: '1',
-        site: '测试城市3',
-        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+        category_msg: '5，1，8，3',
+        site: '测试城市5',
+        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+        time: '2小时前',
+        msgcode: '5-258741',
+        send_time: '2019-08-06 06:44:25',
+        phone: '18888888888'
       }
       this.msgList.unshift(tests)
       // this.$axios.get('',data).then(result => {
@@ -186,13 +309,13 @@ export default {
         // })
       }
       let tests = {
-        img: 'static/img/userimg.png',
-        name: '测试企业3',
-        category: '1',
-        vip: '1',
-        site: '测试城市3',
-        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介'
+        category_msg: '5，1，8，3',
+        site: '测试城市5',
+        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+        time: '2小时前',
+        msgcode: '5-258741',
+        send_time: '2019-08-06 06:44:25',
+        phone: '18888888888'
       }
       this.msgList.push(tests)
       this.$store.commit('setIsPullingUp', true)
@@ -234,5 +357,5 @@ export default {
 </script>
 
 <style scoped>
-
+@import "static/css/listmsg.css";
 </style>

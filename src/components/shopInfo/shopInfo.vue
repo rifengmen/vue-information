@@ -45,6 +45,12 @@
           <div class="font30">{{shopInfo.site}}</div>
         </li>
         <!-- 所在地区 end -->
+        <!-- 联系电话 start -->
+        <li class="shopinfo_li">
+          <div class="font_blod">联系电话：</div>
+          <div class="font30">{{shopInfo.phone}}</div>
+        </li>
+        <!-- 联系电话 end -->
         <!-- 店铺标签 start -->
         <li class="shopinfo_li">
           <div class="font_blod">店铺标签：</div>
@@ -97,8 +103,6 @@ export default {
   name: 'shopInfo',
   data () {
     return {
-      // 店铺详情
-      shopInfo: {},
       // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
       // 店铺分类
@@ -108,8 +112,9 @@ export default {
     }
   },
   computed: {
-    shopid () {
-      return this.$route.query.shopid
+    // 接收传过来的店铺详情
+    shopInfo () {
+      return this.$route.query.shopInfo
     }
   },
   components: {
@@ -119,38 +124,6 @@ export default {
     // 后退
     backs () {
       this.$router.back()
-    },
-    // 获取店铺详情
-    getShopInfo () {
-      // this.$axios.get('', this.shopid).then(result => {
-      //   if (result.data.code === 0) {
-      //     this.$message.error(result.data.msg)
-      //   } else if (result.data.code === 1) {
-      //     this.shopInfo = result.data.data
-      //   }
-      // }).catch(error => {
-      //   throw error
-      // })
-      this.shopInfo = {
-        // 店铺门脸图片
-        img: 'static/img/userimg.png',
-        // 店铺名称
-        name: '测试企业1',
-        // 所属分类
-        category: '5',
-        // vip等级
-        vip: '3',
-        // 所处地区
-        site: '测试城市1',
-        // 店铺标签
-        tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
-        // 店铺介绍
-        des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
-        // 店铺信息更新时间
-        updateTime: '2019-07-27 12:00:00',
-        // 点赞数量
-        like: '53'
-      }
     },
     // // 检查是否喜欢当前店铺
     isLike () {
@@ -188,8 +161,6 @@ export default {
     }
   },
   created () {
-    // 获取店铺信息
-    this.getShopInfo()
     // 是否喜欢店铺
     this.isLike()
   }

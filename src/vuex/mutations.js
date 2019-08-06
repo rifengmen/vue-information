@@ -13,7 +13,7 @@ const mutations = {
   },
   // 获取信息分类
   getCategory_msg (state, categorymsg) {
-    state.categoryimg = categorymsg
+    state.categorymsg = categorymsg
   },
   // 设置下拉刷新请求开关
   setIsPullingDown (state, isPullingDown) {

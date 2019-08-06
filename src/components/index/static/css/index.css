@@ -33,4 +33,10 @@
   margin-top: .15rem;
 }
 /* 选择 搜索 end */
+/* 下拉刷新动画 start */
+.loading {
+  top: 3.33rem;
+  height: calc(100vh - 4.64rem);
+}
+/* 下拉刷新动画 end */
 

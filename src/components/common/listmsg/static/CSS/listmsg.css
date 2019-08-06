@@ -1,0 +1,6 @@
+/* 下拉刷新动画 start */
+.loading {
+  top: 2.32rem;
+  height: calc(100vh - 3.53rem);
+}
+/* 下拉刷新动画 end */

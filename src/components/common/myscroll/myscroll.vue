@@ -4,7 +4,7 @@
     <ul class="shopslist" v-show="shopsList.length">
       <!-- 店铺简介 start -->
       <li v-for="(item, index) in shopsList" :key="index">
-        <router-link class="shopinfo" :to="{name: 'shopInfo', query:{shopid: item.shopid}}" tag="div">
+        <router-link class="shopinfo" :to="{name: 'shopInfo', query:{shopInfo: item}}" tag="div">
           <div class="shoptit">
             <div class="shopimg fl">
               <img class="img" :src="item.img || 'static/img/userimg.png'">
@@ -34,9 +34,9 @@
       <!-- 店铺简介 end -->
     </ul>
     <!-- 店铺列表 end -->
-    <!-- 上拉加载动画 start -->
+    <!-- 上拉加载提示 start -->
     <div class="loading tc font22 color999" v-if="loading">{{loadText}}</div>
-    <!-- 上拉加载动画 end -->
+    <!-- 上拉加载提示 end -->
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
   },
   data () {
     return {
-      // 加载动画
+      // 上拉加载提示
       loading: false,
       // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
