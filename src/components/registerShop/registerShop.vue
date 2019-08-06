@@ -31,7 +31,7 @@
             </div>
             <el-select v-model="registerData.category" placeholder="请选择店铺分类">
               <el-option
-                v-for="(item, index) in category"
+                v-for="(item, index) in category.slice(1)"
                 :key="index"
                 :label="item"
                 :value="index">

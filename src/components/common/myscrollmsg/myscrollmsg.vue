@@ -4,9 +4,19 @@
       <ul class="msglist" v-show="msgList.length">
         <!-- 信息简介 start -->
         <li class="msgdetail" v-for="(item, index) in msgList" :key="index">
-          <router-link class="msgdetail" :to="{name: 'msgDetail', query:{msgDetail: item}}" tag="div">
-            <div>
-              <span v-for="(arr_item, index) in (item.category_msg.split('，'))" :key="index">{{categorymsg[arr_item]}}</span>
+          <router-link :to="{name: 'msgDetail', query:{msgDetail: item}}" tag="div">
+            <div class="categorymsg">
+              <span
+                class="font32 font_blod"
+                v-for="(arr_item, index) in (item.category_msg.split('，'))"
+                :key="index">
+                {{categorymsg[arr_item]}}
+              </span>
+            </div>
+            <div class="msgdes ellipsis color666 font28">{{item.des}}</div>
+            <div class="time_detailbtn">
+              <div class="time color999">{{item.time}}</div>
+              <div class="detailbtn colorff9500 font28 tc">查看详情</div>
             </div>
           </router-link>
         </li>
