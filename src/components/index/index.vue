@@ -15,7 +15,7 @@
           </el-option>
         </el-select>
         <div class="site">
-          <div @click="choose" class="choose tc colorcecece">
+          <div @click="choose" class="choose tc color666">
             <div class="font26">{{searchData.site || '地区选择'}}</div>
             <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
           </div>
