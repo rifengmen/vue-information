@@ -16,14 +16,14 @@
         <li class="shopinfo_li">
           <div class="shopimg_box">
             <div class="shopimg">
-              <img :src="shopInfo.img">
+              <img :src="shopInfo.image">
             </div>
-            <div class="vip" v-if="vipClass[shopInfo.vip]">
-              <img :src="vipClass[shopInfo.vip]">
+            <div class="vip" v-if="vipClass[shopInfo.vipnum]">
+              <img :src="vipClass[shopInfo.vipnum]">
             </div>
           </div>
           <div class="update tr color666">
-            <span>{{shopInfo.updateTime}}  更新</span>
+            <span>{{shopInfo.time}}  更新</span>
           </div>
         </li>
         <!-- 店铺门头照片 end -->
@@ -36,13 +36,13 @@
         <!-- 店铺分类 start -->
         <li class="shopinfo_li">
           <div class="font_blod">店铺分类：</div>
-          <div class="font30">{{category[shopInfo.category]}}</div>
+          <div class="font30">{{classify[shopInfo.classify]}}</div>
         </li>
         <!-- 店铺分类 end -->
         <!-- 所在地区 start -->
         <li class="shopinfo_li">
           <div class="font_blod">所在地区：</div>
-          <div class="font30">{{shopInfo.site}}</div>
+          <div class="font30">{{shopInfo.area}}</div>
         </li>
         <!-- 所在地区 end -->
         <!-- 联系电话 start -->
@@ -55,14 +55,14 @@
         <li class="shopinfo_li">
           <div class="font_blod">店铺标签：</div>
           <div class="tags">
-            <span class="tag color333 bgcecece" v-for="(item, index) in shopInfo.tags" :key="index">{{item}}</span>
+            <span class="tag color333 bgcecece" v-for="(item, index) in shopInfo.label" :key="index">{{item}}</span>
           </div>
         </li>
         <!-- 店铺标签 end -->
         <!-- 业务介绍 start -->
         <li class="shopinfo_li">
           <div class="font_blod">业务介绍：</div>
-          <div class="des">{{shopInfo.des}}</div>
+          <div class="des">{{shopInfo.business}}</div>
         </li>
         <!-- 业务介绍 end -->
         <!-- 免责声明 start -->
@@ -78,9 +78,9 @@
       <div class="likeleft tc">
         <div class="likenum color666" @click="addLike">
           <div class="likeimg">
-            <img :src="(likes ? 'static/img/like.png' : 'static/img/nolike.png')">
+            <img :src="(give ? 'static/img/like.png' : 'static/img/nolike.png')">
           </div>
-          <div>{{shopInfo.like}}</div>
+          <div>{{shopInfo.give}}</div>
         </div>
         <router-link :to="{name: 'index'}" tag="div" class="shopslist color666">
           <div class="shopsimg"><img src="static/img/index.png"></div>
@@ -106,9 +106,9 @@ export default {
       // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
       // 店铺分类
-      category: this.$store.state.category,
+      classify: this.$store.state.classify,
       // 是否喜欢当前店铺
-      likes: false
+      give: false
     }
   },
   computed: {
@@ -127,22 +127,22 @@ export default {
     },
     // // 检查是否喜欢当前店铺
     isLike () {
-      // this.$axios.get('', this.shopid).then(result => {
+      // this.$axios.get('', this.id).then(result => {
       //   if (result.data.code === 0) {
-      //     this.likes = false
+      //     this.give = false
       //   } else if (result.data.code === 1) {
-      //     this.likes = true
+      //     this.give = true
       //   }
       // }).catch(error => {
       //   throw error
       // })
-      this.likes = true
+      this.give = true
     },
     // 是否添加喜欢店铺
     addLike () {
-      this.likes = !this.likes
-      // this.$axios.get('', this.shopid).then(result => {
-      //   this.shopInfo.like = result.data
+      this.give = !this.give
+      // this.$axios.get('', this.id).then(result => {
+      //   this.shopInfo.give = result.data
       // }).catch()
     },
     // 免责声明

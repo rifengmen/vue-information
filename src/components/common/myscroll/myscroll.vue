@@ -7,27 +7,27 @@
         <router-link class="shopinfo" :to="{name: 'shopInfo', query:{shopInfo: item}}" tag="div">
           <div class="shoptit">
             <div class="shopimg fl">
-              <img class="img" :src="item.img || 'static/img/userimg.png'">
+              <img class="img" :src="item.image || 'static/img/userimg.png'">
             </div>
             <div class="shopname fr color666">
               <div class="vip_name">
-                <img class="vipclass fl" v-if="vipClass[item.vip]" :src="vipClass[item.vip]">
+                <img class="vipclass fl" v-if="vipClass[item.vipnum]" :src="vipClass[item.vipnum]">
                 <div class="name font30 color333 ellipsis fl">{{item.name}}</div>
               </div>
-              <span class="shopcategory font24 colorfff bg1470cc">{{category[item.category]}}</span>
+              <span class="shopcategory font24 colorfff bg1470cc">{{classify[item.classify]}}</span>
               <div class="area_box">
                 <img class="area" src="static/img/area.png">
-                <span class="font26">{{item.site}}</span>
+                <span class="font26">{{item.area}}</span>
               </div>
             </div>
           </div>
-          <div class="shoptags" v-if="item.tags.length">
+          <div class="shoptags" v-if="item.label.length">
             <!-- 店铺标签 start -->
-            <span v-for="(tag, tIndex) in item.tags" :key="tIndex" class="tags font24 color333 bgcecece">{{tag}}</span>
+            <span v-for="(label, tIndex) in item.label" :key="tIndex" class="tags font24 color333 bgcecece">{{label}}</span>
             <!-- 店铺标签 end -->
           </div>
           <div class="shopdes">
-            <div class="font28 color666 ellipsis">{{item.des}}</div>
+            <div class="font28 color999 ellipsis">{{item.business}}</div>
           </div>
         </router-link>
       </li>
@@ -67,7 +67,7 @@ export default {
       // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
       // 店铺分类
-      category: this.$store.state.category
+      classify: this.$store.state.classify
     }
   },
   computed: {

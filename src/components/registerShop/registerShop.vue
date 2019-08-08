@@ -29,9 +29,9 @@
             <div class="categoryimg">
               <img src="static/img/category.png">
             </div>
-            <el-select v-model="registerData.category" placeholder="请选择店铺分类">
+            <el-select v-model="registerData.classify" placeholder="请选择店铺分类">
               <el-option
-                v-for="(item, index) in category.slice(1)"
+                v-for="(item, index) in classify.slice(1)"
                 :key="index"
                 :label="item"
                 :value="index">
@@ -60,7 +60,7 @@
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload">
-              <img v-if="registerData.img" :src="registerData.img" class="avatar">
+              <img v-if="registerData.image" :src="registerData.image" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon font40 font_blod color999 tc"></i>
             </el-upload>
           </div>
@@ -75,8 +75,8 @@
               <img src="static/img/category.png">
             </div>
             <div class="site">
-              <div @click="choose" class="choose tc colorcecece">
-                <div class="font26">{{registerData.site || '请选择地区'}}</div>
+              <div @click="choose" class="choose tc color666">
+                <div class="font26">{{registerData.area || '请选择地区'}}</div>
                 <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
               </div>
               <p class="pwrap bgfff" v-if="show">
@@ -91,7 +91,7 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺标签：</div>
           <div class="register_val">
-            <textarea cols="30" rows="4" v-model.trim="tags" placeholder="请输入店铺标签，两个标签间需用汉语逗号（，）隔开"></textarea>
+            <textarea cols="30" rows="4" v-model.trim="label" placeholder="请输入店铺标签，两个标签间需用汉语逗号（，）隔开"></textarea>
           </div>
         </li>
         <!-- 店铺标签 end -->
@@ -99,8 +99,10 @@
         <li class="register_li">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">业务介绍：</div>
-          <div class="register_val">
-            <textarea cols="30" rows="8" v-model.trim="registerData.des" placeholder="请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符"></textarea>
+          <div class="register_val business">
+            <!--<div class="tips font26 color999">请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符</div>-->
+            <!--<vue-ueditor-wrap v-model="registerData.business" :config="myConfig"></vue-ueditor-wrap>-->
+            <v-editor :editorContent="registerData.business" @updateContent="updateContent"></v-editor>
           </div>
         </li>
         <!-- 业务介绍 end -->
@@ -109,9 +111,9 @@
           <div class="tip coloree410c"></div>
           <div class="li_name color333 font_blod">店铺认证：</div>
           <div class="register_val">
-            <el-radio v-model="registerData.authentication" label="1">不认证</el-radio>
-            <el-radio v-model="registerData.authentication" label="2">个人认证</el-radio>
-            <el-radio v-model="registerData.authentication" label="3">企业认证</el-radio>
+            <el-radio v-model="registerData.type" label="1">不认证</el-radio>
+            <el-radio v-model="registerData.type" label="2">个人认证</el-radio>
+            <el-radio v-model="registerData.type" label="3">企业认证</el-radio>
           </div>
         </li>
         <!-- 是否认证 end -->
@@ -150,6 +152,8 @@
 
 <script>
 import VDistpicker from 'v-distpicker'
+import E from 'wangeditor'
+
 export default {
   name: 'registerShop',
   data () {
@@ -157,26 +161,26 @@ export default {
       // 店铺注册信息
       registerData: {
         // 店铺门脸照片
-        img: '',
+        image: '',
         // 店铺名字
         name: '',
-        // 店铺分类，0：全部分类
-        category: 0,
+        // 店铺分类
+        classify: '',
         // 店铺位置
-        site: '',
+        area: '',
         // 店铺标签
-        tags: [],
+        label: [],
         // 店铺介绍
-        des: '',
+        business: '',
         // 店铺电话
         phone: '',
         // 认证类型，1：未认证；2：个人认证；3：企业认证
-        authentication: '1',
+        type: '1',
         // 购买煤球数量，1煤球=1块钱
         pointsAnum: '0'
       },
       // 店铺标签
-      tags: '',
+      label: '',
       // 省市县三级联动显示隐藏
       show: false,
       // 是否发送注册信息
@@ -200,12 +204,12 @@ export default {
       return this.$store.state.userInfo
     },
     // 店铺分类
-    category () {
-      return this.$store.state.category
+    classify () {
+      return this.$store.state.classify
     },
     // 认证类型，方便监听
-    authentication () {
-      return this.registerData.authentication
+    type () {
+      return this.registerData.type
     },
     // 去支付总金额
     goPay () {
@@ -218,24 +222,30 @@ export default {
       if (this.userInfo.shopid && this.userInfo.shopid !== '0') {
         // this.$axios.get('', this.userInfo.shopid).then(result => {
         //   if (result.data.code === 0) {
-        //     this.$message.error(result.data.msg)
-        //   } else if (result.data.code === 1) {
         //     this.registerData = result.data.data
-        //     this.tags = this.registerData.tags.join('，')
+        //     this.label = this.registerData.label.join('，')
         //   }
         // })
-        let data = {
-          img: 'static/img/userimg.png',
-          name: '测试店铺',
-          category: 2,
-          site: '山西省太原市小店区',
-          tags: ['测试一', '测试二'],
-          des: '这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，这是测试的简介，',
-          phone: '18735605086',
-          authentication: '1'
+        this.registerData = {
+          // 店铺门脸照片
+          image: 'static/img/userimg.png',
+          // 店铺名字
+          name: '测试',
+          // 店铺分类
+          classify: 5,
+          // 店铺位置
+          area: '山西省太原市小店区',
+          // 店铺标签
+          label: ['123', '456', '789'],
+          // 店铺介绍
+          business: '111111111111111111111111111111111111111',
+          // 店铺电话
+          phone: '18888888888',
+          // 认证类型，1：未认证；2：个人认证；3：企业认证
+          type: '1',
+          // 购买煤球数量，1煤球=1块钱
+          pointsAnum: '0'
         }
-        this.registerData = data
-        this.tags = data.tags.join('，')
       }
     },
     // 后退
@@ -245,7 +255,7 @@ export default {
     // 验证是否可以发送注册信息
     isSend () {
       for (let registerDataKey in this.registerData) {
-        if (this.registerData[registerDataKey] === '' || this.registerData.tags.length === 0) {
+        if (this.registerData[registerDataKey] === '' || this.registerData.label.length === 0) {
           this.send = false
           return
         }
@@ -257,8 +267,6 @@ export default {
       if (this.send) {
         // this.$axios.post('', this.registerData).then(result => {
         //   if (result.data.code === 0) {
-        //     this.$message.error(result.data.msg)
-        //   } else if (result.data.code === 1) {
         //     let _this = this
         //     this.$message.success({
         //       message: result.data.msg,
@@ -275,7 +283,7 @@ export default {
     },
     // 图片上传成功后返回图片路径
     handleAvatarSuccess (res, file) {
-      this.registerData.img = URL.createObjectURL(file.raw)
+      this.registerData.image = URL.createObjectURL(file.raw)
     },
     // 图片上传前验证
     beforeAvatarUpload (file) {
@@ -297,16 +305,14 @@ export default {
     },
     // 省市县三级联动
     onSelected (data) {
-      this.registerData.site = data.province.value + data.city.value + data.area.value
+      this.registerData.area = data.province.value + data.city.value + data.area.value
       this.show = false
       this.turnimg = false
     },
     // 获取认证金额
     getPay () {
       // this.$axios.get('').then(result => {
-      //   if (result.data.code === 0) {
-      //     this.$message.error(result.data.msg)
-      //   } else if (result.data.code === 1) {
+      //   if (result.data.code === 1) {
       //     this.pay = result.data.data
       //   }
       // }).catch(error => {
@@ -333,15 +339,21 @@ export default {
         dangerouslyUseHTMLString: true,
         duration: 0
       })
+    },
+    // 响应数据显示
+    updateContent (html) {
+      console.log(1)
+      this.registerData.business = html
     }
   },
   components: {
-    VDistpicker
+    VDistpicker,
+    VEditor
   },
   watch: {
     // 监听店铺标签变化
-    tags (newval, oldval) {
-      this.registerData.tags = newval.split('，')
+    label (newval, oldval) {
+      this.registerData.label = newval.split('，')
     },
     // 监听注册信息填写情况
     registerData: {
@@ -351,7 +363,7 @@ export default {
       deep: true
     },
     // 监听认证类型
-    authentication (newval, oldval) {
+    type (newval, oldval) {
       if (newval === '1') {
         this.payTotal = ''
       } else if (newval === '2') {

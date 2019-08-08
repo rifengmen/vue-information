@@ -13,7 +13,7 @@
                 {{categorymsg[arr_item]}}
               </span>
             </div>
-            <div class="msgdes ellipsis color666 font28">{{item.des}}</div>
+            <div class="msgdes ellipsis color666 font28">{{item.business}}</div>
             <div class="time_detailbtn">
               <div class="time color999">{{item.time}}</div>
               <div class="detailbtn colorff9500 font28 tc">查看详情</div>

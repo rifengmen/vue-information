@@ -8,8 +8,8 @@ const mutations = {
     state.userInfo.pointsA = pointsA
   },
   // 获取店铺分类
-  getCategory (state, category) {
-    state.category = category
+  getClassify (state, classify) {
+    state.classify = classify
   },
   // 获取信息分类
   getCategory_msg (state, categorymsg) {

@@ -26,6 +26,7 @@
 }
 .register_li .register_val {
   width: 60%;
+  padding: .2rem 0;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -66,6 +67,9 @@
   display: block;
 }
 /* 门脸图片上传 end */
+/* 业务介绍 start */
+
+/* 业务介绍 end */
 /* 购买煤球 start */
 .register_li .register_val2 .pointsAnum {
   display: flex;

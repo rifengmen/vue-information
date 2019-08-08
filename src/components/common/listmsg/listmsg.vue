@@ -16,7 +16,7 @@
         </el-select>
         <div class="site">
           <div @click="choose" class="choose tc colorcecece">
-            <div class="font26">{{searchData.site || '地区选择'}}</div>
+            <div class="font26">{{searchData.area || '地区选择'}}</div>
             <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
           </div>
           <p class="pwrap bgfff" v-if="show">
@@ -72,12 +72,12 @@ export default {
         // 信息分类
         categoryimg: 0,
         // 地区查询
-        site: '',
+        area: '',
         // 页码
-        page: '1',
-        // 总页数
-        total: '0'
+        current_page: '1'
       },
+      // 总页数
+      total: '0',
       // 信息列表
       msgList: [
         {
@@ -238,8 +238,8 @@ export default {
       return this.searchData.categorymsg
     },
     // 查询地区
-    site () {
-      return this.searchData.site
+    area () {
+      return this.searchData.area
     }
   },
   components: {
@@ -255,94 +255,56 @@ export default {
     //   console.log(this.categorymsg)
     //   this.$axios.get('').then(result => {
     //     if (result.data.code === 0) {
-    //     } else if (result.data.code === 1) {
     //       this.$store.commit('getCategory_msg', result.data.data)
     //     }
     //   }).catch(error => {
     //     throw error
     //   })
     // },
-    // 获取信息总页数
-    getTotal () {
-      this.searchData.total = 8
-      // this.$axios.get('').then(result => {
-      //   if (result.data.code === 0) {
-      //   } else if (result.data.code === 1) {
-      //     this.searchData.total = result.data.data
-      //   }
-      // }).catch(error => {
-      //   throw error
-      // })
-    },
     // 获取信息列表资料公共方法
     getMsgList () {
-      this.searchData.page = '1'
+      this.searchData.current_page = '1'
       this.isShowLoading = true
-      let data = this.$qs.stringify(this.searchData)
+      // let data = this.$qs.stringify(this.searchData)
       setTimeout(() => {
         this.isShowLoading = false
       }, 1000)
-      let tests = {
-        // 信息类别，1：供应，2：采购
-        msg_status: 1,
-        category_msg: '5，1，8，3',
-        site: '测试城市5',
-        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-        time: '2小时前',
-        msgcode: '5-258741',
-        send_time: '2019-08-06 06:44:25',
-        phone: '18888888888'
-      }
-      this.msgList.unshift(tests)
       // this.$axios.get('',data).then(result => {
       //   this.$store.commit('setIsPullingDown', true)
       //   if (result.data.code === 0) {
-      //   } else if (result.data.code === 1) {
       //     this.isShowLoading = false
       //     this.shopsList = result.data.data
+      //     this.total = result.data.total
       //   }
       // }).catch(error => {
       //   throw error
       // })
       this.$store.commit('setIsPullingDown', true)
-      console.log(data, '下拉刷新发送data')
     },
     // 下拉刷新
     _getMsgList () {
-      this.searchData.site = ''
+      this.searchData.area = ''
     },
     // 上拉加载更多
     getMoreMsgList () {
-      this.searchData.page++
-      let page = this.searchData.page
-      let total = this.searchData.total
+      this.searchData.current_page++
+      let currentpage = this.searchData.current_page
+      let total = this.total
       let data = this.$qs.stringify(this.searchData)
-      if (page > total) {
+      if (currentpage > total) {
         this.loadText = '暂无更多数据'
       } else {
-        // this.$axios.get('',data).then(result => {
+        // this.$axios.get('', data).then(result => {
         //   this.$store.commit('setIsPullingUp', true)
         //   if (result.data.code === 0) {
-        //   } else if (result.data.code === 1) {
         //     this.isShowLoading = false
-        //     this.shopsList = result.data.data
+        //     this.shopsList = result.data.data.data
+        //     this.total = result.data.total
         //   }
         // }).catch(error => {
         //   throw error
         // })
       }
-      let tests = {
-        // 信息类别，1：供应，2：采购
-        msg_status: 1,
-        category_msg: '5，1，8，3',
-        site: '测试城市5',
-        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-        time: '2小时前',
-        msgcode: '5-258741',
-        send_time: '2019-08-06 06:44:25',
-        phone: '18888888888'
-      }
-      this.msgList.push(tests)
       this.$store.commit('setIsPullingUp', true)
       console.log(data, '上拉加载发送data')
     },
@@ -353,18 +315,16 @@ export default {
     },
     // 省市县三级联动
     onSelected (data) {
-      this.searchData.site = data.province.value + data.city.value + data.area.value
+      this.searchData.area = data.province.value + data.city.value + data.area.value
       this.show = false
       this.turnimg = false
     }
   },
   watch: {
     searchData_category_msg (newval, oldval) {
-      this.getTotal()
       this.getMsgList()
     },
-    site (newval, oldval) {
-      this.getTotal()
+    area (newval, oldval) {
       this.getMsgList()
     }
   },
@@ -374,7 +334,6 @@ export default {
     } else if (this.msg_status === 2) {
       this.searchData.msg_status = 2
     }
-    this.getTotal()
     // this.getCategory_msg()
     this.getMsgList()
   }

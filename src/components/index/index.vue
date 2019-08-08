@@ -6,9 +6,9 @@
     <!-- 选择 搜索 start -->
     <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.category">
+        <el-select v-model="searchData.classify">
           <el-option
-            v-for="(item, index) in category"
+            v-for="(item, index) in classify"
             :key="index"
             :label="item"
             :value="index">
@@ -16,7 +16,7 @@
         </el-select>
         <div class="site">
           <div @click="choose" class="choose tc color666">
-            <div class="font26">{{searchData.site || '地区选择'}}</div>
+            <div class="font26">{{searchData.area || '地区选择'}}</div>
             <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
           </div>
           <p class="pwrap bgfff" v-if="show">
@@ -69,199 +69,53 @@ export default {
   name: 'index',
   data () {
     return {
-      // 测试接口数据
-      test: {},
       // 下拉刷新
       isShowLoading: true,
       // 搜索
       searchData: {
         // 分类搜索
-        category: 0,
+        classify: 0,
         // 地区搜索
-        site: '',
+        area: '',
         // 排序方式，0：时间顺序(默认)；1：时间倒序；2：等级顺序；3：等级倒序
         sort: 0,
         // 标签搜索
         search: '',
         // 页码
-        page: '1',
-        // 总页数
-        total: '0'
+        current_page: '1'
       },
+      // 总页数
+      total: '0',
       // 是否发送搜索信息
       isSend: false,
       // 排序方式
       sort: ['时间顺序', '时间倒序', '等级顺序', '等级倒序'],
       // 商铺列表
       shopsList: [
-        {
-          // 店铺id
-          shopid: '1',
-          // 店铺门脸图片
-          img: 'static/img/userimg.png',
-          // 店铺名称
-          name: '测试企业1',
-          // 所属分类
-          category: '0',
-          // vip等级
-          vip: '',
-          // 所处地区
-          site: '测试城市1',
-          // 店铺标签
-          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
-          // 店铺介绍
-          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '2',
-          img: 'static/img/userimg.png',
-          name: '测试企业2',
-          category: '1',
-          vip: '4',
-          site: '测试城市2',
-          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话，后台需要加密
-          phone: '18888888888'
-        },
-        {
-          shopid: '3',
-          img: 'static/img/userimg.png',
-          name: '测试企业3',
-          category: '3',
-          vip: '6',
-          site: '测试城市3',
-          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '4',
-          img: 'static/img/userimg.png',
-          name: '测试企业1',
-          category: '2',
-          vip: '2',
-          site: '测试城市1',
-          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
-          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '5',
-          img: 'static/img/userimg.png',
-          name: '测试企业3',
-          category: '0',
-          vip: '',
-          site: '测试城市3',
-          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '6',
-          img: 'static/img/userimg.png',
-          name: '测试企业1',
-          category: '2',
-          vip: '1',
-          site: '测试城市1',
-          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
-          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '7',
-          img: 'static/img/userimg.png',
-          name: '测试企业2',
-          category: '3',
-          vip: '10',
-          site: '测试城市2',
-          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介，测试企业2简介，测试企业2简介测试企业2简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '8',
-          img: 'static/img/userimg.png',
-          name: '测试企业3',
-          category: '0',
-          vip: '1',
-          site: '测试城市3',
-          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '9',
-          img: 'static/img/userimg.png',
-          name: '测试企业1',
-          category: '2',
-          vip: '1',
-          site: '测试城市1',
-          tags: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
-          des: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        },
-        {
-          shopid: '10',
-          img: 'static/img/userimg.png',
-          name: '测试企业3',
-          category: '1',
-          vip: '1',
-          site: '测试城市3',
-          tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-          des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-          // 店铺信息更新时间
-          updateTime: '2019-07-27 12:00:00',
-          // 点赞数量
-          like: '53',
-          // 联系电话
-          phone: '18888888888'
-        }
+        // {
+        //   // 店铺id
+        //   id: '1',
+        //   // 店铺门脸图片
+        //   image: 'static/img/userimg.png',
+        //   // 店铺名称
+        //   name: '测试企业1',
+        //   // 所属分类
+        //   classify: '0',
+        //   // vip等级
+        //   vipnum: '',
+        //   // 所处地区
+        //   area: '测试城市1',
+        //   // 店铺标签
+        //   label: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+        //   // 店铺介绍
+        //   business: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
+        //   // 店铺信息更新时间
+        //   time: '2019-07-27 12:00:00',
+        //   // 点赞数量
+        //   give: '53',
+        //   // 联系电话
+        //   phone: '18888888888'
+        // }
       ],
       // 加载提示语
       loadText: '加载更多...',
@@ -273,16 +127,16 @@ export default {
   },
   computed: {
     // 店铺分类
-    category () {
-      return this.$store.state.category
+    classify () {
+      return this.$store.state.classify
     },
     // 搜索类别
-    searchData_category () {
-      return this.searchData.category
+    searchData_classify () {
+      return this.searchData.classify
     },
     // 搜索地区
-    site () {
-      return this.searchData.site
+    area () {
+      return this.searchData.area
     },
     // 修改排序
     searchSort () {
@@ -301,24 +155,12 @@ export default {
     VDistpicker
   },
   methods: {
-    // 测试接口方法
-    ceshi () {
-      this.$axios.post('Index/index/classify').then(result => {
-        this.test = result
-        console.log(result, '返回数据')
-        console.log(this.test, '接收到的数据')
-      }).catch(error => {
-        throw error
-      })
-    },
-    // 测试请求路径  /construction/login/vueTest
-    // // 获取店铺分类
-    // getCategory () {
-    //   console.log(this.category)
+    // // 获取店铺分类  暂时关闭，等后台管理系统开放相关功能再开启
+    // getClassify () {
+    //   console.log(this.classify)
     //   this.$axios.get('').then(result => {
     //     if (result.data.code === 0) {
-    //     } else if (result.data.code === 1) {
-    //       this.$store.commit('getCategory', result.data.data)
+    //       this.$store.commit('getClassify', result.data.data)
     //     }
     //   }).catch(error => {
     //     throw error
@@ -330,99 +172,50 @@ export default {
         this.getShopsList()
       }
     },
-    // 获取信息总页数
-    getTotal () {
-      this.searchData.total = 8
-      // this.$axios.get('').then(result => {
-      //   if (result.data.code === 0) {
-      //   } else if (result.data.code === 1) {
-      //     this.searchData.total = result.data.data
-      //   }
-      // }).catch(error => {
-      //   throw error
-      // })
-    },
     // 获取店铺列表资料公共方法
     getShopsList () {
-      this.searchData.page = '1'
+      this.searchData.current_page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
       setTimeout(() => {
         this.isShowLoading = false
       }, 1000)
-      let tests = {
-        shopid: '101',
-        img: 'static/img/userimg.png',
-        name: '测试企业3',
-        category: '1',
-        vip: '1',
-        site: '测试城市3',
-        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-        // 店铺信息更新时间
-        updateTime: '2019-07-27 12:00:00',
-        // 点赞数量
-        like: '53',
-        // 联系电话
-        phone: '18888888888'
-      }
-      this.shopsList.unshift(tests)
-      // this.$axios.get('',data).then(result => {
-      //   this.$store.commit('setIsPullingDown', true)
-      //   if (result.data.code === 0) {
-      //   } else if (result.data.code === 1) {
-      //     this.isShowLoading = false
-      //     this.shopsList = result.data.data
-      //   }
-      // }).catch(error => {
-      //   throw error
-      // })
+      this.$axios.get('Index/index/shops', data).then(result => {
+        this.$store.commit('setIsPullingDown', true)
+        if (result.data.code === 0) {
+          this.isShowLoading = false
+          this.shopsList = result.data.data.data
+          this.total = result.data.total
+        }
+      }).catch(error => {
+        throw error
+      })
       this.$store.commit('setIsPullingDown', true)
-      console.log(data, '下拉刷新发送data')
     },
     // 下拉刷新
     _getShopsList () {
-      this.searchData.site = ''
+      this.searchData.area = ''
     },
     // 上拉加载更多
     getMoreShopsList () {
-      this.searchData.page++
-      let page = this.searchData.page
-      let total = this.searchData.total
+      this.searchData.current_page++
+      let currentpage = this.searchData.current_page
+      let total = this.total
       let data = this.$qs.stringify(this.searchData)
-      if (page > total) {
+      if (currentpage > total) {
         this.loadText = '暂无更多数据'
       } else {
-        // this.$axios.get('',data).then(result => {
-        //   this.$store.commit('setIsPullingUp', true)
-        //   if (result.data.code === 0) {
-        //   } else if (result.data.code === 1) {
-        //     this.isShowLoading = false
-        //     this.shopsList = result.data.data
-        //   }
-        // }).catch(error => {
-        //   throw error
-        // })
+        this.$axios.get('Index/index/shops', data).then(result => {
+          this.$store.commit('setIsPullingUp', true)
+          if (result.data.code === 0) {
+            this.isShowLoading = false
+            this.shopsList = result.data.data
+          }
+        }).catch(error => {
+          throw error
+        })
       }
-      let tests = {
-        shopid: '102',
-        img: 'static/img/userimg.png',
-        name: '测试企业3',
-        category: '1',
-        vip: '1',
-        site: '测试城市3',
-        tags: ['标签2-1', '标签2-2', '标签2-3', '标签2-4', '标签2-5'],
-        des: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-        // 店铺信息更新时间
-        updateTime: '2019-07-27 12:00:00',
-        // 点赞数量
-        like: '53',
-        // 联系电话
-        phone: '18888888888'
-      }
-      this.shopsList.push(tests)
       this.$store.commit('setIsPullingUp', true)
-      console.log(data, '上拉加载发送data')
     },
     // 显示隐藏省市县下拉框
     choose () {
@@ -431,25 +224,22 @@ export default {
     },
     // 省市县三级联动
     onSelected (data) {
-      this.searchData.site = data.province.value + data.city.value + data.area.value
+      this.searchData.area = data.province.value + data.city.value + data.area.value
       this.show = false
       this.turnimg = false
     }
   },
   watch: {
     // 监听店铺类别变换
-    searchData_category (newval, oldval) {
-      this.getTotal()
+    searchData_classify (newval, oldval) {
       this.getShopsList()
     },
     // 监听店铺地区变换
-    site (newval, oldval) {
-      this.getTotal()
+    area (newval, oldval) {
       this.getShopsList()
     },
     // 监听排序方式变换
     searchSort (newval, oldval) {
-      this.getTotal()
       this.getShopsList()
     },
     // 监听搜索标签输入
@@ -462,10 +252,8 @@ export default {
     }
   },
   created () {
-    this.getTotal()
     // this.getCategory()
     this.getShopsList()
-    this.ceshi()
   }
 }
 </script>
