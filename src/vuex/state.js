@@ -6,7 +6,7 @@ const state = {
     // 用户头像
     userimg: 'static/img/userimg.png',
     // 是否注册店铺
-    shopid: '',
+    shopid: '5',
     // 煤球数量
     pointsA: '50',
     // 积分数量

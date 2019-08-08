@@ -102,7 +102,7 @@
           <div class="register_val business">
             <!--<div class="tips font26 color999">请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符</div>-->
             <!--<vue-ueditor-wrap v-model="registerData.business" :config="myConfig"></vue-ueditor-wrap>-->
-            <v-editor :editorContent="registerData.business" @updateContent="updateContent"></v-editor>
+            <v-editor v-model="registerData.business" @textchange="updateContent"></v-editor>
           </div>
         </li>
         <!-- 业务介绍 end -->
@@ -152,7 +152,7 @@
 
 <script>
 import VDistpicker from 'v-distpicker'
-import E from 'wangeditor'
+import VEditor from '@/components/common/wangeditor/wangeditor'
 
 export default {
   name: 'registerShop',
@@ -171,7 +171,7 @@ export default {
         // 店铺标签
         label: [],
         // 店铺介绍
-        business: '',
+        business: '请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符',
         // 店铺电话
         phone: '',
         // 认证类型，1：未认证；2：个人认证；3：企业认证
@@ -342,7 +342,6 @@ export default {
     },
     // 响应数据显示
     updateContent (html) {
-      console.log(1)
       this.registerData.business = html
     }
   },
