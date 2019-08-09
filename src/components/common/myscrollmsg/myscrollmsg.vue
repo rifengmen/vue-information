@@ -8,14 +8,12 @@
             <div class="categorymsg">
               <span
                 class="font30 font_blod"
-                v-for="(classifymsg_item, index) in (item.classifymsg.split('，'))"
-                :key="index">
-                {{classifymsg[classifymsg_item.split('-')[0]].label + '-' + classifymsg[classifymsg_item.split('-')[0]].children[classifymsg_item.split('-')[1]].label}}
-              </span>
+                v-for="(classifymsg_item, index) in item.classify"
+                :key="index">{{classifymsg_item}}</span>
             </div>
-            <div class="msgdes ellipsis color666 font28">{{item.business}}</div>
+            <div class="msgdes ellipsis color666 font28">{{item.leave}}</div>
             <div class="time_detailbtn">
-              <div class="time color1470cc">发布时间：<span class="font26">{{item.send_time}}</span></div>
+              <div class="time color1470cc">发布时间：<span class="font26">{{item.time}}</span></div>
               <div class="detailbtn colorff9500 font28 tc">查看详情</div>
             </div>
           </router-link>

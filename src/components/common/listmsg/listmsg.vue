@@ -66,7 +66,7 @@ export default {
         // 信息类别，1：供应，2：求购
         msg_status: '',
         // 信息分类
-        classifymsg: '0',
+        classifymsg: 0,
         // 地区查询
         area: '',
         // 页码
@@ -80,15 +80,15 @@ export default {
           // 信息类别，1：供应，2：求购
           msg_status: 1,
           // 信息分类所属
-          classifymsg: '1-3，2-6，3-9',
+          classifymsg: ['测试信息分类1-2', '测试信息分类1-5'],
           // 信息地区
           area: '测试城市1',
           // 信息详情
-          business: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          leave: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
           // 信息编号
           msgcode: '5-258741',
           // 发布时间
-          send_time: '2019-08-06 06:44:25',
+          time: '2019-08-06 06:44:25',
           // 联系电话
           phone: '18888888888'
         }
@@ -123,16 +123,48 @@ export default {
     VDistpicker
   },
   methods: {
+    // 设置信息分类
+    setClassifymsg () {
+      this.$axios.post('Index/index/classify').then(result => {
+        let data = result.data.data
+        let arr = []
+        for (let i = 0; i < data.length; i++) {
+          let _arr = {}
+          _arr['value'] = data[i].pid
+          _arr['label'] = data[i].name
+          if (data[i].children) {
+            _arr['children'] = []
+            let v = data[i].children
+            for (let j = 0; j < v.length; j++) {
+              let _v = {}
+              _v['value'] = v[j].pid
+              _v['label'] = v[j].name
+              _arr['children'].push(_v)
+            }
+          }
+          arr.push(_arr)
+        }
+        this.$store.commit('setClassifymsg', arr)
+      }).catch(error => {
+        throw error
+      })
+    },
     // 获取信息列表资料公共方法
     getMsgList () {
       this.searchData.page = '1'
       this.isShowLoading = true
-      let data = this.$qs.stringify(this.searchData)
-      this.$axios.get('Index/index/askbuy', data).then(result => {
+      let _data = {
+        data: this.searchData.msg_status,
+        search: this.searchData.classifymsg,
+        site: this.searchData.area,
+        page: this.searchData.page
+      }
+      let data = this.$qs.stringify(_data)
+      this.$axios.post('Index/index/askbuy', data).then(result => {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
           this.isShowLoading = false
-          this.msgList = result.data.data
+          this.msgList = result.data.data.data
           this.total = result.data.total
         }
       }).catch(error => {
@@ -157,8 +189,7 @@ export default {
           this.$store.commit('setIsPullingUp', true)
           if (result.data.code === 0) {
             this.isShowLoading = false
-            this.msgList = result.data.data
-            this.total = result.data.total
+            this.msgList.push(...result.data.data.data)
           }
         }).catch(error => {
           throw error
@@ -179,7 +210,7 @@ export default {
     },
     // 信息分类发生变化时触发
     handleChange (value) {
-      this.searchData.classifymsg = value.join('-')
+      this.searchData.classifymsg = value[1]
     }
   },
   watch: {
@@ -196,6 +227,7 @@ export default {
     } else if (this.msg_status === 2) {
       this.searchData.msg_status = 2
     }
+    this.setClassifymsg()
     this.getMsgList()
   }
 }

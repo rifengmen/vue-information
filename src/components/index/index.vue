@@ -71,8 +71,6 @@ export default {
     return {
       // 下拉刷新
       isShowLoading: true,
-      // 店铺分类
-      classify: [],
       // 搜索
       searchData: {
         // 分类搜索
@@ -128,10 +126,10 @@ export default {
     }
   },
   computed: {
-    // // 店铺分类
-    // classify () {
-    //   return this.$store.state.classify
-    // },
+    // 店铺分类
+    classify () {
+      return this.$store.state.classify
+    },
     // 搜索类别
     searchData_classify () {
       return this.searchData.classify
@@ -157,6 +155,14 @@ export default {
     VDistpicker
   },
   methods: {
+    // // 设置店铺分类
+    // setClassify () {
+    //   this.$axios.post('').then(result => {
+    //     this.$store.commit('setClassify', result.data.data)
+    //   }).catch(error => {
+    //     throw error
+    //   })
+    // },
     // 标签搜索
     sendSearch () {
       if (this.isSend) {
@@ -187,6 +193,7 @@ export default {
     // 上拉加载更多
     getMoreShopsList () {
       this.searchData.page++
+      console.log(this.searchData)
       let currentpage = this.searchData.page
       let total = this.total
       let data = this.$qs.stringify(this.searchData)
@@ -197,7 +204,7 @@ export default {
           this.$store.commit('setIsPullingUp', true)
           if (result.data.code === 0) {
             this.isShowLoading = false
-            this.shopsList = result.data.data
+            this.shopsList.push(...result.data.data.data)
           }
         }).catch(error => {
           throw error
@@ -240,6 +247,7 @@ export default {
     }
   },
   created () {
+    // this.setClassify()
     this.getShopsList()
   }
 }

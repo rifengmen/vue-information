@@ -7,12 +7,12 @@ const mutations = {
   setPointsA (state, pointsA) {
     state.userInfo.pointsA = pointsA
   },
-  // 获取店铺分类
-  getClassify (state, classify) {
+  // 设置店铺分类
+  setClassify (state, classify) {
     state.classify = classify
   },
-  // 获取信息分类
-  getClassifymsg (state, classifymsg) {
+  // 设置信息分类
+  setClassifymsg (state, classifymsg) {
     state.classifymsg = classifymsg
   },
   // 设置下拉刷新请求开关
