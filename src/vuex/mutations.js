@@ -12,8 +12,8 @@ const mutations = {
     state.classify = classify
   },
   // 获取信息分类
-  getCategory_msg (state, categorymsg) {
-    state.categorymsg = categorymsg
+  getClassifymsg (state, classifymsg) {
+    state.classifymsg = classifymsg
   },
   // 设置下拉刷新请求开关
   setIsPullingDown (state, isPullingDown) {

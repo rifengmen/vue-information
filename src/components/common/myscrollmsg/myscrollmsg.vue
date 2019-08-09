@@ -7,15 +7,15 @@
           <router-link :to="{name: 'msgDetail', query:{msgDetail: item}}" tag="div">
             <div class="categorymsg">
               <span
-                class="font32 font_blod"
-                v-for="(arr_item, index) in (item.category_msg.split('，'))"
+                class="font30 font_blod"
+                v-for="(classifymsg_item, index) in (item.classifymsg.split('，'))"
                 :key="index">
-                {{categorymsg[arr_item]}}
+                {{classifymsg[classifymsg_item.split('-')[0]].label + '-' + classifymsg[classifymsg_item.split('-')[0]].children[classifymsg_item.split('-')[1]].label}}
               </span>
             </div>
             <div class="msgdes ellipsis color666 font28">{{item.business}}</div>
             <div class="time_detailbtn">
-              <div class="time color999">{{item.time}}</div>
+              <div class="time color1470cc">发布时间：<span class="font26">{{item.send_time}}</span></div>
               <div class="detailbtn colorff9500 font28 tc">查看详情</div>
             </div>
           </router-link>
@@ -54,7 +54,7 @@ export default {
       // 上拉加载提示
       loading: false,
       // 信息分类
-      categorymsg: this.$store.state.categorymsg
+      classifymsg: this.$store.state.classifymsg
     }
   },
   computed: {

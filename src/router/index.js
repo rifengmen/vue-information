@@ -7,6 +7,7 @@ import shopInfo from '@/components/shopInfo/shopInfo'
 import listSupplier from '@/components/list/listSupplier'
 import listPurchase from '@/components/list/listPurchase'
 import msgDetail from '@/components/msgDetail/msgDetail'
+import sendMsg from '@/components/sendMsg/sendMsg'
 
 // 省市县三级联动
 import Distpicker from 'v-distpicker'
@@ -22,6 +23,7 @@ export default new Router({
     {path: '/shopInfo', name: 'shopInfo', component: shopInfo},
     {path: '/listSupplier', name: 'listSupplier', component: listSupplier},
     {path: '/listPurchase', name: 'listPurchase', component: listPurchase},
-    {path: '/msgDetail', name: 'msgDetail', component: msgDetail}
+    {path: '/msgDetail', name: 'msgDetail', component: msgDetail},
+    {path: '/sendMsg', name: 'sendMsg', component: sendMsg}
   ]
 })

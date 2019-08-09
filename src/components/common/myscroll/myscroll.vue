@@ -14,7 +14,7 @@
                 <img class="vipclass fl" v-if="vipClass[item.vipnum]" :src="vipClass[item.vipnum]">
                 <div class="name font30 color333 ellipsis fl">{{item.name}}</div>
               </div>
-              <span class="shopcategory font24 colorfff bg1470cc">{{classify[item.classify]}}</span>
+              <span class="shopcategory font24 colorfff bg1470cc">{{item.classify}}</span>
               <div class="area_box">
                 <img class="area" src="static/img/area.png">
                 <span class="font26">{{item.area}}</span>
@@ -65,9 +65,7 @@ export default {
       // 上拉加载提示
       loading: false,
       // 店铺等级图标资源路径
-      vipClass: this.$store.state.vip,
-      // 店铺分类
-      classify: this.$store.state.classify
+      vipClass: this.$store.state.vip
     }
   },
   computed: {
@@ -129,17 +127,6 @@ export default {
       this.initScroll()
     })
   }
-  // watch: {
-  //   shopsList () {
-  //     this.$nextTick(() => {
-  //       console.log(1)
-  //       this.scroll.finishPullDown()
-  //       this.scroll.finishPullUp()
-  //       this.scroll.refresh()
-  //       console.log(2)
-  //     })
-  //   }
-  // }
 }
 </script>
 

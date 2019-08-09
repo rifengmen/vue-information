@@ -71,6 +71,8 @@ export default {
     return {
       // 下拉刷新
       isShowLoading: true,
+      // 店铺分类
+      classify: [],
       // 搜索
       searchData: {
         // 分类搜索
@@ -82,7 +84,7 @@ export default {
         // 标签搜索
         search: '',
         // 页码
-        current_page: '1'
+        page: '1'
       },
       // 总页数
       total: '0',
@@ -126,10 +128,10 @@ export default {
     }
   },
   computed: {
-    // 店铺分类
-    classify () {
-      return this.$store.state.classify
-    },
+    // // 店铺分类
+    // classify () {
+    //   return this.$store.state.classify
+    // },
     // 搜索类别
     searchData_classify () {
       return this.searchData.classify
@@ -155,17 +157,6 @@ export default {
     VDistpicker
   },
   methods: {
-    // // 获取店铺分类  暂时关闭，等后台管理系统开放相关功能再开启
-    // getClassify () {
-    //   console.log(this.classify)
-    //   this.$axios.get('').then(result => {
-    //     if (result.data.code === 0) {
-    //       this.$store.commit('getClassify', result.data.data)
-    //     }
-    //   }).catch(error => {
-    //     throw error
-    //   })
-    // },
     // 标签搜索
     sendSearch () {
       if (this.isSend) {
@@ -174,12 +165,9 @@ export default {
     },
     // 获取店铺列表资料公共方法
     getShopsList () {
-      this.searchData.current_page = '1'
+      this.searchData.page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
-      setTimeout(() => {
-        this.isShowLoading = false
-      }, 1000)
       this.$axios.get('Index/index/shops', data).then(result => {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
@@ -198,8 +186,8 @@ export default {
     },
     // 上拉加载更多
     getMoreShopsList () {
-      this.searchData.current_page++
-      let currentpage = this.searchData.current_page
+      this.searchData.page++
+      let currentpage = this.searchData.page
       let total = this.total
       let data = this.$qs.stringify(this.searchData)
       if (currentpage > total) {
@@ -252,7 +240,6 @@ export default {
     }
   },
   created () {
-    // this.getCategory()
     this.getShopsList()
   }
 }
