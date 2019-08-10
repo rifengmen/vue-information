@@ -66,7 +66,7 @@ export default {
         // 信息类别，1：供应，2：求购
         msg_status: '',
         // 信息分类
-        classifymsg: 0,
+        classifymsg: -1,
         // 地区查询
         area: '',
         // 页码
@@ -128,6 +128,7 @@ export default {
       this.$axios.post('Index/index/classify').then(result => {
         let data = result.data.data
         let arr = []
+        arr[0] = {'value': -1, 'label': '全部分类'}
         for (let i = 0; i < data.length; i++) {
           let _arr = {}
           _arr['value'] = data[i].pid
@@ -153,13 +154,13 @@ export default {
     getMsgList () {
       this.searchData.page = '1'
       this.isShowLoading = true
-      let _data = {
+      let senddata = {
         data: this.searchData.msg_status,
-        search: this.searchData.classifymsg,
+        search: this.searchData.classifymsg === -1 ? '' : this.searchData.classifymsg,
         site: this.searchData.area,
         page: this.searchData.page
       }
-      let data = this.$qs.stringify(_data)
+      let data = this.$qs.stringify(senddata)
       this.$axios.post('Index/index/askbuy', data).then(result => {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
@@ -210,7 +211,7 @@ export default {
     },
     // 信息分类发生变化时触发
     handleChange (value) {
-      this.searchData.classifymsg = value[1]
+      this.searchData.classifymsg = value[value.length - 1]
     }
   },
   watch: {
@@ -222,12 +223,12 @@ export default {
     }
   },
   created () {
+    this.setClassifymsg()
     if (this.msg_status === 1) {
       this.searchData.msg_status = 1
     } else if (this.msg_status === 2) {
       this.searchData.msg_status = 2
     }
-    this.setClassifymsg()
     this.getMsgList()
   }
 }
