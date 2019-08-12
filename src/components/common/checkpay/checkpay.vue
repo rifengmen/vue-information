@@ -40,7 +40,7 @@
       </div>
       <!-- 信息内容 end -->
       <!-- 付款按钮 start -->
-      <div class="sendbtn tc colorff9500 bgfff" @click="sendpay">支付并查看</div>
+      <div class="sendbtn tc colorff9500 bgfff" @click="sendpay">去支付</div>
       <!-- 付款按钮 end -->
     </div>
     <!-- 付款信息 end -->
@@ -82,7 +82,6 @@ export default {
       if (newval) {
         this.isSend = true
       }
-      console.log(newval)
     }
   }
 }

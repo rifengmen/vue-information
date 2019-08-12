@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index/index'
 import userInfo from '@/components/userInfo/userInfo'
+import userList from '@/components/userInfo/userList'
 import registerShop from '@/components/registerShop/registerShop'
 import shopInfo from '@/components/shopInfo/shopInfo'
 import listSupplier from '@/components/list/listSupplier'
@@ -19,6 +20,7 @@ export default new Router({
   routes: [
     {path: '/', name: 'index', component: index},
     {path: '/userInfo', name: 'userInfo', component: userInfo},
+    {path: '/userList', name: 'userList', component: userList},
     {path: '/registerShop', name: 'registerShop', component: registerShop},
     {path: '/shopInfo', name: 'shopInfo', component: shopInfo},
     {path: '/listSupplier', name: 'listSupplier', component: listSupplier},
