@@ -4,3 +4,9 @@
   height: calc(100vh - 3.53rem);
 }
 /* 下拉刷新动画 end */
+/* 地区三级联动 start */
+.site_box {
+  width: 3.9rem;
+  height: 100%;
+}
+/* 地区三级联动 end */

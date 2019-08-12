@@ -32,6 +32,10 @@
   height: .40rem;
   margin-top: .15rem;
 }
+.site_box {
+  width: 4.5rem;
+  height: 100%;
+}
 /* 选择 搜索 end */
 /* 下拉刷新动画 start */
 .loading {

@@ -10,14 +10,16 @@
           v-model="searchData.classifymsg"
           :options="classifymsg"
           @change="handleChange"></el-cascader>
-        <div class="site">
-          <div @click="choose" class="choose tc colorcecece">
-            <div class="font26 color666">{{searchData.area || '地区选择'}}</div>
-            <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
+        <div class="site_box">
+          <div class="site">
+            <div @click="choose" class="choose tc colorcecece">
+              <div class="font26 color666">{{searchData.area || '地区选择'}}</div>
+              <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
+            </div>
+            <p class="pwrap bgfff" v-if="show">
+              <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
+            </p>
           </div>
-          <p class="pwrap bgfff" v-if="show">
-            <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
-          </p>
         </div>
       </div>
     </div>
@@ -66,7 +68,7 @@ export default {
         // 信息类别，1：供应，2：求购
         msg_status: '',
         // 信息分类
-        classifymsg: -1,
+        classifymsg: 0,
         // 地区查询
         area: '',
         // 页码
@@ -128,22 +130,24 @@ export default {
       this.$axios.post('Index/index/classify').then(result => {
         let data = result.data.data
         let arr = []
-        arr[0] = {'value': -1, 'label': '全部分类'}
-        for (let i = 0; i < data.length; i++) {
-          let _arr = {}
-          _arr['value'] = data[i].pid
-          _arr['label'] = data[i].name
-          if (data[i].children) {
-            _arr['children'] = []
-            let v = data[i].children
-            for (let j = 0; j < v.length; j++) {
-              let _v = {}
-              _v['value'] = v[j].pid
-              _v['label'] = v[j].name
-              _arr['children'].push(_v)
+        arr[0] = {'value': 0, 'label': '全部分类'}
+        if (data) {
+          for (let i = 0; i < data.length; i++) {
+            let _arr = {}
+            _arr['value'] = data[i].id
+            _arr['label'] = data[i].name
+            if (data[i].children) {
+              _arr['children'] = []
+              let v = data[i].children
+              for (let j = 0; j < v.length; j++) {
+                let _v = {}
+                _v['value'] = v[j].id
+                _v['label'] = v[j].name
+                _arr['children'].push(_v)
+              }
             }
+            arr.push(_arr)
           }
-          arr.push(_arr)
         }
         this.$store.commit('setClassifymsg', arr)
       }).catch(error => {
@@ -166,7 +170,7 @@ export default {
         if (result.data.code === 0) {
           this.isShowLoading = false
           this.msgList = result.data.data.data
-          this.total = result.data.total
+          this.total = result.data.data.total
         }
       }).catch(error => {
         throw error
@@ -211,7 +215,7 @@ export default {
     },
     // 信息分类发生变化时触发
     handleChange (value) {
-      this.searchData.classifymsg = value[value.length - 1]
+      this.searchData.classifymsg = value[value.length - 1 || 0]
     }
   },
   watch: {

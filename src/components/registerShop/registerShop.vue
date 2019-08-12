@@ -100,8 +100,6 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">业务介绍：</div>
           <div class="register_val business">
-            <!--<div class="tips font26 color999">请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符</div>-->
-            <!--<vue-ueditor-wrap v-model="registerData.business" :config="myConfig"></vue-ueditor-wrap>-->
             <v-editor v-model="registerData.business" @textchange="updateContent"></v-editor>
           </div>
         </li>
@@ -183,7 +181,7 @@ export default {
       label: '',
       // 省市县三级联动显示隐藏
       show: false,
-      // 是否发送注册信息
+      // 是否发送信息
       send: false,
       // 箭头旋转
       turnimg: false,
@@ -252,7 +250,7 @@ export default {
     backs () {
       this.$router.back()
     },
-    // 验证是否可以发送注册信息
+    // 验证是否可以提交信息
     isSend () {
       for (let registerDataKey in this.registerData) {
         if (this.registerData[registerDataKey] === '' || this.registerData.label.length === 0) {
@@ -262,7 +260,7 @@ export default {
         this.send = true
       }
     },
-    // 发送注册信息
+    // 提交信息
     registerSend () {
       if (this.send) {
         // this.$axios.post('', this.registerData).then(result => {

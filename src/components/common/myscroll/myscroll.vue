@@ -11,10 +11,13 @@
             </div>
             <div class="shopname fr color666">
               <div class="vip_name">
-                <img class="vipclass fl" v-if="vipClass[item.vipnum]" :src="vipClass[item.vipnum]">
+                <img class="vipclass fl" v-if="vipClass[item.vipnum]" :src="vipClass[item.vipnum - 1]">
                 <div class="name font30 color333 ellipsis fl">{{item.name}}</div>
               </div>
-              <span class="shopcategory font24 colorfff bg1470cc">{{item.classify}}</span>
+              <div>
+                <span class="font28 color1470cc font_blod">{{typearr[item.type - 1]}}</span>
+                <span class="shopcategory font24 colorfff bg1470cc">{{item.classify}}</span>
+              </div>
               <div class="area_box">
                 <img class="area" src="static/img/area.png">
                 <span class="font26">{{item.area}}</span>
@@ -65,7 +68,9 @@ export default {
       // 上拉加载提示
       loading: false,
       // 店铺等级图标资源路径
-      vipClass: this.$store.state.vip
+      vipClass: this.$store.state.vip,
+      // 认证类别数组，1：不认证 2：个人认证 3：企业认证
+      typearr: this.$store.state.typearr
     }
   },
   computed: {

@@ -14,14 +14,16 @@
             :value="index">
           </el-option>
         </el-select>
-        <div class="site">
-          <div @click="choose" class="choose tc color666">
-            <div class="font26">{{searchData.area || '地区选择'}}</div>
-            <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
+        <div class="site_box">
+          <div class="site">
+            <div @click="choose" class="choose tc color666">
+              <div class="font26">{{searchData.area || '地区选择'}}</div>
+              <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
+            </div>
+            <p class="pwrap bgfff" v-if="show">
+              <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
+            </p>
           </div>
-          <p class="pwrap bgfff" v-if="show">
-            <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
-          </p>
         </div>
         <el-select v-model="searchData.sort">
           <el-option
@@ -101,6 +103,8 @@ export default {
         //   name: '测试企业1',
         //   // 所属分类
         //   classify: '0',
+        //   // 认证类型，1：不认证； 2：个人认证； 3：企业认证；
+        //   classify: 1,
         //   // vip等级
         //   vipnum: '',
         //   // 所处地区
@@ -171,6 +175,7 @@ export default {
     },
     // 获取店铺列表资料公共方法
     getShopsList () {
+      console.log(this.searchData)
       this.searchData.page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
@@ -179,7 +184,7 @@ export default {
         if (result.data.code === 0) {
           this.isShowLoading = false
           this.shopsList = result.data.data.data
-          this.total = result.data.total
+          this.total = result.data.data.total
         }
       }).catch(error => {
         throw error

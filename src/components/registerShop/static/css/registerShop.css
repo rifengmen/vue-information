@@ -16,11 +16,6 @@
 .register_li:last-child {
   border-bottom: none;
 }
-.register_li .tip {
-  width: .26rem;
-  height: .26rem;
-  margin: 0 .1rem;
-}
 .register_li .li_name {
   margin-right: .2rem;
 }

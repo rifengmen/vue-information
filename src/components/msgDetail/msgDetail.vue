@@ -9,6 +9,20 @@
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
+    <!-- 信息详情 start -->
+    <div class="msgdetail">
+      <div class="msgarea font30 font_blod">
+        <div>
+          <span>分类：</span>
+          <span>分类1</span>
+        </div>
+        <div>
+          <span>产地：</span>
+          <span>山西省太原市小店区</span>
+        </div>
+      </div>
+    </div>
+    <!-- 信息详情 end -->
   </div>
 </template>
 
