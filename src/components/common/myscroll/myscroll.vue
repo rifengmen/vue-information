@@ -35,11 +35,11 @@
         </router-link>
       </li>
       <!-- 店铺简介 end -->
+      <!-- 上拉加载提示 start -->
+      <div class="loading tc font22 color999" v-if="loading">{{loadText}}</div>
+      <!-- 上拉加载提示 end -->
     </ul>
     <!-- 店铺列表 end -->
-    <!-- 上拉加载提示 start -->
-    <div class="loading tc font22 color999" v-if="loading">{{loadText}}</div>
-    <!-- 上拉加载提示 end -->
   </div>
 </template>
 
@@ -108,23 +108,34 @@ export default {
             setTimeout(() => {
               this.scroll.finishPullDown()
               this.scroll.refresh()
-            }, 500)
+            }, 2000)
           })
         }
         // 是否触发上拉加载
         if (this.isPullingUp) {
           this.scroll.on('pullingUp', () => {
-            this.$store.commit('setIsPullingUp', false)
             this.loading = true
+            this.$store.commit('setIsPullingUp', false)
             this.$emit('pullingup')
             setTimeout(() => {
               this.scroll.finishPullUp()
               this.scroll.refresh()
-            }, 500)
-            this.loading = false
+              this.loading = false
+            }, 2000)
           })
         }
       }
+    }
+  },
+  watch: {
+    // 监听列表变化，重置滚动
+    shopsList: {
+      handler () {
+        this.$nextTick(() => {
+          this.initScroll()
+        })
+      },
+      deep: true
     }
   },
   created () {

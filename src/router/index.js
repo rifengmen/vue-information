@@ -9,6 +9,8 @@ import listSupplier from '@/components/list/listSupplier'
 import listPurchase from '@/components/list/listPurchase'
 import msgDetail from '@/components/msgDetail/msgDetail'
 import sendMsg from '@/components/sendMsg/sendMsg'
+import complaintList from '@/components/complaintList/complaintList'
+import sendComplaint from '@/components/sendComplaint/sendComplaint'
 
 // 省市县三级联动
 import Distpicker from 'v-distpicker'
@@ -26,6 +28,8 @@ export default new Router({
     {path: '/listSupplier', name: 'listSupplier', component: listSupplier},
     {path: '/listPurchase', name: 'listPurchase', component: listPurchase},
     {path: '/msgDetail', name: 'msgDetail', component: msgDetail},
-    {path: '/sendMsg', name: 'sendMsg', component: sendMsg}
+    {path: '/sendMsg', name: 'sendMsg', component: sendMsg},
+    {path: '/complaintList', name: 'complaintList', component: complaintList},
+    {path: '/sendComplaint', name: 'sendComplaint', component: sendComplaint}
   ]
 })

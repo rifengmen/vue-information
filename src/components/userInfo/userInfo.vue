@@ -33,7 +33,7 @@
               </div>
               <div class="imgname">我的查看</div>
             </router-link>
-            <router-link :to="{name: ''}" tag="li"  class="cont_li">
+            <router-link :to="{name: 'complaintList'}" tag="li"  class="cont_li">
               <div class="imgbox">
                 <img src="static/img/complaintactive.png">
               </div>

@@ -16,11 +16,11 @@
 export default {
   name: 'msgheader',
   props: {
-    // 信息列表头部发布按钮，通过接收到的参数判断发布信息类型，1：供应信息；2：采购信息
+    // 信息列表头部发布按钮，通过接收到的参数判断发布信息类型，1：采购信息；2：供应信息
     msg_status: {
       type: Number,
       default: function () {
-        return 1
+        return 2
       }
     }
   },

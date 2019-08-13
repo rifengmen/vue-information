@@ -6,14 +6,19 @@
     <!-- 选择 搜索 start -->
     <div class="search_cont color666">
       <div class="category">
-        <el-select v-model="searchData.classify">
-          <el-option
-            v-for="(item, index) in classify"
-            :key="index"
-            :label="item"
-            :value="index">
-          </el-option>
-        </el-select>
+        <el-cascader
+          placeholder="选择分类"
+          v-model="searchData.classify"
+          :options="classify"
+          @change="handleChange"></el-cascader>
+        <!--<el-select v-model="searchData.classify">-->
+          <!--<el-option-->
+            <!--v-for="(item, index) in classify"-->
+            <!--:key="index"-->
+            <!--:label="item"-->
+            <!--:value="index">-->
+          <!--</el-option>-->
+        <!--</el-select>-->
         <div class="site_box">
           <div class="site">
             <div @click="choose" class="choose tc color666">
@@ -159,14 +164,25 @@ export default {
     VDistpicker
   },
   methods: {
-    // // 设置店铺分类
-    // setClassify () {
-    //   this.$axios.post('').then(result => {
-    //     this.$store.commit('setClassify', result.data.data)
-    //   }).catch(error => {
-    //     throw error
-    //   })
-    // },
+    // 设置店铺分类
+    setClassify () {
+      this.$axios.post('Index/index/shopclass').then(result => {
+        let data = result.data.data
+        let arr = []
+        arr[0] = {'value': 0, 'label': '全部分类'}
+        if (data) {
+          for (let i = 0; i < data.length; i++) {
+            let _arr = {}
+            _arr['value'] = data[i].id
+            _arr['label'] = data[i].name
+            arr.push(_arr)
+          }
+        }
+        this.$store.commit('setClassify', arr)
+      }).catch(error => {
+        throw error
+      })
+    },
     // 标签搜索
     sendSearch () {
       if (this.isSend) {
@@ -175,7 +191,6 @@ export default {
     },
     // 获取店铺列表资料公共方法
     getShopsList () {
-      console.log(this.searchData)
       this.searchData.page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
@@ -184,7 +199,7 @@ export default {
         if (result.data.code === 0) {
           this.isShowLoading = false
           this.shopsList = result.data.data.data
-          this.total = result.data.data.total
+          this.total = result.data.data.last_page
         }
       }).catch(error => {
         throw error
@@ -193,12 +208,15 @@ export default {
     },
     // 下拉刷新
     _getShopsList () {
-      this.searchData.area = ''
+      if (this.searchData.area !== '') {
+        this.searchData.area = ''
+      } else {
+        this.getShopsList()
+      }
     },
     // 上拉加载更多
     getMoreShopsList () {
       this.searchData.page++
-      console.log(this.searchData)
       let currentpage = this.searchData.page
       let total = this.total
       let data = this.$qs.stringify(this.searchData)
@@ -221,12 +239,17 @@ export default {
     choose () {
       this.show = !this.show
       this.turnimg = !this.turnimg
+      this.searchData.area = ''
     },
     // 省市县三级联动
     onSelected (data) {
       this.searchData.area = data.province.value + data.city.value + data.area.value
       this.show = false
       this.turnimg = false
+    },
+    // 信息分类发生变化时触发
+    handleChange (value) {
+      this.searchData.classify = value[0]
     }
   },
   watch: {
@@ -252,7 +275,7 @@ export default {
     }
   },
   created () {
-    // this.setClassify()
+    this.setClassify()
     this.getShopsList()
   }
 }

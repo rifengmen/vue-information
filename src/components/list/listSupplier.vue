@@ -9,8 +9,8 @@ export default {
   name: 'listSupplier',
   data () {
     return {
-      // 列表信息，1：供应信息
-      msg_status: 1
+      // 列表信息，2：供应信息
+      msg_status: 2
     }
   },
   components: {

@@ -1,15 +1,12 @@
 <template>
     <div class="wrapper" ref="myscroll">
       <!-- 信息列表 start -->
-      <ul class="msglist" v-show="msgList.length">
+      <ul class="msglist" v-if="msgList.length">
         <!-- 信息简介 start -->
         <li class="msgdetail" v-for="(item, index) in msgList" :key="index">
           <router-link :to="{name: 'msgDetail', query:{msgDetail: item}}" tag="div">
             <div class="categorymsg">
-              <span
-                class="font30 font_blod"
-                v-for="(classifymsg_item, index) in item.classify"
-                :key="index">{{classifymsg_item}}</span>
+              <span class="font30 font_blod">{{item.classify}}</span>
             </div>
             <div class="msgdes ellipsis color666 font28">{{item.leave}}</div>
             <div class="time_detailbtn">
@@ -19,11 +16,16 @@
           </router-link>
         </li>
         <!-- 信息简介 end -->
+        <!-- 上拉加载动画 start -->
+        <div class="loading tc font22 color999" v-if="loading">{{loadText}}</div>
+        <!-- 上拉加载动画 end -->
       </ul>
       <!-- 信息列表 end -->
-      <!-- 上拉加载动画 start -->
-      <div class="loading tc font22 color999" v-if="loading">{{loadText}}</div>
-      <!-- 上拉加载动画 end -->
+      <!-- 无信息提示 start -->
+      <div v-else class="nodata msglist">
+        <img src="static/img/nodata.jpg">
+      </div>
+      <!-- 无信息提示 end -->
     </div>
 </template>
 
@@ -90,23 +92,34 @@ export default {
             setTimeout(() => {
               this.scroll.finishPullDown()
               this.scroll.refresh()
-            }, 500)
+            }, 2000)
           })
         }
         // 是否触发上拉加载
         if (this.isPullingUp) {
           this.scroll.on('pullingUp', () => {
-            this.$store.commit('setIsPullingUp', false)
             this.loading = true
+            this.$store.commit('setIsPullingUp', false)
             this.$emit('pullingup')
             setTimeout(() => {
               this.scroll.finishPullUp()
               this.scroll.refresh()
-            }, 500)
-            this.loading = false
+              this.loading = false
+            }, 2000)
           })
         }
       }
+    }
+  },
+  watch: {
+    // 监听列表变化，重置滚动
+    msgList: {
+      handler () {
+        this.$nextTick(() => {
+          this.initScroll()
+        })
+      },
+      deep: true
     }
   },
   created () {

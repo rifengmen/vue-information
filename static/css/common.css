@@ -292,4 +292,11 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
   z-index: 100!important;
 }
 /* 富文本编辑器样式修改 end */
+/* 无数据图片 start */
+.nodata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 无数据图片 end */
 /* 公共样式 end */

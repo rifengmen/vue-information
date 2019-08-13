@@ -96,7 +96,7 @@ export default {
       msgarr: this.$store.state.msgarr,
       // 发布信息
       registerData: {
-        // 发布信息，通过接收到的参数判断发布信息类型，1：供应信息；2：采购信息
+        // 发布信息，通过接收到的参数判断发布信息类型，1：采购信息；2：供应信息
         msg_status: '',
         // 信息分类
         classifymsg: '',

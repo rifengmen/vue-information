@@ -1,0 +1,62 @@
+.cont {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+/* 信息详情 start */
+.msgarea {
+  border-top: .2rem #e7e7e7 solid;
+}
+.msg_li {
+  width: 100%;
+  padding: .3rem 0;
+  border-bottom: .01rem #e7e7e7 solid;
+}
+.msg_li > div {
+  width: 100%;
+  min-height: .8rem;
+  line-height: 1.5;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.msg_li > div > div:first-child {
+  width: 1.5rem;
+}
+.msg_li > div > div:last-child {
+  width: 5.5rem;
+}
+/* 信息详情 end */
+/* 信息编号 start */
+.msgcode {
+  width: 100%;
+  border-top: .2rem #e7e7e7 solid;
+}
+.msgcode > div > div:first-child {
+  width: 2rem;
+}
+.msgcode > div > div:last-child {
+  width: 5rem;
+}
+/* 信息编号 end */
+/* 免责 投诉 start */
+.tip_complaint {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-top: .2rem #e7e7e7 solid;
+}
+.complaint {
+  width: 1rem;
+  height: .4rem;
+  padding: .1rem .4rem;
+  border: .01rem #cecece solid;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 免责 投诉 end */
+

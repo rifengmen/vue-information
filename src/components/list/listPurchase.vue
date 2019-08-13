@@ -9,8 +9,8 @@ export default {
   name: 'listPurchase',
   data () {
     return {
-      // 列表信息 2：采购信息
-      msg_status: 2
+      // 列表信息 1：采购信息
+      msg_status: 1
     }
   },
   components: {

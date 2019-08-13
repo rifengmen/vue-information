@@ -55,7 +55,7 @@ export default {
     msg_status: {
       type: Number,
       default: function () {
-        return 1
+        return 2
       }
     }
   },
@@ -65,7 +65,7 @@ export default {
       isShowLoading: true,
       // 筛选条件
       searchData: {
-        // 信息类别，1：供应，2：求购
+        // 信息类别，1：求购，2：供应
         msg_status: '',
         // 信息分类
         classifymsg: 0,
@@ -79,7 +79,7 @@ export default {
       // 信息列表
       msgList: [
         {
-          // 信息类别，1：供应，2：求购
+          // 信息类别，1：求购，2：供应
           msg_status: 1,
           // 信息分类所属
           classifymsg: ['测试信息分类1-2', '测试信息分类1-5'],
@@ -160,7 +160,7 @@ export default {
       this.isShowLoading = true
       let senddata = {
         data: this.searchData.msg_status,
-        search: this.searchData.classifymsg === -1 ? '' : this.searchData.classifymsg,
+        search: this.searchData.classifymsg === 0 ? '' : this.searchData.classifymsg,
         site: this.searchData.area,
         page: this.searchData.page
       }
@@ -170,7 +170,7 @@ export default {
         if (result.data.code === 0) {
           this.isShowLoading = false
           this.msgList = result.data.data.data
-          this.total = result.data.data.total
+          this.total = result.data.data.last_page
         }
       }).catch(error => {
         throw error
@@ -179,18 +179,28 @@ export default {
     },
     // 下拉刷新
     _getMsgList () {
-      this.searchData.area = ''
+      if (this.searchData.area !== '') {
+        this.searchData.area = ''
+      } else {
+        this.getMsgList()
+      }
     },
     // 上拉加载更多
     getMoreMsgList () {
       this.searchData.page++
       let currentpage = this.searchData.page
       let total = this.total
-      let data = this.$qs.stringify(this.searchData)
-      if (currentpage > total) {
+      let senddata = {
+        data: this.searchData.msg_status,
+        search: this.searchData.classifymsg === 0 ? '' : this.searchData.classifymsg,
+        site: this.searchData.area,
+        page: this.searchData.page
+      }
+      let data = this.$qs.stringify(senddata)
+      if (currentpage >= total) {
         this.loadText = '暂无更多数据'
       } else {
-        this.$axios.get('Index/index/askbuy', data).then(result => {
+        this.$axios.post('Index/index/askbuy', data).then(result => {
           this.$store.commit('setIsPullingUp', true)
           if (result.data.code === 0) {
             this.isShowLoading = false
@@ -206,6 +216,7 @@ export default {
     choose () {
       this.show = !this.show
       this.turnimg = !this.turnimg
+      this.searchData.area = ''
     },
     // 省市县三级联动
     onSelected (data) {
