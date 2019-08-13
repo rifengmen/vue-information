@@ -35,6 +35,7 @@
           <div class="li_name font28">分类：</div>
           <div class="send_val">
             <el-cascader
+              placeholder="选择分类"
               v-model="registerData.classifymsg"
               :options="classifymsg.slice(1)"
               @change="handleChange"></el-cascader>
@@ -55,7 +56,7 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">数量：</div>
           <div  class="send_val">
-            <input type="number" v-model.number="registerData.num" placeholder="请填写数量">
+            <input type="number" v-model.number="registerData.num" placeholder="请填写数量" oninput="if(value.length > 11)value = value.slice(0, 11)">
           </div>
         </li>
         <!-- 数量 end -->
@@ -121,6 +122,10 @@ export default {
     // 信息分类
     classifymsg () {
       return this.$store.state.classifymsg
+    },
+    // 用户信息
+    userInfo () {
+      return this.$store.state.userInfo
     }
   },
   components: {
@@ -168,21 +173,30 @@ export default {
     // 提交信息
     registerSend () {
       if (this.send) {
-        // this.$axios.post('', this.registerData).then(result => {
-        //   if (result.data.code === 0) {
-        //     let _this = this
-        //     this.$message.success({
-        //       message: result.data.msg,
-        //       onClose () {
-        //         _this.$router.push({name: 'index'})
-        //       }
-        //     })
-        //   }
-        // }).catch(error => {
-        //   throw error
-        // })
+        let _data = {
+          data: this.registerData.msg_status,
+          area: this.registerData.area,
+          classify: this.registerData.classifymsg,
+          leave: this.registerData.business,
+          num: this.registerData.num,
+          userid: this.userInfo.userid,
+          phone: this.registerData.phone
+        }
+        let data = this.$qs.stringify(_data)
+        this.$axios.post('Index/index/askbuyadd', data).then(result => {
+          if (result.data.code === 0) {
+            let _this = this
+            this.$message.success({
+              message: result.data.msg,
+              onClose () {
+                _this.$router.push({name: 'index'})
+              }
+            })
+          }
+        }).catch(error => {
+          throw error
+        })
       }
-      console.log(this.registerData)
     }
   },
   watch: {

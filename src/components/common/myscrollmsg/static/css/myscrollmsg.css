@@ -37,8 +37,8 @@
   align-items: center;
 }
 .detailbtn {
-  padding: .18rem .4rem;
+  padding: .1rem .3rem;
   border: .01rem #cecece solid;
-  border-radius: .2rem;
+  border-radius: .5rem;
 }
 /* 信息列表 end */

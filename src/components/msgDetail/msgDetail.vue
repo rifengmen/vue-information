@@ -9,50 +9,64 @@
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
-    <!-- 信息详情 start -->
-    <div class="container msgarea bgfff">
-      <div class="msg_li">
+    <div class="msg_cont">
+      <!-- 信息详情 start -->
+      <div class="container msgarea bgfff">
+        <div class="msg_li">
+          <div>
+            <div class="font40 font_blod tr">分类：</div>
+            <div class="font40 font_blod">{{msgDetail.classify}}</div>
+          </div>
+          <div>
+            <div class="font40 font_blod tr">产地：</div>
+            <div class="font40 font_blod">{{msgDetail.area}}</div>
+          </div>
+        </div>
+        <div class="msg_li">
+          <div>
+            <div class="font40 font_blod tr">留言：</div>
+            <div v-html="msgDetail.leave">{{msgDetail.leave}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- 信息详情 end -->
+      <!-- 信息编号 start -->
+      <div class="msg_li msgcode bgfff">
         <div>
-          <div class="font40 font_blod tr">分类：</div>
-          <div class="font40 font_blod">{{msgDetail.classify}}</div>
+          <div class="font28 color666 tr">订单号：</div>
+          <div class="font28 color666">5-164554644(暂无)</div>
         </div>
         <div>
-          <div class="font40 font_blod tr">产地：</div>
-          <div class="font40 font_blod">{{msgDetail.area}}</div>
+          <div class="font28 color666 tr">发布时间：</div>
+          <div class="font28 color666">{{msgDetail.time}}</div>
         </div>
       </div>
-      <div class="msg_li">
-        <div>
-          <div class="font40 font_blod tr">留言：</div>
-          <div v-html="msgDetail.leave">{{msgDetail.leave}}</div>
-        </div>
+      <!-- 信息编号 end -->
+      <!-- 免责 投诉 start -->
+      <div class="tip_complaint container">
+        <tip></tip>
+        <router-link :to="{name: 'sendComplaint'}" tag="div" class="complaint bgfff colorff9500">投诉</router-link>
+      </div>
+      <!-- 免责 投诉 end -->
+    </div>
+    <!-- 发布信息 信息列表 查看电话 start -->
+    <div class="msgfooter bgfff">
+      <div class="msgfooter_l">
+        <router-link :to="{name: 'sendMsg', query:{msg_status: msgDetail.data}}" class="msg_btn tc colorfff font30 font_blod bg1470cc" tag="div">发布{{msgarr[msgDetail.data-1]}}</router-link>
+        <router-link :to="{name: (msgDetail.data === '1' ? 'listPurchase' : 'listSupplier')}" class="msg_btn tc colorfff font30 font_blod bgee410c" tag="div">{{msgarr[msgDetail.data-1]}}列表</router-link>
+      </div>
+      <div class="msgfooter_r">
+        <check-pay></check-pay>
       </div>
     </div>
-    <!-- 信息详情 end -->
-    <!-- 信息编号 start -->
-    <div class="msg_li msgcode bgfff">
-      <div>
-        <div class="font28 color666 tr">订单号：</div>
-        <div class="font28 color666">5-164554644(暂无)</div>
-      </div>
-      <div>
-        <div class="font28 color666 tr">发布时间：</div>
-        <div class="font28 color666">{{msgDetail.time}}</div>
-      </div>
-    </div>
-    <!-- 信息编号 end -->
-    <!-- 免责 投诉 start -->
-    <div class="tip_complaint container">
-      <tip></tip>
-      <router-link :to="{name: 'sendComplaint'}" tag="div" class="complaint bgfff colorff9500">投诉</router-link>
-    </div>
-    <!-- 免责 投诉 end -->
+    <!-- 发布信息 信息列表 查看电话 end -->
   </div>
 </template>
 
 <script>
 // 引入免责声明组件
 import tip from '@/components/common/tip/tip'
+import CheckPay from '@/components/common/checkpay/checkpay'
 
 export default {
   name: 'msgDetail',
@@ -69,7 +83,8 @@ export default {
     }
   },
   components: {
-    tip
+    tip,
+    CheckPay
   },
   methods: {
     // 后退

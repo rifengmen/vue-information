@@ -7,6 +7,7 @@
     <div class="search_cont color666">
       <div class="category">
         <el-cascader
+          placeholder="选择分类"
           v-model="searchData.classifymsg"
           :options="classifymsg"
           @change="handleChange"></el-cascader>

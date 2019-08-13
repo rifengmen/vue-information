@@ -29,14 +29,11 @@
             <div class="categoryimg">
               <img src="static/img/category.png">
             </div>
-            <el-select v-model="registerData.classify" placeholder="请选择店铺分类">
-              <el-option
-                v-for="(item, index) in classify.slice(1)"
-                :key="index"
-                :label="item"
-                :value="index">
-              </el-option>
-            </el-select>
+            <el-cascader
+              placeholder="选择分类"
+              v-model="registerData.classify"
+              :options="classify.slice(1)"
+              @change="handleChange"></el-cascader>
           </div>
         </li>
         <!-- 店铺分类 end -->
@@ -341,6 +338,10 @@ export default {
     // 响应数据显示
     updateContent (html) {
       this.registerData.business = html
+    },
+    // 信息分类发生变化时触发
+    handleChange (value) {
+      this.registerData.classify = value[0]
     }
   },
   components: {

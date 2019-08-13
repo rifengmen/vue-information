@@ -5,6 +5,10 @@
   left: 0;
   right: 0;
 }
+.msg_cont {
+  height: calc(100vh - 2.22rem);
+  overflow-y: auto;
+}
 /* 信息详情 start */
 .msgarea {
   border-top: .2rem #e7e7e7 solid;
@@ -47,10 +51,10 @@
 /* 信息编号 end */
 /* 免责 投诉 start */
 .tip_complaint {
-  width: 100%;
   display: flex;
   align-items: center;
   border-top: .2rem #e7e7e7 solid;
+  margin-bottom: 1rem;
 }
 .complaint {
   width: 1rem;
@@ -63,4 +67,32 @@
   align-items: center;
 }
 /* 免责 投诉 end */
-
+/* 发布信息 信息列表 查看电话 start */
+.msgfooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: calc(100vw - .48rem);
+  height: 1.2rem;
+  padding: 0 .24rem;
+  border-top: .01rem #cecece solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.msgfooter_l {
+  width: 5rem;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.msg_btn {
+  height: .6rem;
+  line-height: .6rem;
+  padding: 0 .4rem;
+  border: .01rem #cecece solid;
+  border-radius: .3rem;
+  margin-right: .2rem;
+}
+/* 发布信息 信息列表 查看电话 end */

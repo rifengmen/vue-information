@@ -11,14 +11,6 @@
           v-model="searchData.classify"
           :options="classify"
           @change="handleChange"></el-cascader>
-        <!--<el-select v-model="searchData.classify">-->
-          <!--<el-option-->
-            <!--v-for="(item, index) in classify"-->
-            <!--:key="index"-->
-            <!--:label="item"-->
-            <!--:value="index">-->
-          <!--</el-option>-->
-        <!--</el-select>-->
         <div class="site_box">
           <div class="site">
             <div @click="choose" class="choose tc color666">

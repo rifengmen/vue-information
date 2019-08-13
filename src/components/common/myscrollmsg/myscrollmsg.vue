@@ -8,7 +8,7 @@
             <div class="categorymsg">
               <span class="font30 font_blod">{{item.classify}}</span>
             </div>
-            <div class="msgdes ellipsis color666 font28">{{item.leave}}</div>
+            <div class="msgdes ellipsis color666 font28" v-html="item.leave">{{item.leave}}</div>
             <div class="time_detailbtn">
               <div class="time color1470cc">发布时间：<span class="font26">{{item.time}}</span></div>
               <div class="detailbtn colorff9500 font28 tc">查看详情</div>
