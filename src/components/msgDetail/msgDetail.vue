@@ -58,10 +58,14 @@ export default {
   name: 'msgDetail',
   data () {
     return {
-      // 信息详情
-      msgDetail: this.$route.query.msgDetail,
       // 信息类别数组
       msgarr: this.$store.state.msgarr
+    }
+  },
+  computed: {
+    // 信息详情
+    msgDetail () {
+      return this.$store.state.msgDetail
     }
   },
   components: {
@@ -71,9 +75,16 @@ export default {
     // 后退
     backs () {
       this.$router.back()
+    },
+    // 设置查看信息详情
+    setMsgDetail () {
+      if (this.$route.params.msgDetail) {
+        this.$store.commit('setMsgDetail', this.$route.params.msgDetail)
+      }
     }
   },
   created () {
+    this.setMsgDetail()
   }
 }
 </script>

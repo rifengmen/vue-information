@@ -22,6 +22,14 @@ const mutations = {
   // 设置上拉加载请求开关
   setIsPullingUp (state, isPullingUp) {
     state.isPullingUp = isPullingUp
+  },
+  // 设置查看的店铺信息
+  setShopInfo (state, shopInfo) {
+    state.shopInfo = shopInfo
+  },
+  // 设置查看的信息详情
+  setMsgDetail (state, msgDetail) {
+    state.msgDetail = msgDetail
   }
 }
 

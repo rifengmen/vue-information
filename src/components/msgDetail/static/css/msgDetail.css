@@ -31,8 +31,12 @@
 /* 信息详情 end */
 /* 信息编号 start */
 .msgcode {
-  width: 100%;
+  width: calc(100vw - .48rem);
   border-top: .2rem #e7e7e7 solid;
+  padding: .3rem .24rem;
+}
+.msgcode > div:first-child {
+  border-bottom: .01rem #e7e7e7 solid;
 }
 .msgcode > div > div:first-child {
   width: 2rem;

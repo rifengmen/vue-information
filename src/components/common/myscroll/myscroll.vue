@@ -4,7 +4,7 @@
     <ul class="shopslist" v-show="shopsList.length">
       <!-- 店铺简介 start -->
       <li v-for="(item, index) in shopsList" :key="index">
-        <router-link class="shopinfo" :to="{name: 'shopInfo', query:{shopInfo: item}}" tag="div">
+        <router-link class="shopinfo" :to="{name: 'shopInfo', params:{shopInfo: item}}" tag="div">
           <div class="shoptit">
             <div class="shopimg fl">
               <img class="img" :src="item.image || 'static/img/userimg.png'">

@@ -4,7 +4,7 @@
       <ul class="msglist" v-if="msgList.length">
         <!-- 信息简介 start -->
         <li class="msgdetail" v-for="(item, index) in msgList" :key="index">
-          <router-link :to="{name: 'msgDetail', query:{msgDetail: item}}" tag="div">
+          <router-link :to="{name: 'msgDetail', params:{msgDetail: item}}" tag="div">
             <div class="categorymsg">
               <span class="font30 font_blod">{{item.classify}}</span>
             </div>

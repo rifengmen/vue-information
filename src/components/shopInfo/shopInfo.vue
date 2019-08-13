@@ -116,7 +116,7 @@ export default {
   computed: {
     // 接收传过来的店铺详情
     shopInfo () {
-      return this.$route.query.shopInfo
+      return this.$store.state.shopInfo
     }
   },
   components: {
@@ -147,11 +147,19 @@ export default {
       // this.$axios.get('', this.id).then(result => {
       //   this.shopInfo.give = result.data
       // }).catch()
+    },
+    // 设置查看店铺详情
+    setShopInfo () {
+      if (this.$route.params.shopInfo) {
+        this.$store.commit('setShopInfo', this.$route.params.shopInfo)
+      }
     }
   },
   created () {
     // 是否喜欢店铺
     this.isLike()
+    // 设置查看店铺详情
+    this.setShopInfo()
   }
 }
 </script>

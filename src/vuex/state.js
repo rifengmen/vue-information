@@ -88,7 +88,11 @@ const state = {
   // 下拉刷新请求开关
   isPullingDown: true,
   // 上拉加载请求开关
-  isPullingUp: true
+  isPullingUp: true,
+  // 查看的店铺信息
+  shopInfo: '',
+  // 查看的信息详情
+  msgDetail: ''
 }
 
 export default state
