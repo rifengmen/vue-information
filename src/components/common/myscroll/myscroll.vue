@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" ref="myscroll">
     <!-- 店铺列表 start -->
-    <ul class="shopslist" v-show="shopsList.length">
+    <ul class="shopslist" v-if="shopsList.length">
       <!-- 店铺简介 start -->
       <li v-for="(item, index) in shopsList" :key="index">
         <router-link class="shopinfo" :to="{name: 'shopInfo', params:{shopInfo: item}}" tag="div">
@@ -40,6 +40,11 @@
       <!-- 上拉加载提示 end -->
     </ul>
     <!-- 店铺列表 end -->
+    <!-- 无信息提示 start -->
+    <div v-else class="nodata">
+      <img src="static/img/nodata.jpg">
+    </div>
+    <!-- 无信息提示 end -->
   </div>
 </template>
 
