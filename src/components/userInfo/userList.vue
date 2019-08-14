@@ -5,7 +5,7 @@
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">{{userarr[msg_status - 1]}}</div>
+      <div class="font26 font_blod color1470cc">{{userarr[searchData.msg_status - 1]}}</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
@@ -33,6 +33,8 @@ export default {
       isShowLoading: true,
       // 筛选条件
       searchData: {
+        // 供应、求购状态
+        msg_status: this.$route.params.msg_status || this.$store.state.msg_status,
         // 信息分类
         classifymsg: 0,
         // 地区查询
@@ -73,13 +75,17 @@ export default {
     backs () {
       this.$router.back()
     },
+    // 设置供应、求购状态
+    setMsgStatus () {
+      this.$store.commit('setMsgStatus', this.searchData.msg_status)
+    },
     // 获取信息列表资料公共方法
     getMsgList () {
       this.searchData.page = '1'
       this.isShowLoading = true
       let senddata = {
         userid: this.$store.state.userInfo.userid,
-        data: this.$route.params.msg_status,
+        data: this.searchData.msg_status,
         search: this.searchData.classifymsg === 0 ? '' : this.searchData.classifymsg,
         site: this.searchData.area,
         page: this.searchData.page
@@ -112,7 +118,7 @@ export default {
       let total = this.total
       let senddata = {
         userid: this.$store.state.userInfo.userid,
-        data: this.$route.params.msg_status,
+        data: this.searchData.msg_status,
         search: this.searchData.classifymsg === 0 ? '' : this.searchData.classifymsg,
         site: this.searchData.area,
         page: this.searchData.page
@@ -135,6 +141,7 @@ export default {
     }
   },
   created () {
+    this.setMsgStatus()
     this.getMsgList()
   }
 }

@@ -30,6 +30,10 @@ const mutations = {
   // 设置查看的信息详情
   setMsgDetail (state, msgDetail) {
     state.msgDetail = msgDetail
+  },
+  // 设置供应、求购状态
+  setMsgStatus (state, msgStatus) {
+    state.msg_status = msgStatus
   }
 }
 
