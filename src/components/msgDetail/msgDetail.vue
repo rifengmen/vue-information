@@ -34,7 +34,7 @@
       <div class="msg_li msgcode bgfff">
         <div>
           <div class="font28 color666 tr">订单号：</div>
-          <div class="font28 color666">5-164554644(暂无)</div>
+          <div class="font28 color666">{{msgDetail.orderid}}</div>
         </div>
         <div>
           <div class="font28 color666 tr">发布时间：</div>
@@ -45,7 +45,7 @@
       <!-- 免责 投诉 start -->
       <div class="tip_complaint container">
         <tip></tip>
-        <router-link :to="{name: 'sendComplaint'}" tag="div" class="complaint bgfff colorff9500">投诉</router-link>
+        <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff colorff9500">投诉</router-link>
       </div>
       <!-- 免责 投诉 end -->
     </div>
@@ -56,7 +56,7 @@
         <router-link :to="{name: (msgDetail.data === '1' ? 'listPurchase' : 'listSupplier')}" class="msg_btn tc colorfff font30 font_blod bgee410c" tag="div">{{msgarr[msgDetail.data-1]}}列表</router-link>
       </div>
       <div class="msgfooter_r">
-        <check-pay></check-pay>
+        <check-pay>查看电话</check-pay>
       </div>
     </div>
     <!-- 发布信息 信息列表 查看电话 end -->

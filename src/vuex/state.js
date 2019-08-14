@@ -2,7 +2,7 @@ const state = {
   // 用户信息
   userInfo: {
     // 用户id
-    userid: '20',
+    userid: '1',
     // 用户名
     username: '测试用户名',
     // 用户头像
@@ -95,9 +95,9 @@ const state = {
       ]
     }
   ],
-  // 认证类别数组，1：不认证 2：个人认证 3：企业认证
+  // 认证类别，1：不认证 2：个人认证 3：企业认证
   typearr: ['不认证', '个人认证', '企业认证'],
-  // 信息类别数组
+  // 信息类别
   msgarr: ['求购', '供应'],
   // 下拉刷新请求开关
   isPullingDown: true,
@@ -106,7 +106,9 @@ const state = {
   // 查看的店铺信息
   shopInfo: '',
   // 查看的信息详情
-  msgDetail: ''
+  msgDetail: '',
+  // 投诉原因
+  cause: ['请选择投诉原因', '已联系，无此货源', '电话号码为空', '其他']
 }
 
 export default state

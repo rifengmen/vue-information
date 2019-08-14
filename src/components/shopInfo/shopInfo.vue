@@ -88,7 +88,7 @@
         </router-link>
       </div>
       <div class="checkpay">
-        <check-pay></check-pay>
+        <check-pay>查看电话</check-pay>
       </div>
     </div>
     <!-- 查看电话 end -->

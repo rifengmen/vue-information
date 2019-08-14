@@ -1,0 +1,30 @@
+/* 投诉列表 start */
+.complaintlist {
+  width: 100%;
+  height: calc(100vh - 1.21rem);
+  overflow-y: hidden;
+}
+.complaint_li {
+  width: 100%;
+  height: 1.81rem;
+  border-bottom: .2rem #e7e7e7 solid;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.complaint_name {
+  width: 100%;
+  height: 1rem;
+  line-height: 1rem;
+  border-bottom: .01rem #e7e7e7 solid;
+}
+.complaint_time {
+  width: 100%;
+  height: .8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* 投诉列表 end */
+
+

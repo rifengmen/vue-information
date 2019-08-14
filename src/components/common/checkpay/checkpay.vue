@@ -4,7 +4,7 @@
     <div
       class="checkbtn colorff9500 tc font30 font_blod"
       @click="openmsg">
-      查看电话
+      <slot></slot>
     </div>
     <!-- 查看按钮 end -->
     <!-- 付款信息 start -->

@@ -42,10 +42,14 @@
           </ul>
         </li>
         <li class="user_li bgfff">
-          <div><span class="color1470cc">VIP</span>续费</div>
+          <check-pay><span class="color1470cc font30">VIP</span>续费</check-pay>
         </li>
         <li class="user_li bgfff">
           <div>会员激活：</div>
+          <div class="vipcode">
+            <input type="number" v-model.number="vipcode">
+          </div>
+          <div :class="'vipcode_btn tc font_blod font28' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="sendCode">激活</div>
         </li>
       </ul>
     </div>
@@ -59,18 +63,64 @@
 </template>
 
 <script>
-import MyHeader from '@/components/common/header/myheader'
 import MyFooter from '@/components/common/footer/myfooter'
+import CheckPay from '@/components/common/checkpay/checkpay'
+
 export default {
   name: 'userInfo',
   data () {
     return {
-      test: '这是个人中心页面'
+      // vip激活码
+      vipcode: '',
+      // 是否发送信息
+      send: false
+    }
+  },
+  computed: {
+    // 获取用户信息
+    userInfo () {
+      return this.$store.state.userInfo
     }
   },
   components: {
-    MyHeader,
-    MyFooter
+    MyFooter,
+    CheckPay
+  },
+  methods: {
+    // 发送激活码
+    sendCode () {
+      if (this.send) {
+        let _data = {
+          vipcode: this.vipcode,
+          userid: this.userInfo.userid
+        }
+        let data = this.$qs.stringify(_data)
+        // this.$axios.post('', data).then(result => {
+        //   if (result.data.code === 0) {
+        //     this.$message.success(result.data.msg)
+        //     // 更新用户信息
+        //     this.$store.commit('setUserInfo', result.data.data)
+        //   }
+        // }).catch(error => {
+        //   throw error
+        // })
+        console.log(data)
+      }
+    },
+    // 验证是否可以提交信息
+    isSend () {
+      if (this.vipcode === '') {
+        this.send = false
+        return
+      }
+      this.send = true
+    }
+  },
+  watch: {
+    // 监听激活码填写情况
+    vipcode () {
+      this.isSend()
+    }
   }
 }
 </script>

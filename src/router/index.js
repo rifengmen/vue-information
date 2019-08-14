@@ -11,6 +11,7 @@ import msgDetail from '@/components/msgDetail/msgDetail'
 import sendMsg from '@/components/sendMsg/sendMsg'
 import complaintList from '@/components/complaintList/complaintList'
 import sendComplaint from '@/components/sendComplaint/sendComplaint'
+import complaint from '@/components/complaint/complaint'
 
 // 省市县三级联动
 import Distpicker from 'v-distpicker'
@@ -30,6 +31,7 @@ export default new Router({
     {path: '/msgDetail', name: 'msgDetail', component: msgDetail},
     {path: '/sendMsg', name: 'sendMsg', component: sendMsg},
     {path: '/complaintList', name: 'complaintList', component: complaintList},
-    {path: '/sendComplaint', name: 'sendComplaint', component: sendComplaint}
+    {path: '/sendComplaint', name: 'sendComplaint', component: sendComplaint},
+    {path: '/complaint', name: 'complaint', component: complaint}
   ]
 })
