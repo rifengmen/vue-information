@@ -10,3 +10,9 @@
   height: 100%;
 }
 /* 地区三级联动 end */
+/* 信息列表 start */
+.msglist {
+  width: 100%;
+  height: calc(100vh - 3.53rem);
+}
+/* 信息列表 end */

@@ -107,4 +107,10 @@
   border-radius: .3rem;
 }
 /* 功能部分 end */
+/* 我的供应 求购 start */
+.userlist {
+  width: 100%;
+  height: calc(100vh - 1.21rem);
+}
+/* 我的供应 求购 end */
 

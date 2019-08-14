@@ -15,30 +15,38 @@
       <ul>
         <li class="user_li bgfff">
           <ul>
-            <router-link :to="{name: 'userList', query:{status: '0'}}" tag="li" class="cont_li">
+            <!-- 我的供应 start -->
+            <router-link :to="{name: 'userList', params:{msg_status: 2}}" tag="li" class="cont_li">
               <div class="imgbox">
                 <img src="static/img/supplieractive.png">
               </div>
               <div class="imgname">我的供应</div>
             </router-link>
-            <router-link :to="{name: 'userList', query:{status: '1'}}" tag="li"  class="cont_li">
+            <!-- 我的供应 end -->
+            <!-- 我的求购 start -->
+            <router-link :to="{name: 'userList', params:{msg_status: 1}}" tag="li"  class="cont_li">
               <div class="imgbox">
                 <img src="static/img/purchaseactive.png">
               </div>
               <div class="imgname">我的求购</div>
             </router-link>
-            <router-link :to="{name: 'userList', query:{status: '2'}}" tag="li"  class="cont_li">
+            <!-- 我的求购 end -->
+            <!-- 我的查看 start -->
+            <router-link :to="{name: ''}" tag="li"  class="cont_li">
               <div class="imgbox">
                 <img src="static/img/categoryactive.png">
               </div>
               <div class="imgname">我的查看</div>
             </router-link>
+            <!-- 我的查看 end -->
+            <!-- 我的投诉 start -->
             <router-link :to="{name: 'complaintList'}" tag="li"  class="cont_li">
               <div class="imgbox">
                 <img src="static/img/complaintactive.png">
               </div>
               <div class="imgname">我的投诉</div>
             </router-link>
+            <!-- 我的投诉 end -->
           </ul>
         </li>
         <li class="user_li bgfff">

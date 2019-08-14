@@ -29,12 +29,14 @@
     <loading v-if="isShowLoading"></loading>
     <!-- 下拉刷新动画 end -->
     <!-- 信息列表 start -->
-    <my-scrollmsg
-      :msgList="msgList"
-      :loadText="loadText"
-      @pullingDown="_getMsgList"
-      @pullingup="getMoreMsgList">
-    </my-scrollmsg>
+    <div class="msglist">
+      <my-scrollmsg
+        :msgList="msgList"
+        :loadText="loadText"
+        @pullingDown="_getMsgList"
+        @pullingup="getMoreMsgList">
+      </my-scrollmsg>
+    </div>
     <!-- 信息列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>

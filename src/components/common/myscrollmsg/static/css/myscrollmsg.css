@@ -1,7 +1,7 @@
 /* 信息列表 start */
 .wrapper {
   width: 100%;
-  height: calc(100vh - 3.53rem);
+  height: 100%;
   z-index: -1;
   overflow: hidden;
 }
