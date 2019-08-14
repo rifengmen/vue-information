@@ -28,7 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
       ],
     },
-    https:true,
+    // https:true, // https环境开启
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
