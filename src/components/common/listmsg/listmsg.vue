@@ -198,7 +198,7 @@ export default {
         page: this.searchData.page
       }
       let data = this.$qs.stringify(senddata)
-      if (currentpage >= total) {
+      if (currentpage > total) {
         this.loadText = '暂无更多数据'
       } else {
         this.$axios.post('Index/index/askbuy', data).then(result => {

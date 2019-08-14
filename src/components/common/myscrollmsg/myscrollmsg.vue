@@ -89,8 +89,8 @@ export default {
           this.scroll.on('pullingDown', () => {
             this.$store.commit('setIsPullingDown', false)
             this.$emit('pullingDown')
+            this.scroll.finishPullDown()
             setTimeout(() => {
-              this.scroll.finishPullDown()
               this.scroll.refresh()
             }, 2000)
           })
@@ -101,8 +101,8 @@ export default {
             this.loading = true
             this.$store.commit('setIsPullingUp', false)
             this.$emit('pullingup')
+            this.scroll.finishPullUp()
             setTimeout(() => {
-              this.scroll.finishPullUp()
               this.scroll.refresh()
               this.loading = false
             }, 2000)
@@ -115,9 +115,7 @@ export default {
     // 监听列表变化，重置滚动
     msgList: {
       handler () {
-        this.$nextTick(() => {
-          this.initScroll()
-        })
+        this.scroll.refresh()
       },
       deep: true
     }
