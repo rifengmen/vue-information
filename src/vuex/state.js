@@ -4,10 +4,12 @@ const state = {
     // 用户id
     userid: '1',
     // 用户名
-    username: '测试用户名',
+    username: '我是测试用户名',
     // 用户头像
     userimg: 'static/img/userimg.png',
-    // 是否注册店铺
+    // 会员到期时间
+    time: '9999-99-99',
+    // 注册店铺id
     shopid: '5',
     // 煤球数量
     pointsA: '50',

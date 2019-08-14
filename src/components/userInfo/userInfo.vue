@@ -4,10 +4,10 @@
     <div class="userinfo colorfff bg1470cc">
       <div class="userinfo_tit font34 tc">个人中心</div>
       <div class="userimg bgfff">
-        <img src="static/img/userimg.png">
+        <img :src="(userInfo.userimg || 'static/img/userimg.png')">
       </div>
-      <div class="username font32 font_blod tc">测试用户名</div>
-      <div class="usertime tc">会员到期时间：0000-00-00</div>
+      <div class="username font32 font_blod tc ellipsis">{{userInfo.username}}</div>
+      <div class="usertime tc">会员到期时间：{{userInfo.time}}</div>
     </div>
     <!-- 用户信息 end -->
     <!-- 功能部分 start -->
