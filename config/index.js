@@ -14,7 +14,7 @@ module.exports = {
       '/api': {
         target: 'http://bibejc.bibiback.com/',//设置你调用的接口域名和端口号 别忘了加http
         changeOrigin: true,
-        // secure: false, // 解决https的问题
+        secure: false, // 解决https的问题
         pathRewrite: {
           '^/api': '/'
           // 这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替
@@ -34,7 +34,7 @@ module.exports = {
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
-    useEslint: false,
+    useEslint: true,
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
     showEslintErrorsInOverlay: false,
