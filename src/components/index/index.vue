@@ -44,12 +44,14 @@
     <loading v-if="isShowLoading"></loading>
     <!-- 下拉刷新动画 end -->
     <!-- 店铺列表 start -->
-    <my-scroll
-      :shopsList="shopsList"
-      :loadText="loadText"
-      @pullingDown="_getShopsList"
-      @pullingup="getMoreShopsList">
-    </my-scroll>
+    <div class="shopslist">
+      <my-scroll
+        :shopsList="shopsList"
+        :loadText="loadText"
+        @pullingDown="_getShopsList"
+        @pullingup="getMoreShopsList">
+      </my-scroll>
+    </div>
     <!-- 店铺列表 end -->
     <!-- 底部导航 start -->
     <my-footer></my-footer>
@@ -89,34 +91,34 @@ export default {
       isSend: false,
       // 排序方式
       sort: ['时间顺序', '时间倒序', '等级顺序', '等级倒序'],
-      // 商铺列表
+      // 店铺列表
       shopsList: [
-        // {
-        //   // 店铺id
-        //   id: '1',
-        //   // 店铺门脸图片
-        //   image: 'static/img/userimg.png',
-        //   // 店铺名称
-        //   name: '测试企业1',
-        //   // 所属分类
-        //   classify: '0',
-        //   // 认证类型，1：不认证； 2：个人认证； 3：企业认证；
-        //   classify: 1,
-        //   // vip等级
-        //   vipnum: '',
-        //   // 所处地区
-        //   area: '测试城市1',
-        //   // 店铺标签
-        //   label: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
-        //   // 店铺介绍
-        //   business: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
-        //   // 店铺信息更新时间
-        //   time: '2019-07-27 12:00:00',
-        //   // 点赞数量
-        //   give: '53',
-        //   // 联系电话
-        //   phone: '18888888888'
-        // }
+        {
+          // 店铺id
+          id: '1',
+          // 店铺门脸图片
+          image: 'static/img/userimg.png',
+          // 店铺名称
+          name: '测试企业1',
+          // 所属分类
+          classify: '0',
+          // 认证类型，1：不认证； 2：个人认证； 3：企业认证；
+          type: 1,
+          // vip等级
+          vipnum: '',
+          // 所处地区
+          area: '测试城市1',
+          // 店铺标签
+          label: ['标签1-1', '标签1-2', '标签1-3', '标签1-4', '标签1-5'],
+          // 店铺介绍
+          business: '测试企业1简介，测试企业1简介测试企业1简介测试企业1简介，测试企业1简介测试企业1简介测试企业1简介测试企业1简介测试企业1简介，测试企业1简介，测试企业1简介测试企业1简介',
+          // 店铺信息更新时间
+          time: '2019-07-27 12:00:00',
+          // 点赞数量
+          give: '53',
+          // 联系电话
+          phone: '18888888888'
+        }
       ],
       // 加载提示语
       loadText: '加载更多...',
@@ -225,7 +227,7 @@ export default {
           throw error
         })
       }
-      this.$store.commit('setIsPullingUp', true)
+      this.$store.commit('setIsPullingUp', false)
     },
     // 显示隐藏省市县下拉框
     choose () {
@@ -268,6 +270,8 @@ export default {
   },
   created () {
     this.setClassify()
+  },
+  beforeMount () {
     this.getShopsList()
   }
 }

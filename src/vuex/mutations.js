@@ -34,6 +34,10 @@ const mutations = {
   // 设置供应、求购状态
   setMsgStatus (state, msgStatus) {
     state.msg_status = msgStatus
+  },
+  // 设置查看自己发布的信息时隐藏信息详情部分按钮
+  setUserlistshow (state, isshow) {
+    state.userlistshow = isshow
   }
 }
 

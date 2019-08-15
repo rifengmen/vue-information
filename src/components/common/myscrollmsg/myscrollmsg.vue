@@ -124,6 +124,9 @@ export default {
     this.$nextTick(() => {
       this.initScroll()
     })
+  },
+  beforeMount () {
+    console.log(this.msgList)
   }
 }
 </script>

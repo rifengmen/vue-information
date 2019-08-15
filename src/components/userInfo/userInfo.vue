@@ -122,6 +122,10 @@ export default {
         return
       }
       this.send = true
+    },
+    // 设置查看自己发布的信息时隐藏信息详情部分按钮
+    setUserlistshow () {
+      this.$store.commit('setUserlistshow', false)
     }
   },
   watch: {
@@ -129,6 +133,9 @@ export default {
     vipcode () {
       this.isSend()
     }
+  },
+  created () {
+    this.setUserlistshow()
   }
 }
 </script>

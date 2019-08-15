@@ -1,12 +1,14 @@
 <template>
   <div class="cont bge7e7e7">
     <!-- 头部 start -->
-    <div class="tit bgfff">
-      <div class="backs" @click="backs">
-        <img src="static/img/turnleftactive.png">
+    <div class="container bgfff">
+      <div class="tit bgfff">
+        <div class="backs" @click="backs">
+          <img src="static/img/turnleftactive.png">
+        </div>
+        <div class="font26 font_blod color1470cc">{{msgarr[msgDetail.data-1]}}详情</div>
+        <div class="backs"></div>
       </div>
-      <div class="font26 font_blod color1470cc">{{msgarr[msgDetail.data-1]}}详情</div>
-      <div class="backs"></div>
     </div>
     <!-- 头部 end -->
     <div class="msg_cont">
@@ -43,14 +45,14 @@
       </div>
       <!-- 信息编号 end -->
       <!-- 免责 投诉 start -->
-      <div class="tip_complaint container">
+      <div class="tip_complaint container" v-if="userlistshow">
         <tip></tip>
         <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff colorff9500">投诉</router-link>
       </div>
       <!-- 免责 投诉 end -->
     </div>
     <!-- 发布信息 信息列表 查看电话 start -->
-    <div class="msgfooter bgfff">
+    <div class="msgfooter bgfff" v-if="userlistshow">
       <div class="msgfooter_l">
         <router-link :to="{name: 'sendMsg', query:{msg_status: msgDetail.data}}" class="msg_btn tc colorfff font30 font_blod bg1470cc" tag="div">发布{{msgarr[msgDetail.data-1]}}</router-link>
         <router-link :to="{name: (msgDetail.data === '1' ? 'listPurchase' : 'listSupplier')}" class="msg_btn tc colorfff font30 font_blod bgee410c" tag="div">{{msgarr[msgDetail.data-1]}}列表</router-link>
@@ -80,6 +82,10 @@ export default {
     // 信息详情
     msgDetail () {
       return this.$store.state.msgDetail
+    },
+    // 查看自己发布的信息时隐藏信息详情部分按钮
+    userlistshow () {
+      return this.$store.state.userlistshow
     }
   },
   components: {

@@ -116,6 +116,7 @@ export default {
             }, 2000)
           })
         }
+        console.log(1)
         // 是否触发上拉加载
         if (this.isPullingUp) {
           this.scroll.on('pullingUp', () => {
@@ -145,6 +146,9 @@ export default {
     this.$nextTick(() => {
       this.initScroll()
     })
+  },
+  beforeMount () {
+    console.log(this.shopsList)
   }
 }
 </script>

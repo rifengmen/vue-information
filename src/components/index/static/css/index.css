@@ -43,4 +43,10 @@
   height: calc(100vh - 4.64rem);
 }
 /* 下拉刷新动画 end */
+/* 店铺列表 start */
+.shopslist {
+  width: 100%;
+  height: calc(100vh - 4.64rem);
+}
+/* 店铺列表 end */
 

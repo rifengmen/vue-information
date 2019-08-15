@@ -111,8 +111,10 @@ const state = {
   msgDetail: '',
   // 投诉原因
   cause: ['请选择投诉原因', '已联系，无此货源', '电话号码为空', '其他'],
-  // 供应、求购状态
-  msg_status: ''
+  // 供应、求购状态(会员中心用)
+  msg_status: '',
+  // 查看自己发布的信息时隐藏信息详情部分按钮
+  userlistshow: false
 }
 
 export default state

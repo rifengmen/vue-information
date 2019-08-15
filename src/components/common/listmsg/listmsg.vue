@@ -82,20 +82,20 @@ export default {
       // 信息列表
       msgList: [
         {
-          // 信息类别，1：求购，2：供应
-          msg_status: 1,
-          // 信息分类所属
-          classifymsg: ['测试信息分类1-2', '测试信息分类1-5'],
-          // 信息地区
-          area: '测试城市1',
-          // 信息详情
-          leave: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
-          // 信息编号
-          orderid: '5-258741',
-          // 发布时间
-          time: '2019-08-06 06:44:25',
-          // 联系电话
-          phone: '18888888888'
+          // // 信息类别，1：求购，2：供应
+          // msg_status: 1,
+          // // 信息分类所属
+          // classifymsg: ['测试信息分类1-2', '测试信息分类1-5'],
+          // // 信息地区
+          // area: '测试城市1',
+          // // 信息详情
+          // leave: '测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介，测试企业2简介测试企业2简介测试企业2简介测试企业2简介',
+          // // 信息编号
+          // orderid: '5-258741',
+          // // 发布时间
+          // time: '2019-08-06 06:44:25',
+          // // 联系电话
+          // phone: '18888888888'
         }
       ],
       // 加载提示语
@@ -230,6 +230,10 @@ export default {
     // 信息分类发生变化时触发
     handleChange (value) {
       this.searchData.classifymsg = value[value.length - 1 || 0]
+    },
+    // 设置查看自己发布的信息时隐藏信息详情部分按钮
+    setUserlistshow () {
+      this.$store.commit('setUserlistshow', true)
     }
   },
   watch: {
@@ -241,6 +245,7 @@ export default {
     }
   },
   created () {
+    this.setUserlistshow()
     this.setClassifymsg()
     if (this.msg_status === 1) {
       this.searchData.msg_status = 1
