@@ -192,6 +192,12 @@ export default {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
           this.isShowLoading = false
+          // result.data.data.data.forEach((value, index) => {
+          //   this.$set(this.shopsList, index, {})
+          //   for (let key in value) {
+          //     this.$set(this.shopsList[index], key, value[key])
+          //   }
+          // })
           this.shopsList = result.data.data.data
           this.total = result.data.data.last_page
         }
