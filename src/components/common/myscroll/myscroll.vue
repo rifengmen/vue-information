@@ -7,7 +7,7 @@
         <router-link class="shopinfo" :to="{name: 'shopInfo', params:{shopInfo: item}}" tag="div">
           <div class="shoptit">
             <div class="shopimg fl">
-              <img class="img" :src="item.image || 'static/img/userimg.png'">
+              <img class="img" :src="(item.image ? (imgurl + item.image) : ('static/img/userimg.png'))">
             </div>
             <div class="shopname fr color666">
               <div class="vip_name">
@@ -75,7 +75,9 @@ export default {
       // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
       // 认证类别数组，1：不认证 2：个人认证 3：企业认证
-      typearr: this.$store.state.typearr
+      typearr: this.$store.state.typearr,
+      // 图片路径
+      imgurl: this.IMGURL
     }
   },
   computed: {

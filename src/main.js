@@ -19,6 +19,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 Vue.prototype.$qs = qs
 Vue.use(ElementUI)
 Vue.use(Distpicker)
+Vue.prototype.IMGURL = 'http://47.94.145.71:81/'
 
 /* eslint-disable no-new */
 new Vue({

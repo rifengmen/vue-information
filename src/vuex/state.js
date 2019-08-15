@@ -6,7 +6,7 @@ const state = {
     // 用户名
     username: '我是测试用户名',
     // 用户头像
-    userimg: 'static/img/userimg.png',
+    userimg: '',
     // 会员到期时间
     time: '9999-99-99',
     // 注册店铺id
