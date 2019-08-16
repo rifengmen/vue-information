@@ -27,10 +27,9 @@
   justify-content: start;
   align-items: center;
 }
-/* 地区选择 start */
+/* 地区选择样式修改 start */
 .site_box {
-  width: 4.1rem;
   height: 100%;
 }
-/* 地区选择 end */
+/* 地区选择样式修改 end */
 /* 发布内容 end */

@@ -18,7 +18,7 @@
           tag="li"
           v-for="(item, index) in complaintList"
           :key="index">
-          <div class="complaint_name font30 font_blod">投诉原因：{{cause[item.type]}}</div>
+          <div class="complaint_name font32 font_blod">投诉原因：{{cause[item.type]}}</div>
           <div class="complaint_time">
             <div>信息编号：{{item.orderid}}</div>
             <div class="color1470cc">投诉时间：{{item.time}}</div>

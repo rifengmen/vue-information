@@ -61,6 +61,9 @@
   align-items: center;
   padding: 0 .3rem;
 }
+.user_li:last-child {
+  margin-bottom: 2rem;
+}
 .user_li ul {
   width: calc(100% - .6rem);
   height: 1.6rem;

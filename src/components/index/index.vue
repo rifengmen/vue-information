@@ -6,14 +6,16 @@
     <!-- 选择 搜索 start -->
     <div class="search_cont color666">
       <div class="category bgfff">
-        <el-cascader
-          placeholder="选择分类"
-          v-model="searchData.classify"
-          :options="classify"
-          @change="handleChange"></el-cascader>
+        <div>
+          <el-cascader
+            placeholder="选择分类"
+            v-model="searchData.classify"
+            :options="classify"
+            @change="handleChange"></el-cascader>
+        </div>
         <div class="site_box">
           <div class="site">
-            <div @click="choose" class="choose tc color666">
+            <div @click="choose" class="choose color666">
               <div class="font26">{{searchData.area || '地区选择'}}</div>
               <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
             </div>
@@ -22,14 +24,13 @@
             </p>
           </div>
         </div>
-        <el-select v-model="searchData.sort">
-          <el-option
-            v-for="(item, index) in sort"
-            :key="index"
-            :label="item"
-            :value="index">
-          </el-option>
-        </el-select>
+        <div>
+          <el-cascader
+            placeholder="排序方式"
+            v-model="searchData.sort"
+            :options="sort"
+            @change="sortHandleChange"></el-cascader>
+        </div>
       </div>
       <div class="search bgeeeeee">
         <div class="search_input fl bgfff">
@@ -90,7 +91,13 @@ export default {
       // 是否发送搜索信息
       isSend: false,
       // 排序方式
-      sort: ['时间顺序', '时间倒序', '等级顺序', '等级倒序'],
+      sort: [
+        {value: '0', label: '时间顺序'},
+        {value: '1', label: '时间倒序'},
+        {value: '2', label: '等级顺序'},
+        {value: '3', label: '等级倒序'}
+      ],
+      // sort: ['时间顺序', '时间倒序', '等级顺序', '等级倒序'],
       // 店铺列表
       shopsList: [
         {
@@ -247,9 +254,13 @@ export default {
       this.show = false
       this.turnimg = false
     },
-    // 信息分类发生变化时触发
+    // 店铺分类发生变化时触发
     handleChange (value) {
       this.searchData.classify = value[0]
+    },
+    // 排序方式发生变化时触发
+    sortHandleChange (value) {
+      this.searchData.sort = value[0]
     }
   },
   watch: {

@@ -12,15 +12,15 @@
             <div class="shopname color666">
               <div class="vip_name">
                 <img class="vipclass fl" v-if="vipClass[item.vipnum]" :src="vipClass[item.vipnum - 1]">
-                <div class="name font30 color333 ellipsis fl">{{item.name}}</div>
+                <div class="name font32 font_blod color333 ellipsis fl">{{item.name}}</div>
               </div>
-              <div>
+              <div class="shopclassify">
                 <span class="font28 color1470cc font_blod">{{typearr[item.type - 1]}}</span>
                 <span class="shopcategory font24 colorfff bg1470cc">{{item.classify}}</span>
               </div>
               <div class="area_box">
                 <img class="area" src="static/img/area.png">
-                <span class="font26">{{item.area}}</span>
+                <span>{{item.area}}</span>
               </div>
             </div>
           </div>

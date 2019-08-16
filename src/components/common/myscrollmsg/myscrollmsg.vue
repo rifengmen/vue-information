@@ -5,7 +5,7 @@
         <!-- 信息简介 start -->
         <li class="msgdetail bgfff" v-for="(item, index) in msgList" :key="index">
           <div class="categorymsg">
-            <span class="font30 font_blod">{{item.classify}}</span>
+            <span class="font32 font_blod">{{item.classify}}</span>
             <span class="area color666">
               <img src="static/img/area.png">
               {{item.area}}

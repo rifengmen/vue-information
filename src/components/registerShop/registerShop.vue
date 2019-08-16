@@ -42,7 +42,7 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺电话：</div>
           <div class="register_val">
-            <input type="number" v-model.number.trim="registerData.phone" placeholder="请输入电话号码">
+            <input type="text" v-model.number.trim="registerData.phone" placeholder="请输入电话号码">
           </div>
         </li>
         <!-- 联系电话 -->
@@ -72,7 +72,7 @@
               <img src="static/img/category.png">
             </div>
             <div class="site">
-              <div @click="choose" class="choose tc color666">
+              <div @click="choose" class="choose color666">
                 <div class="font26">{{registerData.area || '请选择地区'}}</div>
                 <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
               </div>
@@ -121,7 +121,7 @@
             <div class="pointsAnum">
               今日购买数量：
               <input
-                type="number"
+                type="text"
                 class="font50 font_blod coloree410c"
                 v-model.number="registerData.pointsAnum">
               <img src="static/img/pointsA.png" @click="showmsg">
@@ -386,4 +386,11 @@ export default {
 
 <style scoped>
 @import "static/css/registerShop.css";
+/* 地区选择样式修改 start */
+@media screen and (max-width: 870px)  {
+  .site .choose img {
+    left: 3.3rem;
+  }
+}
+/* 地区选择样式修改 end */
 </style>

@@ -6,14 +6,16 @@
     <!-- 筛选条件 start -->
     <div class="search_cont color666 bgfff">
       <div class="category">
-        <el-cascader
-          placeholder="选择分类"
-          v-model="searchData.classifymsg"
-          :options="classifymsg"
-          @change="handleChange"></el-cascader>
+        <div>
+          <el-cascader
+            placeholder="选择分类"
+            v-model="searchData.classifymsg"
+            :options="classifymsg"
+            @change="handleChange"></el-cascader>
+        </div>
         <div class="site_box">
           <div class="site">
-            <div @click="choose" class="choose tc coloreeeeee">
+            <div @click="choose" class="choose coloreeeeee">
               <div class="font26 color666">{{searchData.area || '地区选择'}}</div>
               <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
             </div>
@@ -259,4 +261,11 @@ export default {
 
 <style scoped>
 @import "static/css/listmsg.css";
+/* 地区选择样式修改 start */
+@media screen and (max-width: 870px)  {
+  .site .choose img {
+    left: 2.9rem;
+  }
+}
+/* 地区选择样式修改 end */
 </style>

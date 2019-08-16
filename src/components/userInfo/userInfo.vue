@@ -1,5 +1,5 @@
 <template>
-  <div class="user_main bgeeeeee">
+  <div class="container bgeeeeee">
     <!-- 用户信息 start -->
     <div class="userinfo colorfff bg1470cc">
       <div class="userinfo_tit font34 tc">个人中心</div>
@@ -55,18 +55,16 @@
         <li class="user_li bgfff">
           <div>会员激活：</div>
           <div class="vipcode">
-            <input type="number" v-model.number="vipcode">
+            <input type="text" v-model.number="vipcode">
           </div>
           <div :class="'vipcode_btn nosend_btn tc font26' + (send ? ' bgfff colorff9500 send_border' : ' bgeeeeee color999')" @click="sendCode">激活</div>
         </li>
       </ul>
     </div>
     <!-- 功能部分 end -->
-    <div class="container">
-      <!-- 底部导航 start -->
-      <my-footer></my-footer>
-      <!-- 底部导航 end -->
-    </div>
+    <!-- 底部导航 start -->
+    <my-footer></my-footer>
+    <!-- 底部导航 end -->
   </div>
 </template>
 

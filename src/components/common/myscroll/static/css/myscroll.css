@@ -41,13 +41,25 @@
   width: 5.30rem;
   height: 100%;
   margin-right: .20rem;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column;
 }
 .shopinfo .shopname .vip_name {
   width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   overflow: hidden;
 }
 .shopinfo .shopname .name {
   width: 4.50rem;
+}
+.shopinfo .shopclassify {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .shopinfo .shopcategory {
   display: inline-block;
@@ -59,13 +71,17 @@
   width: 100%;
 }
 .shopinfo .shopname .area_box {
+  width: 100%;
   display: flex;
   justify-content: start;
   align-items: center;
 }
+.shopinfo .shopname .area_box span {
+  height: 100%;
+}
 .shopinfo .shopname .area {
-  width: .24rem;
-  height: .24rem;
+  width: .28rem;
+  height: .28rem;
 }
 .shopinfo .vipclass {
   width: .40rem;

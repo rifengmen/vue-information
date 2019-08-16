@@ -18,8 +18,8 @@
           <div class="li_name font28">产地：</div>
           <div class="send_val site_box">
             <div class="site">
-              <div @click="choose" class="choose tc color666">
-                <div class="font26">{{registerData.area || '请选择地区'}}</div>
+              <div @click="choose" class="choose color666">
+                <div class="font26">{{registerData.area || '地区选择'}}</div>
                 <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
               </div>
               <p class="pwrap bgfff" v-if="show">
@@ -47,7 +47,7 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">联系电话：</div>
           <div class="send_val">
-            <input type="number" v-model.number="registerData.phone" placeholder="请填写你的手机号码">
+            <input type="text" v-model.number="registerData.phone" placeholder="请填写你的手机号码">
           </div>
         </li>
         <!-- 联系电话 end -->
@@ -56,7 +56,7 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">数量：</div>
           <div  class="send_val">
-            <input type="number" v-model.number="registerData.num" placeholder="请填写数量" oninput="if(value.length > 11)value = value.slice(0, 11)">
+            <input type="text" v-model.number="registerData.num" placeholder="请填写数量" oninput="if(value.length > 11)value = value.slice(0, 11)">
           </div>
         </li>
         <!-- 数量 end -->
@@ -219,5 +219,11 @@ export default {
 
 <style scoped>
 @import "static/css/sendmsg.css";
-
+/* 地区选择样式修改 start */
+@media screen and (max-width: 870px)  {
+  .site .choose img {
+    left: 3.45rem;
+  }
+}
+/* 地区选择样式修改 end */
 </style>

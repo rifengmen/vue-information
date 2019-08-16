@@ -28,10 +28,12 @@
   height: .40rem;
 }
 .site_box {
-  width: 4.5rem;
   height: 60%;
   border-left: 1px #eeeeee solid;
   border-right: 1px #eeeeee solid;
+}
+.search_cont .category > div {
+  width: 33%;
 }
 /* 选择 搜索 end */
 /* 下拉刷新动画 start */

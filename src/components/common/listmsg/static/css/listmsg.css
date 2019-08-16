@@ -6,9 +6,11 @@
 /* 下拉刷新动画 end */
 /* 地区三级联动 start */
 .site_box {
-  width: 3.9rem;
   height: 60%;
   border-left: 1px #eeeeee solid;
+}
+.search_cont .category > div {
+  width: 50%;
 }
 /* 地区三级联动 end */
 /* 信息列表 start */
@@ -17,3 +19,4 @@
   height: calc(100vh - 3.53rem);
 }
 /* 信息列表 end */
+
