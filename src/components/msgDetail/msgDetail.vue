@@ -45,7 +45,7 @@
       <!-- 免责 投诉 start -->
       <div class="tip_complaint container" v-if="userlistshow">
         <tip></tip>
-        <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff colorff9500 font26">投诉</router-link>
+        <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff coloree410c font26">投诉</router-link>
       </div>
       <!-- 免责 投诉 end -->
     </div>

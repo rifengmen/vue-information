@@ -22,12 +22,16 @@
   width: 100%;
   height: 1.40rem;
   padding: .1rem 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .shopinfo .shopimg {
   width: 1.40rem;
   height: 1.40rem;
   border-radius: .14rem;
   overflow: hidden;
+  margin-right: .2rem;
 }
 .shopinfo .shopimg img {
   width: 100%;
@@ -43,7 +47,7 @@
   overflow: hidden;
 }
 .shopinfo .shopname .name {
-  width: 4.70rem;
+  width: 4.50rem;
 }
 .shopinfo .shopcategory {
   display: inline-block;

@@ -6,10 +6,10 @@
       <li v-for="(item, index) in shopsList" :key="index" class="bgfff">
         <router-link class="shopinfo" :to="{name: 'shopInfo', params:{shopInfo: item}}" tag="div">
           <div class="shoptit">
-            <div class="shopimg fl">
+            <div class="shopimg">
               <img class="img" :src="(item.image ? (imgurl + item.image) : ('static/img/userimg.png'))">
             </div>
-            <div class="shopname fr color666">
+            <div class="shopname color666">
               <div class="vip_name">
                 <img class="vipclass fl" v-if="vipClass[item.vipnum]" :src="vipClass[item.vipnum - 1]">
                 <div class="name font30 color333 ellipsis fl">{{item.name}}</div>
