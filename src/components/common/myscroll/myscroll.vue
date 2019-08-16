@@ -16,7 +16,7 @@
               </div>
               <div class="shopclassify">
                 <span class="font28 color1470cc font_blod">{{typearr[item.type - 1]}}</span>
-                <span class="shopcategory font24 colorfff bg1470cc">{{item.classify}}</span>
+                <span class="shopcategory font24 colorfff bg1470cc">{{item.shopclass}}</span>
               </div>
               <div class="area_box">
                 <img class="area" src="static/img/area.png">

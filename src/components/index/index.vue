@@ -9,7 +9,7 @@
         <div>
           <el-cascader
             placeholder="选择分类"
-            v-model="searchData.classify"
+            v-model="searchData.category"
             :options="classify"
             @change="handleChange"></el-cascader>
         </div>
@@ -37,7 +37,7 @@
           <input type="text" v-model="searchData.search" placeholder="请输入标签进行搜索" class="fl"/>
           <img src="static/img/search.png" class="fr">
         </div>
-        <div :class="'search_btn nosend_btn font26 tc fr bgfff' + (isSend ? ' colorff9500 send_border' : ' color999')" @click="sendSearch">搜索</div>
+        <div class="search_btn nosend_btn font26 tc fr bgfff colorff9500 send_border" @click="sendSearch">搜索</div>
       </div>
     </div>
     <!-- 选择 搜索 end -->
@@ -76,7 +76,7 @@ export default {
       // 搜索
       searchData: {
         // 分类搜索
-        classify: 0,
+        category: 0,
         // 地区搜索
         area: '',
         // 排序方式，0：时间顺序(默认)；1：时间倒序；2：等级顺序；3：等级倒序
@@ -88,8 +88,6 @@ export default {
       },
       // 总页数
       total: '0',
-      // 是否发送搜索信息
-      isSend: false,
       // 排序方式
       sort: [
         {value: '0', label: '时间顺序'},
@@ -142,7 +140,7 @@ export default {
     },
     // 搜索类别
     searchData_classify () {
-      return this.searchData.classify
+      return this.searchData.category
     },
     // 搜索地区
     area () {
@@ -186,9 +184,7 @@ export default {
     },
     // 标签搜索
     sendSearch () {
-      if (this.isSend) {
-        this.getShopsList()
-      }
+      this.getShopsList()
     },
     // 获取店铺列表资料公共方法
     getShopsList () {
@@ -256,7 +252,7 @@ export default {
     },
     // 店铺分类发生变化时触发
     handleChange (value) {
-      this.searchData.classify = value[0]
+      this.searchData.category = value[0]
     },
     // 排序方式发生变化时触发
     sortHandleChange (value) {
@@ -275,14 +271,6 @@ export default {
     // 监听排序方式变换
     searchSort (newval, oldval) {
       this.getShopsList()
-    },
-    // 监听搜索标签输入
-    search (newval, oldval) {
-      if (newval !== '') {
-        this.isSend = true
-        return
-      }
-      this.isSend = false
     }
   },
   created () {
