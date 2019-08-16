@@ -6,6 +6,10 @@
         <li class="msgdetail bgfff" v-for="(item, index) in msgList" :key="index">
           <div class="categorymsg">
             <span class="font30 font_blod">{{item.classify}}</span>
+            <span class="area color666">
+              <img src="static/img/area.png">
+              {{item.area}}
+            </span>
           </div>
           <div class="msgdes ellipsis color666 font28" v-html="item.leave_html">{{item.leave_html}}</div>
           <div class="time_detailbtn">

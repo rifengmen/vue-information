@@ -58,10 +58,14 @@
 .shopinfo .shopname .areabox {
   width: 100%;
 }
+.shopinfo .shopname .area_box {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
 .shopinfo .shopname .area {
   width: .24rem;
   height: .24rem;
-  margin-right: .06rem;
 }
 .shopinfo .vipclass {
   width: .40rem;
