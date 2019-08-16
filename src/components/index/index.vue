@@ -195,7 +195,7 @@ export default {
       this.searchData.page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
-      this.$axios.get('Index/index/shops', data).then(result => {
+      this.$axios.post('Index/index/shops', data).then(result => {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
           this.isShowLoading = false
@@ -230,7 +230,7 @@ export default {
       if (currentpage > total) {
         this.loadText = '暂无更多数据'
       } else {
-        this.$axios.get('Index/index/shops', data).then(result => {
+        this.$axios.post('Index/index/shops', data).then(result => {
           this.$store.commit('setIsPullingUp', true)
           if (result.data.code === 0) {
             this.isShowLoading = false
