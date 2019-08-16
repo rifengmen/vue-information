@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 头部 start -->
-    <div class="tit">
+    <div class="tit bgfff">
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
@@ -13,10 +13,10 @@
     <div class="shopinfo">
       <ul>
         <!-- 店铺门头照片 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="shopimg_box">
             <div class="shopimg">
-              <img :src="shopInfo.image">
+              <img :src="(shopInfo.image ? (imgurl + shopInfo.image) : ('static/img/userimg.png'))">
             </div>
             <div class="vip" v-if="vipClass[shopInfo.vipnum]">
               <img :src="vipClass[shopInfo.vipnum]">
@@ -28,45 +28,45 @@
         </li>
         <!-- 店铺门头照片 end -->
         <!-- 店铺名称 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="font_blod">店铺名称：</div>
           <div class="font30">{{shopInfo.name}}</div>
         </li>
         <!-- 店铺名称 end -->
         <!-- 店铺分类 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="font_blod">店铺分类：</div>
           <div class="font30">{{classify[shopInfo.classify]}}</div>
         </li>
         <!-- 店铺分类 end -->
         <!-- 所在地区 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="font_blod">所在地区：</div>
           <div class="font30">{{shopInfo.area}}</div>
         </li>
         <!-- 所在地区 end -->
         <!-- 联系电话 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="font_blod">联系电话：</div>
           <div class="font30">{{shopInfo.phone}}</div>
         </li>
         <!-- 联系电话 end -->
         <!-- 店铺标签 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="font_blod">店铺标签：</div>
           <div class="tags">
-            <span class="tag color333 bgcecece" v-for="(item, index) in shopInfo.label" :key="index">{{item}}</span>
+            <span class="tag color333 bgeeeeee" v-for="(item, index) in shopInfo.label" :key="index">{{item}}</span>
           </div>
         </li>
         <!-- 店铺标签 end -->
         <!-- 业务介绍 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <div class="font_blod">业务介绍：</div>
           <div class="des" v-html="shopInfo.business">{{shopInfo.business}}</div>
         </li>
         <!-- 业务介绍 end -->
         <!-- 免责声明 start -->
-        <li class="shopinfo_li">
+        <li class="shopinfo_li bgfff">
           <tip></tip>
         </li>
         <!-- 免责声明 end -->
@@ -110,7 +110,9 @@ export default {
       // 店铺分类
       classify: this.$store.state.classify,
       // 是否喜欢当前店铺
-      give: false
+      give: false,
+      // 图片路径
+      imgurl: this.IMGURL
     }
   },
   computed: {

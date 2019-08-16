@@ -1,14 +1,12 @@
 <template>
-  <div class="cont bge7e7e7">
+  <div class="container bgeeeeee">
     <!-- 头部 start -->
-    <div class="container bgfff">
-      <div class="tit bgfff">
-        <div class="backs" @click="backs">
-          <img src="static/img/turnleftactive.png">
-        </div>
-        <div class="font26 font_blod color1470cc">{{msgarr[msgDetail.data-1]}}详情</div>
-        <div class="backs"></div>
+    <div class="tit bgfff">
+      <div class="backs" @click="backs">
+        <img src="static/img/turnleftactive.png">
       </div>
+      <div class="font36 font_blod color1470cc">{{msgarr[msgDetail.data-1]}}详情</div>
+      <div class="backs"></div>
     </div>
     <!-- 头部 end -->
     <div class="msg_cont">
@@ -16,17 +14,17 @@
       <div class="container msgarea bgfff">
         <div class="msg_li">
           <div>
-            <div class="font40 font_blod tr">分类：</div>
-            <div class="font40 font_blod">{{msgDetail.classify}}</div>
+            <div class="font30 font_blod">分类：</div>
+            <div class="font30 font_blod">{{msgDetail.classify}}</div>
           </div>
           <div>
-            <div class="font40 font_blod tr">产地：</div>
-            <div class="font40 font_blod">{{msgDetail.area}}</div>
+            <div class="font30 font_blod">产地：</div>
+            <div class="font30 font_blod">{{msgDetail.area}}</div>
           </div>
         </div>
         <div class="msg_li">
           <div>
-            <div class="font40 font_blod tr">留言：</div>
+            <div class="font30 font_blod">留言：</div>
             <div v-html="msgDetail.leave">{{msgDetail.leave}}</div>
           </div>
         </div>
@@ -35,11 +33,11 @@
       <!-- 信息编号 start -->
       <div class="msg_li msgcode bgfff">
         <div>
-          <div class="font28 color666 tr">订单号：</div>
+          <div class="font28 color666">订单号：</div>
           <div class="font28 color666">{{msgDetail.orderid}}</div>
         </div>
         <div>
-          <div class="font28 color666 tr">发布时间：</div>
+          <div class="font28 color666">发布时间：</div>
           <div class="font28 color666">{{msgDetail.time}}</div>
         </div>
       </div>
@@ -47,15 +45,15 @@
       <!-- 免责 投诉 start -->
       <div class="tip_complaint container" v-if="userlistshow">
         <tip></tip>
-        <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff colorff9500">投诉</router-link>
+        <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff colorff9500 font26">投诉</router-link>
       </div>
       <!-- 免责 投诉 end -->
     </div>
     <!-- 发布信息 信息列表 查看电话 start -->
     <div class="msgfooter bgfff" v-if="userlistshow">
       <div class="msgfooter_l">
-        <router-link :to="{name: 'sendMsg', query:{msg_status: msgDetail.data}}" class="msg_btn tc colorfff font30 font_blod bg1470cc" tag="div">发布{{msgarr[msgDetail.data-1]}}</router-link>
-        <router-link :to="{name: (msgDetail.data === '1' ? 'listPurchase' : 'listSupplier')}" class="msg_btn tc colorfff font30 font_blod bgee410c" tag="div">{{msgarr[msgDetail.data-1]}}列表</router-link>
+        <router-link :to="{name: 'sendMsg', query:{msg_status: msgDetail.data}}" class="msg_btn tc colorff9500 font26 font_blod bgfff" tag="div">发布{{msgarr[msgDetail.data-1]}}</router-link>
+        <router-link :to="{name: (msgDetail.data === '1' ? 'listPurchase' : 'listSupplier')}" class="msg_btn tc colorfff font26 font_blod bgff9500" tag="div">{{msgarr[msgDetail.data-1]}}列表</router-link>
       </div>
       <div class="msgfooter_r">
         <check-pay>查看电话</check-pay>

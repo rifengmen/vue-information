@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 头部 start -->
     <div class="tit bgfff">
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">投诉详情</div>
+      <div class="font36 font_blod color1470cc">投诉详情</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
@@ -13,31 +13,31 @@
     <div class="complaint">
       <ul>
         <!-- 投诉原因 start -->
-        <li class="complaint_li">
+        <li class="complaint_li bgfff">
           <div class="font28 tr">投诉原因：</div>
           <div class="font28">{{cause[complaint.type]}}</div>
         </li>
         <!-- 投诉原因 end -->
         <!-- 信息类型 start -->
-        <li class="complaint_li">
+        <li class="complaint_li bgfff">
           <div class="font28 tr">信息类型：</div>
           <div class="font28">{{msgarr[complaint.data-1]}}信息</div>
         </li>
         <!-- 信息类型 end -->
         <!-- 信息编号 start -->
-        <li class="complaint_li">
+        <li class="complaint_li bgfff">
           <div class="font28 tr">信息编号：</div>
           <div class="font28">{{complaint.orderid}}</div>
         </li>
         <!-- 信息编号 end -->
         <!-- 投诉详情 start -->
-        <li class="complaint_li">
+        <li class="complaint_li bgfff">
           <div class="font28 tr">投诉详情：</div>
           <div class="font28" v-html="complaint.leave">{{complaint.leave}}</div>
         </li>
         <!-- 投诉详情 end -->
         <!-- 投诉时间 start -->
-        <li class="complaint_li">
+        <li class="complaint_li bgfff">
           <div class="font28 tr">投诉时间：</div>
           <div class="font28">{{complaint.time}}</div>
         </li>

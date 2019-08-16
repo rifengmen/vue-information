@@ -51,7 +51,7 @@
     </div>
     <!-- 投诉详情 end -->
     <!-- 提交按钮 start -->
-    <div :class="'complaint_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="complaintSend">发布</div>
+    <div :class="'complaint_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bgeeeeee color999')" @click="complaintSend">发布</div>
     <!-- 提交按钮 end -->
   </div>
 </template>

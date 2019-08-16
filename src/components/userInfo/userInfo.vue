@@ -1,5 +1,5 @@
 <template>
-  <div class="user_main bge7e7e7">
+  <div class="user_main bgeeeeee">
     <!-- 用户信息 start -->
     <div class="userinfo colorfff bg1470cc">
       <div class="userinfo_tit font34 tc">个人中心</div>
@@ -57,7 +57,7 @@
           <div class="vipcode">
             <input type="number" v-model.number="vipcode">
           </div>
-          <div :class="'vipcode_btn tc font_blod font28' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="sendCode">激活</div>
+          <div :class="'vipcode_btn nosend_btn tc font26' + (send ? ' bgfff colorff9500 send_border' : ' bgeeeeee color999')" @click="sendCode">激活</div>
         </li>
       </ul>
     </div>

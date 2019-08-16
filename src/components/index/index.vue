@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 用户信息 start -->
     <my-header></my-header>
     <!-- 用户信息 end -->
     <!-- 选择 搜索 start -->
     <div class="search_cont color666">
-      <div class="category">
+      <div class="category bgfff">
         <el-cascader
           placeholder="选择分类"
           v-model="searchData.classify"
@@ -31,12 +31,12 @@
           </el-option>
         </el-select>
       </div>
-      <div class="search">
-        <div class="search_input fl">
+      <div class="search bgeeeeee">
+        <div class="search_input fl bgfff">
           <input type="text" v-model="searchData.search" placeholder="请输入标签进行搜索" class="fl"/>
           <img src="static/img/search.png" class="fr">
         </div>
-        <div :class="'search_btn font26 tc fr' + (isSend ? ' colorff9500 bgfff' : ' color999 bge7e7e7')" @click="sendSearch">搜索</div>
+        <div :class="'search_btn nosend_btn font26 tc fr bgfff' + (isSend ? ' colorff9500 send_border' : ' color999')" @click="sendSearch">搜索</div>
       </div>
     </div>
     <!-- 选择 搜索 end -->
@@ -97,7 +97,7 @@ export default {
           // 店铺id
           id: '1',
           // 店铺门脸图片
-          image: 'static/img/userimg.png',
+          image: '',
           // 店铺名称
           name: '测试企业1',
           // 所属分类

@@ -1,10 +1,13 @@
 /* 用户信息 start */
 .userinfo {
-  width: 100%;
+  width: calc(100vw - .48rem);
   height: 1.0rem;
-  border-bottom: .01rem #e7e7e7 solid;
-  padding: .2rem 0;
+  border-bottom: 1px #eeeeee solid;
+  padding: .2rem .24rem;
   z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .userinfo .user {
   width: 60%;
@@ -15,7 +18,7 @@
   height: .80rem;
   line-height: .8rem;
   border-radius: 50%;
-  border:.01rem #1470cc solid;
+  border:1px #1470cc solid;
   overflow: hidden;
   padding: .10rem;
 }
@@ -30,14 +33,14 @@
   margin-left: .10rem;
 }
 .username {
-
 }
 .shopbtn {
   width: 1.50rem;
-  height: .60rem;
-  line-height: .60rem;
-  margin-top: .20rem;
-  border: .01rem #cecece solid;
+  padding: .15rem 0;
+  border: 1px #ff9500 solid;
   border-radius: .06rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* 用户信息 end */

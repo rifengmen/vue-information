@@ -6,15 +6,15 @@
   overflow: hidden;
 }
 .msgdetail {
-  width: 100%;
+  width: calc(100vw - .48rem);
+  padding: .2rem 0.24rem;
   min-height: 1.8rem;
-  padding: .2rem 0;
-  border-bottom: .2rem #e7e7e7 solid;
+  border-bottom: .2rem #eeeeee solid;
 }
 .categorymsg {
   width: 100%;
   min-height: .8rem;
-  border-bottom: .01rem #cecece dashed;
+  border-bottom: 1px #eeeeee dashed;
   display: flex;
   justify-content: start;
   flex-flow: wrap;
@@ -37,8 +37,8 @@
   align-items: center;
 }
 .detailbtn {
-  padding: .1rem .3rem;
-  border: .01rem #cecece solid;
-  border-radius: .5rem;
+  padding: .15rem .2rem;
+  border: 1px #ff9500 solid;
+  border-radius: .06rem;
 }
 /* 信息列表 end */

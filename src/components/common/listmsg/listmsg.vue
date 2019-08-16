@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 用户信息 start -->
     <msg-header :msg_status="msg_status"></msg-header>
     <!-- 用户信息 end -->
     <!-- 筛选条件 start -->
-    <div class="search_cont color666">
+    <div class="search_cont color666 bgfff">
       <div class="category">
         <el-cascader
           placeholder="选择分类"
@@ -13,7 +13,7 @@
           @change="handleChange"></el-cascader>
         <div class="site_box">
           <div class="site">
-            <div @click="choose" class="choose tc colorcecece">
+            <div @click="choose" class="choose tc coloreeeeee">
               <div class="font26 color666">{{searchData.area || '地区选择'}}</div>
               <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
             </div>

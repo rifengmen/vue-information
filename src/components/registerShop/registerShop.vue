@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 头部 start -->
-    <div class="tit">
+    <div class="tit bgfff">
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">{{userInfo.shopid ? '管理店铺' : '注册店铺'}}</div>
+      <div class="font36 font_blod color1470cc">{{userInfo.shopid ? '管理店铺' : '注册店铺'}}</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
@@ -13,7 +13,7 @@
     <div class="register_cont">
       <ul>
         <!-- 店铺名称 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺名称：</div>
           <div class="register_val">
@@ -22,7 +22,7 @@
         </li>
         <!-- 店铺名称 end -->
         <!-- 店铺分类 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺分类：</div>
           <div class="register_val">
@@ -38,7 +38,7 @@
         </li>
         <!-- 店铺分类 end -->
         <!-- 联系电话 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺电话：</div>
           <div class="register_val">
@@ -47,7 +47,7 @@
         </li>
         <!-- 联系电话 -->
         <!-- 店铺门脸 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺门脸：</div>
           <div class="register_val">
@@ -64,7 +64,7 @@
         </li>
         <!-- 店铺门脸 end -->
         <!-- 所在地区 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">所在地区：</div>
           <div class="register_val">
@@ -84,7 +84,7 @@
         </li>
         <!-- 所在地区 end -->
         <!-- 店铺标签 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">店铺标签：</div>
           <div class="register_val">
@@ -93,7 +93,7 @@
         </li>
         <!-- 店铺标签 end -->
         <!-- 业务介绍 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">业务介绍：</div>
           <div class="register_val business">
@@ -102,7 +102,7 @@
         </li>
         <!-- 业务介绍 end -->
         <!-- 是否认证 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c"></div>
           <div class="li_name color333 font_blod">店铺认证：</div>
           <div class="register_val">
@@ -113,7 +113,7 @@
         </li>
         <!-- 是否认证 end -->
         <!-- 购买煤球 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="tip coloree410c"></div>
           <div class="li_name color333 font_blod">购买煤球：</div>
           <div class="register_val2">
@@ -130,7 +130,7 @@
         </li>
         <!-- 购买煤球 end -->
         <!-- 提示信息 start -->
-        <li class="register_li">
+        <li class="register_li bgfff">
           <div class="color999">
             带<span class="coloree410c">❈</span>为必填项，请认证填写
           </div>
@@ -140,7 +140,9 @@
     </div>
     <!-- 注册信息 end -->
     <!-- 提交按钮 start -->
-    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">发布<span v-if="(goPay > 0)">未支付￥{{goPay}}</span></div>
+    <div class="btn_footer bgeeeeee">
+      <div :class="'register_btn nosend_btn tc font26 bgfff' + (send ? ' colorff9500 send_border' : ' color999')" @click="registerSend">发布<span v-if="(goPay > 0)">未支付￥{{goPay}}</span></div>
+    </div>
     <!-- 提交按钮 end -->
   </div>
 </template>

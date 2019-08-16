@@ -1,13 +1,14 @@
 /* 投诉详情 start */
 .complaint {
   width: 100%;
-  height: calc(100vh - 1.21rem);
-  overflow-y: auto;
+  height: calc(100vh - 1.23rem);
+  padding-bottom: .2rem;
+  overflow-y: hidden;
 }
 .complaint_li {
   width: 100%;
   min-height: 1rem;
-  border-bottom: .2rem #e7e7e7 solid;
+  border-bottom: .2rem #eeeeee solid;
   display: flex;
   justify-content: start;
   align-items: center;

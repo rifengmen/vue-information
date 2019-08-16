@@ -3,17 +3,18 @@
       <!-- 信息列表 start -->
       <ul class="msglist" v-if="msgList.length">
         <!-- 信息简介 start -->
-        <li class="msgdetail" v-for="(item, index) in msgList" :key="index">
-          <router-link :to="{name: 'msgDetail', params:{msgDetail: item}}" tag="div">
-            <div class="categorymsg">
-              <span class="font30 font_blod">{{item.classify}}</span>
-            </div>
-            <div class="msgdes ellipsis color666 font28" v-html="item.leave">{{item.leave}}</div>
-            <div class="time_detailbtn">
-              <div class="time color1470cc">发布时间：<span class="font26">{{item.time}}</span></div>
-              <div class="detailbtn colorff9500 font28 tc">查看详情</div>
-            </div>
-          </router-link>
+        <li class="msgdetail bgfff" v-for="(item, index) in msgList" :key="index">
+          <div class="categorymsg">
+            <span class="font30 font_blod">{{item.classify}}</span>
+          </div>
+          <div class="msgdes ellipsis color666 font28" v-html="item.leave_html">{{item.leave_html}}</div>
+          <div class="time_detailbtn">
+            <div class="time color1470cc">发布时间：<span class="font26">{{item.time}}</span></div>
+            <router-link
+              :to="{name: 'msgDetail', params:{msgDetail: item}}"
+              tag="div"
+              class="detailbtn colorff9500 font28 tc">查看详情</router-link>
+          </div>
         </li>
         <!-- 信息简介 end -->
         <!-- 上拉加载动画 start -->

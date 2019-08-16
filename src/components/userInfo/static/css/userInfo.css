@@ -26,7 +26,7 @@
   width: 1rem;
   height: 1rem;
   padding: .1rem;
-  border: .01rem #e7e7e7;
+  border: 1px #eeeeee solid;
   border-radius: .55rem;
   overflow: hidden;
 }
@@ -56,7 +56,7 @@
 .user_li {
   width: 100%;
   min-height: 1rem;
-  border-top: .2rem #e7e7e7 solid;
+  border-top: .2rem #eeeeee solid;
   display: flex;
   align-items: center;
   padding: 0 .3rem;
@@ -88,23 +88,16 @@
 .vipcode {
   width: 4rem;
   height: .6rem;
-  border: .01rem #cecece solid;
+  border: 1px #eeeeee solid;
   border-radius: .3rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: .2rem;
 }
 .vipcode > input {
   width: 3.5rem;
   height: .5rem;
-}
-.vipcode_btn {
-  width: 1rem;
-  height: .6rem;
-  line-height: .6rem;
-  margin-left: .5rem;
-  border: .01rem #cecece solid;
-  border-radius: .3rem;
 }
 /* 功能部分 end */
 /* 我的供应 求购 start */

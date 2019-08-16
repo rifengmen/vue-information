@@ -1,11 +1,10 @@
 .tipbtn {
-  width: 1.5rem;
   height: .4rem;
-  padding: .1rem .4rem;
-  border: .01rem #cecece solid;
-  border-radius: .5rem;
+  padding: .15rem .2rem;
+  border: 1px #ff9500 solid;
+  border-radius: .06rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: .5rem;
+  margin-right: .2rem;
 }

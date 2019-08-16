@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 头部 start -->
     <div class="tit bgfff">
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">我的投诉</div>
+      <div class="font36 font_blod color1470cc">我的投诉</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
@@ -13,7 +13,7 @@
       <!-- 投诉列表 start -->
       <ul v-if="complaintList.length">
         <router-link
-          class="complaint_li"
+          class="complaint_li bgfff"
           :to="{name: 'complaint', params: {complaint: item}}"
           tag="li"
           v-for="(item, index) in complaintList"

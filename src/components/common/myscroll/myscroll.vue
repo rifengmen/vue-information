@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper" ref="myscroll">
     <!-- 店铺列表 start -->
-    <ul class="shopslist" v-if="shopsList.length">
+    <ul class="shopslist bgeeeeee" v-if="shopsList.length">
       <!-- 店铺简介 start -->
-      <li v-for="(item, index) in shopsList" :key="index">
+      <li v-for="(item, index) in shopsList" :key="index" class="bgfff">
         <router-link class="shopinfo" :to="{name: 'shopInfo', params:{shopInfo: item}}" tag="div">
           <div class="shoptit">
             <div class="shopimg fl">
@@ -26,11 +26,11 @@
           </div>
           <div class="shoptags" v-if="item.label.length">
             <!-- 店铺标签 start -->
-            <span v-for="(label, tIndex) in item.label" :key="tIndex" class="tags font24 color333 bgcecece">{{label}}</span>
+            <span v-for="(label, tIndex) in item.label" :key="tIndex" class="tags font24 color333 bgeeeeee">{{label}}</span>
             <!-- 店铺标签 end -->
           </div>
           <div class="shopdes">
-            <div class="font28 color999 ellipsis">{{item.business}}</div>
+            <div class="font28 color999 ellipsis" v-html="item.business_html">{{item.business_html}}</div>
           </div>
         </router-link>
       </li>

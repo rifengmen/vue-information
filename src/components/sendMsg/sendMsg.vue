@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container bgeeeeee">
     <!-- 头部 start -->
-    <div class="tit">
+    <div class="tit bgfff">
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">发布{{msgarr[registerData.msg_status-1]}}</div>
+      <div class="font36 font_blod color1470cc">发布{{msgarr[registerData.msg_status-1]}}</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->
@@ -13,7 +13,7 @@
     <div class="send_cont">
       <ul>
         <!-- 地区选择 start -->
-        <li class="send_li">
+        <li class="send_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">产地：</div>
           <div class="send_val site_box">
@@ -30,7 +30,7 @@
         </li>
         <!-- 地区选择 end -->
         <!-- 分类选择 start -->
-        <li class="send_li">
+        <li class="send_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">分类：</div>
           <div class="send_val">
@@ -43,7 +43,7 @@
         </li>
         <!-- 分类选择 end -->
         <!-- 联系电话 start -->
-        <li class="send_li">
+        <li class="send_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">联系电话：</div>
           <div class="send_val">
@@ -52,7 +52,7 @@
         </li>
         <!-- 联系电话 end -->
         <!-- 数量 start -->
-        <li class="send_li">
+        <li class="send_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">数量：</div>
           <div  class="send_val">
@@ -61,7 +61,7 @@
         </li>
         <!-- 数量 end -->
         <!-- 留言 start -->
-        <li class="send_li">
+        <li class="send_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">留言：</div>
           <div class="send_val">
@@ -70,7 +70,7 @@
         </li>
         <!-- 留言 end -->
         <!-- 提示信息 start -->
-        <li class="send_li">
+        <li class="send_li bgfff">
           <div class="color999">
             带<span class="coloree410c">❈</span>为必填项，请认证填写
           </div>
@@ -80,7 +80,9 @@
     </div>
     <!-- 发布内容 end -->
     <!-- 提交按钮 start -->
-    <div :class="'register_btn tc font_blod font36' + (send ? ' bgfff colorff9500' : ' bge7e7e7 color999')" @click="registerSend">发布</div>
+    <div class="btn_footer bgeeeeee">
+      <div :class="'register_btn nosend_btn tc font26 bgfff' + (send ? ' colorff9500 send_border' : ' color999')" @click="registerSend">发布</div>
+    </div>
     <!-- 提交按钮 end -->
   </div>
 </template>

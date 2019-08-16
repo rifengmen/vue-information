@@ -11,7 +11,8 @@
   height: auto;
 }
 .shopslist > li {
-  border-bottom: .2rem #e7e7e7 solid;
+  padding: 0 .24rem;
+  border-bottom: .2rem #eeeeee solid;
 }
 .shopslist .shopinfo {
   width: 100%;
@@ -46,7 +47,7 @@
 }
 .shopinfo .shopcategory {
   display: inline-block;
-  margin: .1rem 0;
+  margin: .1rem 0 .1rem .2rem;
   padding: .04rem .16rem;
   border-radius: .20rem;
 }
@@ -62,13 +63,13 @@
   width: .40rem;
   height: .40rem;
   border-radius: 50%;
-  margin-right: .10rem;
+  margin-right: .2rem;
 }
 .shopinfo .tags {
   display: inline-block;
-  padding: .06rem .08rem;
-  margin: .1rem .1rem .1rem 0;
-  border-radius: .14rem;
+  padding: .06rem .2rem;
+  margin: .1rem .2rem .1rem 0;
+  border-radius: .2rem;
 }
 .shopinfo .shopdes {
   padding: .10rem 0;

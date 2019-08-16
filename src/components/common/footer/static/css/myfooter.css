@@ -1,38 +1,66 @@
 .footer{
-  height: 1rem;
+  width: 100%;
+  height: 1.2rem;
   position: fixed;
   left: 0;
   bottom: 0;
-  border-top: .01rem #cecece solid;
-  padding-top: .2rem;
+  border-top: 1px #eeeeee solid;
 }
 .footer-main{
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
-.footer-main>a{
-  position: relative;
+.footer-main > div{
   width: 1.875rem;
   height: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: column;
+  align-items: center;
 }
-.footer-main>a>img{
-  position: absolute;
-  top: 0;
-  left: 0.62rem;
-  width: 0.6rem;
-  height: 0.6rem;
+.footer-main > div > div:first-child{
+  width: .6rem;
+  height: .6rem;
+  margin-top: .1rem;
 }
-.listname{
-  position: absolute;
-  bottom: 0.1rem;
-  left: 0;
-  width: 100%;
+.shops > div:first-child{
+  background-image: url('../img/index.png');
+  background-size: cover;
+}
+.shops.router-link-exact-active > div:first-child {
+  background: url('../img/indexactive.png');
+  background-size: cover;
+}
+.supplier > div:first-child{
+  background-image: url('../img/supplier.png');
+  background-size: cover;
+}
+.supplier.router-link-exact-active > div:first-child {
+  background: url('../img/supplieractive.png');
+  background-size: cover;
+}
+.purchase > div:first-child{
+  background-image: url('../img/purchase.png');
+  background-size: cover;
+}
+.purchase.router-link-exact-active > div:first-child {
+  background: url('../img/purchaseactive.png');
+  background-size: cover;
+}
+.userinfo > div:first-child{
+  background-image: url('../img/userinfo.png');
+  background-size: cover;
+}
+.userinfo.router-link-exact-active > div:first-child {
+  background: url('../img/userinfoactive.png');
+  background-size: cover;
 }
 
-div {
-  text-align: center;
+.listname{
+  width: 100%;
 }
 
 .router-link-exact-active > div.listname {

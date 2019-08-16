@@ -1,5 +1,5 @@
 <template>
-  <div @click="tip" class="tipbtn colorff9500 bgfff">免责声明</div>
+  <div @click="tip" class="tipbtn colorfff bgff9500 font26">免责声明</div>
 </template>
 
 <script>

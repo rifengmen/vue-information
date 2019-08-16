@@ -5,7 +5,7 @@
       <div class="backs" @click="backs">
         <img src="static/img/turnleftactive.png">
       </div>
-      <div class="font26 font_blod color1470cc">{{userarr[searchData.msg_status - 1]}}</div>
+      <div class="font36 font_blod color1470cc">{{userarr[searchData.msg_status - 1]}}</div>
       <div class="backs"></div>
     </div>
     <!-- 头部 end -->

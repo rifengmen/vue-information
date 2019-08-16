@@ -1,9 +1,7 @@
 .checkbtn {
-  width: 2rem;
-  height: .6rem;
-  line-height: .6rem;
-  border: .01rem #cecece solid;
-  border-radius: .4rem;
+  padding: .15rem .2rem;
+  border: 1px #ff9500 solid;
+  border-radius: .06rem;
 }
 .paybox {
   position: fixed;
@@ -22,7 +20,7 @@
   top: .2rem;
   right: .2rem;
   padding: .2rem;
-  border: .01rem #cecece solid;
+  border: 1px #ff9500 solid;
   border-radius: .3rem;
 }
 .paytit {
@@ -46,5 +44,5 @@
   margin: .4rem 0;
   padding: .2rem .8rem;
   border-radius: .4rem;
-  border: .01rem #cecece solid;
+  border: 1px #ff9500 solid;
 }
