@@ -331,6 +331,37 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 }
 /* 无数据图片 end */
 /* 底部公共导航背景图 start */
-
+.footer_shops > div:first-child{
+  background-image: url('../img/index.png');
+  background-size: cover;
+}
+.footer_shops.router-link-exact-active > div:first-child {
+  background: url('../img/indexactive.png');
+  background-size: cover;
+}
+.footer_supplier > div:first-child{
+  background-image: url('../img/supplier.png');
+  background-size: cover;
+}
+.footer_supplier.router-link-exact-active > div:first-child {
+  background: url('../img/supplieractive.png');
+  background-size: cover;
+}
+.footer_purchase > div:first-child{
+  background-image: url('../img/purchase.png');
+  background-size: cover;
+}
+.footer_purchase.router-link-exact-active > div:first-child {
+  background: url('../img/purchaseactive.png');
+  background-size: cover;
+}
+.footer_userinfo > div:first-child{
+  background-image: url('../img/userinfo.png');
+  background-size: cover;
+}
+.footer_userinfo.router-link-exact-active > div:first-child {
+  background: url('../img/userinfoactive.png');
+  background-size: cover;
+}
 /* 底部公共导航背景图 end */
 /* 公共样式 end */
