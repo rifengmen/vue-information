@@ -36,7 +36,7 @@
         <!-- 店铺分类 start -->
         <li class="shopinfo_li bgfff">
           <div class="font_blod">店铺分类：</div>
-          <div class="font30">{{classify[shopInfo.classify]}}</div>
+          <div class="font30">{{shopInfo.shopclass}}</div>
         </li>
         <!-- 店铺分类 end -->
         <!-- 所在地区 start -->
@@ -107,8 +107,6 @@ export default {
     return {
       // 店铺等级图标资源路径
       vipClass: this.$store.state.vip,
-      // 店铺分类
-      classify: this.$store.state.classify,
       // 是否喜欢当前店铺
       give: false,
       // 图片路径

@@ -11,7 +11,7 @@
     <!-- 头部 end -->
     <div class="msg_cont">
       <!-- 信息详情 start -->
-      <div class="container msgarea bgfff">
+      <div class="msgarea bgfff">
         <div class="msg_li">
           <div>
             <div class="font30 font_blod">分类：</div>
@@ -43,7 +43,7 @@
       </div>
       <!-- 信息编号 end -->
       <!-- 免责 投诉 start -->
-      <div class="tip_complaint container" v-if="userlistshow">
+      <div class="tip_complaint" v-if="userlistshow">
         <tip></tip>
         <router-link :to="{name: 'sendComplaint', params: {msgDetail: msgDetail}}" tag="div" class="complaint bgfff coloree410c font26">投诉</router-link>
       </div>
