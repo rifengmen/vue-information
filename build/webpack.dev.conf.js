@@ -29,7 +29,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ],
     },
     // https:true, // https环境开启
-    hot: true,
+    hot: true, // 热更新
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,

@@ -29,7 +29,7 @@ module.exports = {
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
-    poll: true, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
@@ -87,10 +87,10 @@ module.exports = {
 
   test: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../test/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../test'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
 
