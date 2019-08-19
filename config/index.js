@@ -10,17 +10,17 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {
-        target: 'http://47.94.145.71:81/',//设置你调用的接口域名和端口号 别忘了加http
-        changeOrigin: true,
-        // secure: false, // 解决https的问题
-        pathRewrite: {
-          '^/api': '/'
-          // 这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替
-          // 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
-        }
-      }
+    proxyTable: {   //已配置baseURL，不会调用
+      // '/api': {
+      //   target: 'http://47.94.145.71:81/',//设置你调用的接口域名和端口号 别忘了加http
+      //   changeOrigin: true,
+      //   // secure: false, // 解决https的问题
+      //   pathRewrite: {
+      //     '^/api': '/'
+      //     // 这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替
+      //     // 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+      //   }
+      // }
     },
 
     // Various Dev Server settings
@@ -29,7 +29,7 @@ module.exports = {
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    poll: true, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
@@ -55,6 +55,37 @@ module.exports = {
   },
 
   build: {
+    // Template for index.html
+    index: path.resolve(__dirname, '../dist/index.html'),
+
+    // Paths
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',
+
+    /**
+     * Source Maps
+     */
+
+    productionSourceMap: false,
+    // https://webpack.js.org/configuration/devtool/#production
+    devtool: '#source-map',
+
+    // Gzip off by default as many popular static hosts such as
+    // Surge or Netlify already gzip all static assets for you.
+    // Before setting to `true`, make sure to:
+    // npm install --save-dev compression-webpack-plugin
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css'],
+
+    // Run the build command with an extra argument to
+    // View the bundle analyzer report after build finishes:
+    // `npm run build --report`
+    // Set to `true` or `false` to always turn it on or off
+    bundleAnalyzerReport: process.env.npm_config_report
+  },
+
+  test: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
