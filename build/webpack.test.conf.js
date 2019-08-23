@@ -16,14 +16,14 @@ const env = require('../config/test.env')
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
-      sourceMap: config.test.productionSourceMap,
+      sourceMap: config.build.productionSourceMap,
       extract: true,
       usePostCSS: true
     })
   },
-  devtool: config.test.productionSourceMap ? config.test.devtool : false,
+  devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
-    path: config.test.assetsRoot,
+    path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
@@ -38,7 +38,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           warnings: false
         }
       },
-      sourceMap: config.test.productionSourceMap,
+      sourceMap: config.build.productionSourceMap,
       parallel: true
     }),
     // extract css into its own file
@@ -53,7 +53,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
-      cssProcessorOptions: config.test.productionSourceMap
+      cssProcessorOptions: config.build.productionSourceMap
         ? { safe: true, map: { inline: false } }
         : { safe: true }
     }),
@@ -61,7 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: config.test.index,
+      filename: config.build.index,
       template: 'index.html',
       inject: true,
       minify: {
@@ -112,14 +112,14 @@ const webpackConfig = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
-        to: config.test.assetsSubDirectory,
+        to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
     ])
   ]
 })
 
-if (config.test.productionGzip) {
+if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
@@ -128,7 +128,7 @@ if (config.test.productionGzip) {
       algorithm: 'gzip',
       test: new RegExp(
         '\\.(' +
-        config.test.productionGzipExtensions.join('|') +
+        config.build.productionGzipExtensions.join('|') +
         ')$'
       ),
       threshold: 10240,
@@ -137,7 +137,7 @@ if (config.test.productionGzip) {
   )
 }
 
-if (config.test.bundleAnalyzerReport) {
+if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

@@ -28,7 +28,7 @@
       <!-- 信息列表 end -->
       <!-- 无信息提示 start -->
       <div v-else class="nodata">
-        <img src="static/img/nodata.jpg">
+        <img src="static/img/nodata.png">
       </div>
       <!-- 无信息提示 end -->
     </div>

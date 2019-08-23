@@ -1,23 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/index/index'
-import userInfo from '@/components/userInfo/userInfo'
-import userList from '@/components/userInfo/userList'
-import registerShop from '@/components/registerShop/registerShop'
-import shopInfo from '@/components/shopInfo/shopInfo'
-import listSupplier from '@/components/list/listSupplier'
-import listPurchase from '@/components/list/listPurchase'
-import msgDetail from '@/components/msgDetail/msgDetail'
-import sendMsg from '@/components/sendMsg/sendMsg'
-import complaintList from '@/components/complaintList/complaintList'
-import sendComplaint from '@/components/sendComplaint/sendComplaint'
-import complaint from '@/components/complaint/complaint'
 
-// 省市县三级联动
-import Distpicker from 'v-distpicker'
+const index = () => import(/* webpackChunkName: 'shop' */ '@/components/index/index')
+const userInfo = () => import(/* webpackChunkName: 'userinfo' */ '@/components/userInfo/userInfo')
+const userList = () => import(/* webpackChunkName: 'userinfo' */ '@/components/userInfo/userList')
+const registerShop = () => import(/* webpackChunkName: 'shop' */ '@/components/registerShop/registerShop')
+const shopInfo = () => import(/* webpackChunkName: 'shop' */ '@/components/shopInfo/shopInfo')
+const listSupplier = () => import(/* webpackChunkName: 'msg' */ '@/components/list/listSupplier')
+const listPurchase = () => import(/* webpackChunkName: 'msg' */ '@/components/list/listPurchase')
+const msgDetail = () => import(/* webpackChunkName: 'msg' */ '@/components/msgDetail/msgDetail')
+const sendMsg = () => import(/* webpackChunkName: 'msg' */ '@/components/sendMsg/sendMsg')
+const complaintList = () => import(/* webpackChunkName: 'userinfo' */ '@/components/complaintList/complaintList')
+const sendComplaint = () => import(/* webpackChunkName: 'userinfo' */ '@/components/sendComplaint/sendComplaint')
+const complaint = () => import(/* webpackChunkName: 'userinfo' */ '@/components/complaint/complaint')
 
 Vue.use(Router)
-Vue.use(Distpicker)
 
 export default new Router({
   routes: [
