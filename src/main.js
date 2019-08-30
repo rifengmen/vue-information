@@ -10,6 +10,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Distpicker from 'v-distpicker'
 import 'normalize.css'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 Vue.config.productionTip = false
 // 这里写上自己的基础url
@@ -20,6 +22,15 @@ Vue.prototype.$qs = qs
 Vue.use(ElementUI)
 Vue.use(Distpicker)
 Vue.prototype.IMGURL = 'http://47.94.145.71:81/'
+
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach(() => {
+  NProgress.done()
+})
 
 /* eslint-disable no-new */
 new Vue({
