@@ -3,6 +3,10 @@ const mutations = {
   setUserInfo (state, userInfo) {
     state.userInfo = userInfo
   },
+  // 设置行政区域
+  setAREA (state, AREA) {
+    state.AREA = AREA
+  },
   // 设置用户煤球数量
   setPointsA (state, pointsA) {
     state.userInfo.pointsA = pointsA

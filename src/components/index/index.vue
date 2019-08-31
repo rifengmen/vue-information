@@ -6,6 +6,7 @@
     <!-- 选择 搜索 start -->
     <div class="search_cont color666">
       <div class="category bgfff">
+        <!-- 店铺分类 start -->
         <div>
           <el-cascader
             placeholder="选择分类"
@@ -13,6 +14,8 @@
             :options="classify"
             @change="handleChange"></el-cascader>
         </div>
+        <!-- 店铺分类 end -->
+        <!-- 地区选择 start -->
         <div class="site_box">
           <div class="site">
             <div @click="choose" class="choose color666">
@@ -24,6 +27,15 @@
             </p>
           </div>
         </div>
+        <!--<div class="site_box">-->
+          <!--<el-cascader-->
+            <!--placeholder="地区选择"-->
+            <!--v-model="searchData.area"-->
+            <!--:options="AREA"-->
+            <!--@change="sortHandleChange"></el-cascader>-->
+        <!--</div>-->
+        <!-- 地区选择 end -->
+        <!-- 排序方式 start -->
         <div>
           <el-cascader
             placeholder="排序方式"
@@ -31,6 +43,7 @@
             :options="sort"
             @change="sortHandleChange"></el-cascader>
         </div>
+        <!-- 排序方式 end -->
       </div>
       <div class="search bgeeeeee">
         <div class="search_input fl bgfff">
@@ -134,6 +147,10 @@ export default {
     }
   },
   computed: {
+    // // 行政区域
+    // AREA () {
+    //   return this.$store.state.AREA
+    // },
     // 店铺分类
     classify () {
       return this.$store.state.classify
@@ -163,6 +180,16 @@ export default {
     VDistpicker
   },
   methods: {
+    // // 获取行政区域
+    // getArea () {
+    //   this.$axios.post('Index/index/area').then(result => {
+    //     if (result.data.code === 0) {
+    //       console.log(result.data.data)
+    //     }
+    //   }).catch(error => {
+    //     throw error
+    //   })
+    // }
     // 设置店铺分类
     setClassify () {
       this.$axios.post('Index/index/shopclass').then(result => {
@@ -275,6 +302,7 @@ export default {
   },
   created () {
     this.setClassify()
+    // this.getArea()
   },
   beforeMount () {
     this.getShopsList()

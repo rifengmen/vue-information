@@ -31,6 +31,8 @@
   height: 60%;
   border-left: 1px #eeeeee solid;
   border-right: 1px #eeeeee solid;
+  display: flex;
+  align-items: center;
 }
 .search_cont .category > div {
   width: 33%;
