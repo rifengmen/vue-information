@@ -79,7 +79,7 @@ export default {
         // 投诉信息类型 1:求购 2:供应
         data: '',
         // 投诉用户id
-        userid: '',
+        userId: '',
         // 投诉信息id
         shopid: ''
       },
@@ -105,7 +105,7 @@ export default {
     setComplaintData () {
       this.complaintData.orderid = this.msgDetail.orderid
       this.complaintData.data = this.msgDetail.data
-      this.complaintData.userid = this.userInfo.userid
+      this.complaintData.userId = this.userInfo.userId
       this.complaintData.shopid = this.msgDetail.id
     },
     // 响应数据显示

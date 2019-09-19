@@ -98,7 +98,7 @@ export default {
       if (this.send) {
         let _data = {
           vipcode: this.vipcode,
-          userid: this.userInfo.userid
+          userId: this.userInfo.userId
         }
         let data = this.$qs.stringify(_data)
         // this.$axios.post('', data).then(result => {

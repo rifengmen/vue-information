@@ -1,22 +1,22 @@
 const state = {
   // 用户信息
   userInfo: {
-    // 用户id
-    userid: '1',
-    // 用户名
-    username: '我是测试用户名',
-    // 用户头像
-    userimg: '',
-    // 会员到期时间
-    time: '9999-99-99',
-    // 注册店铺id
-    shopid: '5',
-    // 煤球数量
-    pointsA: '50',
-    // 积分数量
-    pointsB: '80',
-    // 与排名第一相差煤球数量
-    difference: '100'
+    // // 用户id
+    // userId: '1',
+    // // 用户名
+    // username: '我是测试用户名',
+    // // 用户头像
+    // userimg: '',
+    // // 会员到期时间
+    // time: '9999-99-99',
+    // // 注册店铺id
+    // shopid: '5',
+    // // 煤球数量
+    // pointsA: '50',
+    // // 积分数量
+    // pointsB: '80',
+    // // 与排名第一相差煤球数量
+    // difference: '100'
   },
   // // 行政区域
   // AREA: [
@@ -541,7 +541,9 @@ const state = {
   // 供应、求购状态(会员中心用)
   msg_status: '',
   // 查看自己发布的信息时隐藏信息详情部分按钮
-  userlistshow: false
+  userlistshow: false,
+  // 用户授权code
+  code: 'ceshi'
 }
 
 export default state

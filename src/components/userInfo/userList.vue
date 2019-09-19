@@ -84,7 +84,7 @@ export default {
       this.searchData.page = '1'
       this.isShowLoading = true
       let senddata = {
-        userid: this.$store.state.userInfo.userid,
+        userId: this.$store.state.userInfo.userId,
         data: this.searchData.msg_status,
         search: this.searchData.classifymsg === 0 ? '' : this.searchData.classifymsg,
         site: this.searchData.area,
@@ -117,7 +117,7 @@ export default {
       let currentpage = this.searchData.page
       let total = this.total
       let senddata = {
-        userid: this.$store.state.userInfo.userid,
+        userId: this.$store.state.userInfo.userId,
         data: this.searchData.msg_status,
         search: this.searchData.classifymsg === 0 ? '' : this.searchData.classifymsg,
         site: this.searchData.area,

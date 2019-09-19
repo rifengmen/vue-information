@@ -143,6 +143,35 @@ export default {
     getMsgStatus () {
       this.registerData.msg_status = this.$route.query.msg_status
     },
+    // 设置信息分类
+    setClassifymsg () {
+      this.$axios.post('Index/index/classify').then(result => {
+        let data = result.data.data
+        let arr = []
+        arr[0] = {'value': 0, 'label': '全部分类'}
+        if (data) {
+          for (let i = 0; i < data.length; i++) {
+            let _arr = {}
+            _arr['value'] = data[i].id
+            _arr['label'] = data[i].name
+            if (data[i].children) {
+              _arr['children'] = []
+              let v = data[i].children
+              for (let j = 0; j < v.length; j++) {
+                let _v = {}
+                _v['value'] = v[j].id
+                _v['label'] = v[j].name
+                _arr['children'].push(_v)
+              }
+            }
+            arr.push(_arr)
+          }
+        }
+        this.$store.commit('setClassifymsg', arr)
+      }).catch(error => {
+        throw error
+      })
+    },
     // 显示隐藏省市县下拉框
     choose () {
       this.show = !this.show
@@ -181,7 +210,7 @@ export default {
           classify: this.registerData.classifymsg,
           leave: this.registerData.business,
           num: this.registerData.num,
-          userid: this.userInfo.userid,
+          userId: this.userInfo.userId,
           phone: this.registerData.phone
         }
         let data = this.$qs.stringify(_data)
@@ -213,6 +242,8 @@ export default {
   created () {
     // 获取需要发布的信息的类别
     this.getMsgStatus()
+    // 设置信息分类
+    this.setClassifymsg()
   }
 }
 </script>

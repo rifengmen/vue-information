@@ -73,7 +73,7 @@ export default {
     },
     // 获取投诉信息列表
     getComplaintList () {
-      let _data = {userid: this.userInfo.userid}
+      let _data = {userId: this.userInfo.userId}
       let data = this.$qs.stringify(_data)
       this.$axios.post('Index/index/complainlits', data).then(result => {
         this.complaintList = result.data.data
