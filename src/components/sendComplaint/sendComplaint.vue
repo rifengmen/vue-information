@@ -40,11 +40,12 @@
         </li>
         <!-- 信息编号 end -->
         <!-- 投诉详情 start -->
-        <li class="complaint_li">
+        <li class="complaint_li" style="position: relative;padding-bottom: .8rem;">
           <div class="font28 tr">投诉详情：</div>
-          <div class="font28">
+          <div class="complaint_val">
             <v-editor v-model="complaintData.leave" @textchange="updateContent"></v-editor>
           </div>
+          <div class="color999" style="position: absolute;left: 0;bottom: 0;padding: .24rem;">请对投诉内容进行详细描述。最多可输入1000字符</div>
         </li>
         <!-- 投诉详情 end -->
       </ul>
@@ -73,7 +74,7 @@ export default {
         // 投诉原因
         type: '',
         // 投诉详情
-        leave: '请对投诉内容进行详细描述',
+        leave: '',
         // 投诉订单编号
         orderid: '',
         // 投诉信息类型 1:求购 2:供应

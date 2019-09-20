@@ -17,7 +17,7 @@
   width: 1.8rem;
   height: 100%;
 }
-.complaint_li > div:last-child {
+.complaint_li > .complaint_val {
   width: 5rem;
   height: 100%;
   line-height: 1.5;

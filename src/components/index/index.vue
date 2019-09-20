@@ -7,43 +7,45 @@
     <div class="search_cont color666">
       <div class="category bgfff">
         <!-- 店铺分类 start -->
-        <div>
-          <el-cascader
-            placeholder="选择分类"
-            v-model="searchData.category"
-            :options="classify"
-            @change="handleChange"></el-cascader>
+        <div class="category_box site_box" v-if="classify.length">
+          <classify
+            :selectArr="classify"
+            :searchDataSelect="searchData_classify"
+            :selectName="selectNameClassify"
+            :titName="titNameClassify"
+            @setSelectData="setSearchDataCategory"></classify>
         </div>
         <!-- 店铺分类 end -->
         <!-- 地区选择 start -->
-        <div class="site_box">
-          <div class="site">
-            <div @click="choose" class="choose color666">
-              <div class="font26">{{searchData.area || '地区选择'}}</div>
-              <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
-            </div>
-            <p class="pwrap bgfff" v-if="show">
-              <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
-            </p>
-          </div>
+        <div class="site_box" v-if="AREA.length">
+          <v-area
+            :selectArr="AREA"
+            :searchDataSelect="area"
+            :selectName="selectNameArea"
+            :titName="titNameArea"
+            @setSelectData="setSearchDataArea"></v-area>
         </div>
         <!--<div class="site_box">-->
-          <!--<el-cascader-->
-            <!--placeholder="地区选择"-->
-            <!--v-model="searchData.area"-->
-            <!--:options="AREA"-->
-            <!--@change="sortHandleChange"></el-cascader>-->
+          <!--<div class="site">-->
+            <!--<div @click="choose" class="choose color666">-->
+              <!--<div class="font26">{{searchData.area || '地区选择'}}</div>-->
+              <!--<img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '_turnimg')">-->
+            <!--</div>-->
+            <!--<p class="pwrap bgfff" v-if="show">-->
+              <!--<v-distpicker type="mobile" @selected="onSelected"></v-distpicker>-->
+            <!--</p>-->
+          <!--</div>-->
         <!--</div>-->
         <!-- 地区选择 end -->
         <!-- 排序方式 start -->
-        <div>
-          <el-cascader
-            placeholder="排序方式"
-            v-model="searchData.sort"
-            :options="sort"
-            @change="sortHandleChange"></el-cascader>
+        <div class="category_box site_box" v-if="sort.length">
+          <classify
+            :selectArr="sort"
+            :searchDataSelect="searchSort"
+            :selectName="selectNameSort"
+            :titName="titNameSort"
+            @setSelectData="setSearchDataSort"></classify>
         </div>
-        <!-- 排序方式 end -->
       </div>
       <div class="search bgeeeeee">
         <div class="search_input fl bgfff">
@@ -78,6 +80,8 @@ import MyHeader from '@/components/common/header/myheader'
 import MyFooter from '@/components/common/footer/myfooter'
 import MyScroll from '@/components/common/myscroll/myscroll'
 import loading from '@/components/common/loading/loading'
+import classify from '@/components/common/classify/classify'
+import VArea from '@/components/common/AREA/AREA'
 import VDistpicker from 'v-distpicker'
 
 export default {
@@ -103,12 +107,11 @@ export default {
       total: '0',
       // 排序方式
       sort: [
-        {value: '0', label: '时间顺序'},
-        {value: '1', label: '时间倒序'},
-        {value: '2', label: '等级顺序'},
-        {value: '3', label: '等级倒序'}
+        {value: 0, label: '时间顺序'},
+        {value: 1, label: '时间倒序'},
+        {value: 2, label: '等级顺序'},
+        {value: 3, label: '等级倒序'}
       ],
-      // sort: ['时间顺序', '时间倒序', '等级顺序', '等级倒序'],
       // 店铺列表
       shopsList: [
         {
@@ -143,14 +146,26 @@ export default {
       // 显示省市县下拉框
       show: false,
       // 箭头旋转
-      turnimg: false
+      turnimg: false,
+      // 店铺分类选择提示
+      selectNameClassify: '全部分类',
+      // 店铺分类信息标题
+      titNameClassify: '店铺分类',
+      // 店铺分类选择提示
+      selectNameArea: '全部地区',
+      // 店铺分类信息标题
+      titNameArea: '地区选择',
+      // 排序方式选择提示
+      selectNameSort: '时间顺序',
+      // 排序方式信息标题
+      titNameSort: '排序方式'
     }
   },
   computed: {
-    // // 行政区域
-    // AREA () {
-    //   return this.$store.state.AREA
-    // },
+    // 行政区域
+    AREA () {
+      return this.$store.state.AREA
+    },
     // 店铺分类
     classify () {
       return this.$store.state.classify
@@ -177,19 +192,42 @@ export default {
     MyFooter,
     MyScroll,
     loading,
+    classify,
+    VArea,
     VDistpicker
   },
   methods: {
-    // // 获取行政区域
-    // getArea () {
-    //   this.$axios.post('Index/index/area').then(result => {
-    //     if (result.data.code === 0) {
-    //       console.log(result.data.data)
-    //     }
-    //   }).catch(error => {
-    //     throw error
-    //   })
-    // }
+    // 获取行政区域
+    setAREA () {
+      this.$axios.post('Index/index/area').then(result => {
+        if (result.data.code === 0) {
+          let data = result.data.data
+          let arr = []
+          arr[0] = {'value': 0, 'label': '全部地区'}
+          if (data) {
+            for (let i = 0; i < data.length; i++) {
+              let _arr = {}
+              _arr['value'] = data[i].id
+              _arr['label'] = data[i].name
+              if (data[i].children) {
+                _arr['children'] = []
+                let v = data[i].children
+                for (let j = 0; j < v.length; j++) {
+                  let _v = {}
+                  _v['value'] = v[j].id
+                  _v['label'] = v[j].name
+                  _arr['children'].push(_v)
+                }
+              }
+              arr.push(_arr)
+            }
+          }
+          this.$store.commit('setAREA', arr)
+        }
+      }).catch(error => {
+        throw error
+      })
+    },
     // 设置店铺分类
     setClassify () {
       this.$axios.post('Index/index/shopclass').then(result => {
@@ -265,6 +303,10 @@ export default {
       }
       this.$store.commit('setIsPullingUp', false)
     },
+    // // 旋转箭头
+    // turn () {
+    //   this.turnimg = !this.turnimg
+    // },
     // 显示隐藏省市县下拉框
     choose () {
       this.show = !this.show
@@ -277,13 +319,16 @@ export default {
       this.show = false
       this.turnimg = false
     },
-    // 店铺分类发生变化时触发
-    handleChange (value) {
-      this.searchData.category = value[0]
+    setSearchDataArea (area) {
+      this.searchData.area = area
     },
-    // 排序方式发生变化时触发
-    sortHandleChange (value) {
-      this.searchData.sort = value[0]
+    // 修改排序方式的方法
+    setSearchDataSort (sort) {
+      this.searchData.sort = sort
+    },
+    // 修改分类的方法
+    setSearchDataCategory (category) {
+      this.searchData.category = category
     }
   },
   watch: {
@@ -302,7 +347,7 @@ export default {
   },
   created () {
     this.setClassify()
-    // this.getArea()
+    this.setAREA()
   },
   beforeMount () {
     this.getShopsList()

@@ -6,7 +6,6 @@
 /* 下拉刷新动画 end */
 /* 地区三级联动 start */
 .site_box {
-  height: 60%;
   border-left: 1px #eeeeee solid;
 }
 .search_cont .category > div {

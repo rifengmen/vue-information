@@ -6,24 +6,29 @@
     <!-- 筛选条件 start -->
     <div class="search_cont color666 bgfff">
       <div class="category">
-        <div>
-          <el-cascader
-            placeholder="选择分类"
-            v-model="searchData.classifymsg"
-            :options="classifymsg"
-            @change="handleChange"></el-cascader>
+        <!-- 选择分类 start -->
+        <div class="category_box site_box" v-if="classifymsg.length">
+          <classify
+            :selectArr="classifymsg"
+            :searchDataSelect="searchData_classifymsg"
+            :selectName="selectNameClassifymsg"
+            :titName="titNameClassifymsg"
+            @setSelectData="setSearchDataClassifymsg"></classify>
         </div>
+        <!-- 选择分类 end -->
+        <!-- 地区选择 start -->
         <div class="site_box">
           <div class="site">
             <div @click="choose" class="choose coloreeeeee">
               <div class="font26 color666">{{searchData.area || '地区选择'}}</div>
-              <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
+              <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '_turnimg')">
             </div>
             <p class="pwrap bgfff" v-if="show">
               <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
             </p>
           </div>
         </div>
+        <!-- 地区选择 end -->
       </div>
     </div>
     <!-- 筛选条件 end -->
@@ -51,6 +56,7 @@ import MsgHeader from '@/components/common/header/msgheader'
 import MyFooter from '@/components/common/footer/myfooter'
 import MyScrollmsg from '@/components/common/myscrollmsg/myscrollmsg'
 import loading from '@/components/common/loading/loading'
+import classify from '@/components/common/classify/classify'
 import VDistpicker from 'v-distpicker'
 
 export default {
@@ -105,7 +111,11 @@ export default {
       // 显示省市县下拉框
       show: false,
       // 箭头旋转
-      turnimg: false
+      turnimg: false,
+      // 信息分类选择提示
+      selectNameClassifymsg: '全部分类',
+      // 信息分类信息标题
+      titNameClassifymsg: '信息分类'
     }
   },
   computed: {
@@ -127,11 +137,38 @@ export default {
     MyFooter,
     MyScrollmsg,
     loading,
+    classify,
     VDistpicker
   },
   methods: {
     // 设置信息分类
     setClassifymsg () {
+      // this.$axios.post('Index/index/classify').then(result => {
+      //   let data = result.data.data
+      //   let arr = []
+      //   arr[0] = {'value': 0, 'label': '全部分类'}
+      //   if (data) {
+      //     for (let i = 0; i < data.length; i++) {
+      //       let _arr = {}
+      //       _arr['value'] = data[i].id
+      //       _arr['label'] = data[i].name
+      //       if (data[i].children) {
+      //         _arr['children'] = []
+      //         let v = data[i].children
+      //         for (let j = 0; j < v.length; j++) {
+      //           let _v = {}
+      //           _v['value'] = v[j].id
+      //           _v['label'] = v[j].name
+      //           _arr['children'].push(_v)
+      //         }
+      //       }
+      //       arr.push(_arr)
+      //     }
+      //   }
+      //   this.$store.commit('setClassifymsg', arr)
+      // }).catch(error => {
+      //   throw error
+      // })
       this.$axios.post('Index/index/classify').then(result => {
         let data = result.data.data
         let arr = []
@@ -141,16 +178,6 @@ export default {
             let _arr = {}
             _arr['value'] = data[i].id
             _arr['label'] = data[i].name
-            if (data[i].children) {
-              _arr['children'] = []
-              let v = data[i].children
-              for (let j = 0; j < v.length; j++) {
-                let _v = {}
-                _v['value'] = v[j].id
-                _v['label'] = v[j].name
-                _arr['children'].push(_v)
-              }
-            }
             arr.push(_arr)
           }
         }
@@ -230,8 +257,8 @@ export default {
       this.turnimg = false
     },
     // 信息分类发生变化时触发
-    handleChange (value) {
-      this.searchData.classifymsg = value[value.length - 1 || 0]
+    setSearchDataClassifymsg (classifymsg) {
+      this.searchData.classifymsg = classifymsg
     },
     // 设置查看自己发布的信息时隐藏信息详情部分按钮
     setUserlistshow () {

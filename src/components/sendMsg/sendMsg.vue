@@ -20,7 +20,7 @@
             <div class="site">
               <div @click="choose" class="choose color666">
                 <div class="font26">{{registerData.area || '地区选择'}}</div>
-                <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
+                <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '_turnimg')">
               </div>
               <p class="pwrap bgfff" v-if="show">
                 <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
@@ -34,11 +34,14 @@
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">分类：</div>
           <div class="send_val">
-            <el-cascader
-              placeholder="选择分类"
-              v-model="registerData.classifymsg"
-              :options="classifymsg.slice(1)"
-              @change="handleChange"></el-cascader>
+            <div class="category_box site_box" v-if="classifymsg.length">
+              <classify
+                :selectArr="classifymsg.slice(1)"
+                :searchDataSelect="registerData_classifymsg"
+                :selectName="selectNameClassifymsg"
+                :titName="titNameClassifymsg"
+                @setSelectData="setSearchDataClassifymsg"></classify>
+            </div>
           </div>
         </li>
         <!-- 分类选择 end -->
@@ -51,22 +54,14 @@
           </div>
         </li>
         <!-- 联系电话 end -->
-        <!-- 数量 start -->
-        <li class="send_li bgfff">
-          <div class="tip coloree410c">❈</div>
-          <div class="li_name font28">数量：</div>
-          <div  class="send_val">
-            <input type="text" v-model.number="registerData.num" placeholder="请填写数量" oninput="if(value.length > 11)value = value.slice(0, 11)">
-          </div>
-        </li>
-        <!-- 数量 end -->
         <!-- 留言 start -->
-        <li class="send_li bgfff">
+        <li class="send_li bgfff" style="position: relative;padding-bottom: .8rem;">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">留言：</div>
           <div class="send_val">
             <v-editor v-model="registerData.business" @textchange="updateContent"></v-editor>
           </div>
+          <div class="color999" style="position: absolute;left: 0;bottom: 0;padding: .24rem">请填写您想发布的内容。最多可输入1000字符</div>
         </li>
         <!-- 留言 end -->
         <!-- 提示信息 start -->
@@ -88,6 +83,7 @@
 </template>
 
 <script>
+import classify from '@/components/common/classify/classify'
 import VDistpicker from 'v-distpicker'
 import VEditor from '@/components/common/wangeditor/wangeditor'
 
@@ -102,25 +98,31 @@ export default {
         // 发布信息，通过接收到的参数判断发布信息类型，1：采购信息；2：供应信息
         msg_status: '',
         // 信息分类
-        classifymsg: '',
+        classifymsg: 0,
         // 产地
         area: '',
         // 信息详情
-        business: '请填写您想发布的内容。最多可输入1000字符',
+        business: '',
         // 联系电话
-        phone: '',
-        // 数量
-        num: ''
+        phone: ''
       },
       // 省市县三级联动显示隐藏
       show: false,
       // 箭头旋转
       turnimg: false,
       // 是否发送信息
-      send: false
+      send: false,
+      // 信息分类选择提示
+      selectNameClassifymsg: '分类选择',
+      // 信息分类信息标题
+      titNameClassifymsg: '信息分类'
     }
   },
   computed: {
+    // 发布类别
+    registerData_classifymsg () {
+      return this.registerData.classifymsg
+    },
     // 信息分类
     classifymsg () {
       return this.$store.state.classifymsg
@@ -131,6 +133,7 @@ export default {
     }
   },
   components: {
+    classify,
     VDistpicker,
     VEditor
   },
@@ -184,8 +187,8 @@ export default {
       this.turnimg = false
     },
     // 信息分类发生变化时触发
-    handleChange (value) {
-      this.registerData.classifymsg = value[value.length - 1 || 0]
+    setSearchDataClassifymsg (classifymsg) {
+      this.registerData.classifymsg = classifymsg
     },
     // 响应数据显示
     updateContent (html) {
@@ -209,7 +212,6 @@ export default {
           area: this.registerData.area,
           classify: this.registerData.classifymsg,
           leave: this.registerData.business,
-          num: this.registerData.num,
           userId: this.userInfo.userId,
           phone: this.registerData.phone
         }

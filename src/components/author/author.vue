@@ -51,7 +51,7 @@ export default {
       const REDIRECT_URI = 'http://www.bibejc.com'
       const URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + APPID + '&redirect_uri=' + REDIRECT_URI + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
       // 截取code
-      this.code = this.getUrlCode().code
+      this.getUrlCode()
       // 如果没有code，则去请求
       if (this.code == null || this.code === '') {
         window.location.href = URL
@@ -70,16 +70,7 @@ export default {
     // 截取url中的code方法
     getUrlCode () {
       var url = location.search
-      this.winUrl = url
-      var theRequest = {}
-      if (url.indexOf('?') !== -1) {
-        var str = url.substr(1)
-        var strs = str.split('&')
-        for (var i = 0; i < strs.length; i++) {
-          theRequest[strs[i].split('=')[0]] = (strs[i].split('=')[1])
-        }
-      }
-      return theRequest
+      this.code = url.substring(url.indexOf('code=') + 5, url.indexOf('state=') - 1)
     }
   },
   created () {

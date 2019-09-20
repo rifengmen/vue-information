@@ -29,11 +29,14 @@
             <div class="categoryimg">
               <img src="static/img/category.png">
             </div>
-            <el-cascader
-              placeholder="选择分类"
-              v-model="registerData.classify"
-              :options="classify.slice(1)"
-              @change="handleChange"></el-cascader>
+            <div class="category_box site_box" v-if="classify.length">
+              <classify
+                :selectArr="classify.slice(1)"
+                :searchDataSelect="registerData_classify"
+                :selectName="selectNameClassify"
+                :titName="titNameClassify"
+                @setSelectData="setSearchDataClassify"></classify>
+            </div>
           </div>
         </li>
         <!-- 店铺分类 end -->
@@ -93,12 +96,13 @@
         </li>
         <!-- 店铺标签 end -->
         <!-- 业务介绍 start -->
-        <li class="register_li bgfff">
+        <li class="register_li bgfff" style="position: relative;padding-bottom: .8rem;">
           <div class="tip coloree410c">❈</div>
           <div class="li_name color333 font_blod">业务介绍：</div>
           <div class="register_val business">
             <v-editor v-model="registerData.business" @textchange="updateContent"></v-editor>
           </div>
+          <div class="color999" style="position: absolute;left: 0;bottom: 0;padding: .24rem">请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符</div>
         </li>
         <!-- 业务介绍 end -->
         <!-- 是否认证 start -->
@@ -148,6 +152,7 @@
 </template>
 
 <script>
+import classify from '@/components/common/classify/classify'
 import VDistpicker from 'v-distpicker'
 import VEditor from '@/components/common/wangeditor/wangeditor'
 
@@ -162,13 +167,13 @@ export default {
         // 店铺名字
         name: '',
         // 店铺分类
-        classify: '',
+        classify: 0,
         // 店铺位置
         area: '',
         // 店铺标签
         label: [],
         // 店铺介绍
-        business: '请填写您提供的产品和服务，详细的产品介绍和完善的服务有助于提升您的店铺品质。最多可输入1000字符',
+        business: '',
         // 店铺电话
         phone: '',
         // 认证类型，1：未认证；2：个人认证；3：企业认证
@@ -192,7 +197,11 @@ export default {
         company: ''
       },
       // 支付认证费用
-      payTotal: ''
+      payTotal: '',
+      // 店铺分类选择提示
+      selectNameClassify: '分类选择',
+      // 店铺分类信息标题
+      titNameClassify: '店铺分类'
     }
   },
   computed: {
@@ -203,6 +212,10 @@ export default {
     // 店铺分类
     classify () {
       return this.$store.state.classify
+    },
+    // 注册类别
+    registerData_classify () {
+      return this.registerData.classify
     },
     // 认证类型，方便监听
     type () {
@@ -342,11 +355,12 @@ export default {
       this.registerData.business = html
     },
     // 信息分类发生变化时触发
-    handleChange (value) {
-      this.registerData.classify = value[0]
+    setSearchDataClassify (classify) {
+      this.registerData.classify = classify
     }
   },
   components: {
+    classify,
     VDistpicker,
     VEditor
   },

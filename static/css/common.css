@@ -242,7 +242,7 @@ i {
   position: relative;
 }
 .site .choose div {
-  width: 90%;
+  width: 100%;
 }
 .site .choose img {
   position: absolute;
@@ -250,6 +250,13 @@ i {
   left: 1.8rem;
   width: .28rem;
   height: .28rem;
+}
+._turnimg {
+  transform: rotate(0deg);
+  transition: transform 0.3s;
+}
+div.category_box {
+  border: none!important;
 }
 .turnimg {
   transform: rotate(180deg);
@@ -413,4 +420,9 @@ i {
   background-size: cover;
 }
 /* 底部公共导航背景图 end */
+/* element-ui样式修改 start */
+.el-cascader > .el-input--suffix {
+  z-index: 0;
+}
+/* element-ui样式修改 end */
 /* 公共样式 end */
