@@ -16,16 +16,13 @@
         <li class="send_li bgfff">
           <div class="tip coloree410c">❈</div>
           <div class="li_name font28">产地：</div>
-          <div class="send_val site_box">
-            <div class="site">
-              <div @click="choose" class="choose color666">
-                <div class="font26">{{registerData.area || '地区选择'}}</div>
-                <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '_turnimg')">
-              </div>
-              <p class="pwrap bgfff" v-if="show">
-                <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
-              </p>
-            </div>
+          <div class="site_box" v-if="AREA.length">
+            <v-area
+              :selectArr="AREA.slice(1)"
+              :searchDataSelect="area"
+              :selectName="selectNameArea"
+              :titName="titNameArea"
+              @setSelectData="setSearchDataArea"></v-area>
           </div>
         </li>
         <!-- 地区选择 end -->
@@ -84,7 +81,7 @@
 
 <script>
 import classify from '@/components/common/classify/classify'
-import VDistpicker from 'v-distpicker'
+import VArea from '@/components/common/AREA/AREA'
 import VEditor from '@/components/common/wangeditor/wangeditor'
 
 export default {
@@ -115,10 +112,18 @@ export default {
       // 信息分类选择提示
       selectNameClassifymsg: '分类选择',
       // 信息分类信息标题
-      titNameClassifymsg: '信息分类'
+      titNameClassifymsg: '信息分类',
+      // 地区选择提示
+      selectNameArea: '地区选择',
+      // 地区选择信息标题
+      titNameArea: '地区选择'
     }
   },
   computed: {
+    // 行政区域
+    AREA () {
+      return this.$store.state.AREA
+    },
     // 发布类别
     registerData_classifymsg () {
       return this.registerData.classifymsg
@@ -134,10 +139,41 @@ export default {
   },
   components: {
     classify,
-    VDistpicker,
+    VArea,
     VEditor
   },
   methods: {
+    // 获取行政区域
+    setAREA () {
+      this.$axios.post('Index/index/area').then(result => {
+        if (result.data.code === 0) {
+          let data = result.data.data
+          let arr = []
+          arr[0] = {'value': 0, 'label': '全部地区'}
+          if (data) {
+            for (let i = 0; i < data.length; i++) {
+              let _arr = {}
+              _arr['value'] = data[i].id
+              _arr['label'] = data[i].name
+              if (data[i].children) {
+                _arr['children'] = []
+                let v = data[i].children
+                for (let j = 0; j < v.length; j++) {
+                  let _v = {}
+                  _v['value'] = v[j].id
+                  _v['label'] = v[j].name
+                  _arr['children'].push(_v)
+                }
+              }
+              arr.push(_arr)
+            }
+          }
+          this.$store.commit('setAREA', arr)
+        }
+      }).catch(error => {
+        throw error
+      })
+    },
     // 后退
     backs () {
       this.$router.back()
@@ -175,16 +211,9 @@ export default {
         throw error
       })
     },
-    // 显示隐藏省市县下拉框
-    choose () {
-      this.show = !this.show
-      this.turnimg = !this.turnimg
-    },
-    // 省市县三级联动
-    onSelected (data) {
-      this.registerData.area = data.province.value + data.city.value + data.area.value
-      this.show = false
-      this.turnimg = false
+    // 修改地区的方法
+    setSearchDataArea (area) {
+      this.registerData.area = area
     },
     // 信息分类发生变化时触发
     setSearchDataClassifymsg (classifymsg) {
@@ -246,6 +275,7 @@ export default {
     this.getMsgStatus()
     // 设置信息分类
     this.setClassifymsg()
+    this.setAREA()
   }
 }
 </script>

@@ -25,17 +25,6 @@
             :titName="titNameArea"
             @setSelectData="setSearchDataArea"></v-area>
         </div>
-        <!--<div class="site_box">-->
-          <!--<div class="site">-->
-            <!--<div @click="choose" class="choose color666">-->
-              <!--<div class="font26">{{searchData.area || '地区选择'}}</div>-->
-              <!--<img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '_turnimg')">-->
-            <!--</div>-->
-            <!--<p class="pwrap bgfff" v-if="show">-->
-              <!--<v-distpicker type="mobile" @selected="onSelected"></v-distpicker>-->
-            <!--</p>-->
-          <!--</div>-->
-        <!--</div>-->
         <!-- 地区选择 end -->
         <!-- 排序方式 start -->
         <div class="category_box site_box" v-if="sort.length">
@@ -82,7 +71,6 @@ import MyScroll from '@/components/common/myscroll/myscroll'
 import loading from '@/components/common/loading/loading'
 import classify from '@/components/common/classify/classify'
 import VArea from '@/components/common/AREA/AREA'
-import VDistpicker from 'v-distpicker'
 
 export default {
   name: 'index',
@@ -151,9 +139,9 @@ export default {
       selectNameClassify: '全部分类',
       // 店铺分类信息标题
       titNameClassify: '店铺分类',
-      // 店铺分类选择提示
+      // 地区选择提示
       selectNameArea: '全部地区',
-      // 店铺分类信息标题
+      // 地区选择信息标题
       titNameArea: '地区选择',
       // 排序方式选择提示
       selectNameSort: '时间顺序',
@@ -193,8 +181,7 @@ export default {
     MyScroll,
     loading,
     classify,
-    VArea,
-    VDistpicker
+    VArea
   },
   methods: {
     // 获取行政区域
@@ -303,32 +290,17 @@ export default {
       }
       this.$store.commit('setIsPullingUp', false)
     },
-    // // 旋转箭头
-    // turn () {
-    //   this.turnimg = !this.turnimg
-    // },
-    // 显示隐藏省市县下拉框
-    choose () {
-      this.show = !this.show
-      this.turnimg = !this.turnimg
-      this.searchData.area = ''
+    // 修改分类的方法
+    setSearchDataCategory (category) {
+      this.searchData.category = category
     },
-    // 省市县三级联动
-    onSelected (data) {
-      this.searchData.area = data.province.value + data.city.value + data.area.value
-      this.show = false
-      this.turnimg = false
-    },
+    // 修改地区的方法
     setSearchDataArea (area) {
       this.searchData.area = area
     },
     // 修改排序方式的方法
     setSearchDataSort (sort) {
       this.searchData.sort = sort
-    },
-    // 修改分类的方法
-    setSearchDataCategory (category) {
-      this.searchData.category = category
     }
   },
   watch: {

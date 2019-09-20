@@ -25,22 +25,33 @@
   border-radius: .3rem;
 }
 .paytit {
-  width: 100%;
+  width: calc(100vw - .4rem);
   height: .4rem;
   line-height: .4rem;
   padding: .2rem;
   border-radius: .3rem .3rem 0 0;
 }
 .paymsg {
-  width: 100%;
-  min-height: 3rem;
-  padding: .4rem .2rem;
+  width: calc(100vw - .4rem);
+  height: 5rem;
+  padding: .2rem;
   border-radius: 0 0 .3rem .3rem;
+  display: flex;
+  justify-content: space-around;
+}
+.paymsg > div {
+  width: 35%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.paymsg .city {
+  border-left: 1px #e7e7e7 dashed;
+  padding-left: .2rem;
+  width: 60%;
 }
 .classify {
-  display: inline-block;
-  width: 2.2rem;
-  padding: 0.1rem;
+  padding: .18rem;
 }
 .sendbtn {
   margin: .4rem 0;

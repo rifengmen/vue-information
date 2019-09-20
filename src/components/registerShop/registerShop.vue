@@ -74,14 +74,13 @@
             <div class="categoryimg">
               <img src="static/img/category.png">
             </div>
-            <div class="site">
-              <div @click="choose" class="choose color666">
-                <div class="font26">{{registerData.area || '请选择地区'}}</div>
-                <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '')">
-              </div>
-              <p class="pwrap bgfff" v-if="show">
-                <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
-              </p>
+            <div class="site_box" v-if="AREA.length">
+              <v-area
+                :selectArr="AREA.slice(1)"
+                :searchDataSelect="area"
+                :selectName="selectNameArea"
+                :titName="titNameArea"
+                @setSelectData="setSearchDataArea"></v-area>
             </div>
           </div>
         </li>
@@ -153,7 +152,7 @@
 
 <script>
 import classify from '@/components/common/classify/classify'
-import VDistpicker from 'v-distpicker'
+import VArea from '@/components/common/AREA/AREA'
 import VEditor from '@/components/common/wangeditor/wangeditor'
 
 export default {
@@ -201,10 +200,18 @@ export default {
       // 店铺分类选择提示
       selectNameClassify: '分类选择',
       // 店铺分类信息标题
-      titNameClassify: '店铺分类'
+      titNameClassify: '店铺分类',
+      // 地区选择提示
+      selectNameArea: '地区选择',
+      // 地区选择信息标题
+      titNameArea: '地区选择'
     }
   },
   computed: {
+    // 行政区域
+    AREA () {
+      return this.$store.state.AREA
+    },
     // 用户信息
     userInfo () {
       return this.$store.state.userInfo
@@ -226,7 +233,43 @@ export default {
       return (parseInt(this.registerData.pointsAnum || 0) + parseInt(this.payTotal || 0)).toFixed(2)
     }
   },
+  components: {
+    classify,
+    VArea,
+    VEditor
+  },
   methods: {
+    // 获取行政区域
+    setAREA () {
+      this.$axios.post('Index/index/area').then(result => {
+        if (result.data.code === 0) {
+          let data = result.data.data
+          let arr = []
+          arr[0] = {'value': 0, 'label': '全部地区'}
+          if (data) {
+            for (let i = 0; i < data.length; i++) {
+              let _arr = {}
+              _arr['value'] = data[i].id
+              _arr['label'] = data[i].name
+              if (data[i].children) {
+                _arr['children'] = []
+                let v = data[i].children
+                for (let j = 0; j < v.length; j++) {
+                  let _v = {}
+                  _v['value'] = v[j].id
+                  _v['label'] = v[j].name
+                  _arr['children'].push(_v)
+                }
+              }
+              arr.push(_arr)
+            }
+          }
+          this.$store.commit('setAREA', arr)
+        }
+      }).catch(error => {
+        throw error
+      })
+    },
     // 判断是否注册店铺，如已注册则在页面加载前抓取注册信息进行展示
     isRegister () {
       if (this.userInfo.shopid && this.userInfo.shopid !== '0') {
@@ -308,17 +351,6 @@ export default {
       }
       return isJPG && isLt2M
     },
-    // 显示隐藏省市县下拉框
-    choose () {
-      this.show = !this.show
-      this.turnimg = !this.turnimg
-    },
-    // 省市县三级联动
-    onSelected (data) {
-      this.registerData.area = data.province.value + data.city.value + data.area.value
-      this.show = false
-      this.turnimg = false
-    },
     // 获取认证金额
     getPay () {
       // this.$axios.get('').then(result => {
@@ -357,12 +389,11 @@ export default {
     // 信息分类发生变化时触发
     setSearchDataClassify (classify) {
       this.registerData.classify = classify
+    },
+    // 修改地区的方法
+    setSearchDataArea (area) {
+      this.registerData.area = area
     }
-  },
-  components: {
-    classify,
-    VDistpicker,
-    VEditor
   },
   watch: {
     // 监听店铺标签变化
@@ -394,6 +425,7 @@ export default {
     this.isRegister()
     // 获取认证金额
     this.getPay()
+    this.setAREA()
   }
 }
 </script>

@@ -17,16 +17,13 @@
         </div>
         <!-- 选择分类 end -->
         <!-- 地区选择 start -->
-        <div class="site_box">
-          <div class="site">
-            <div @click="choose" class="choose coloreeeeee">
-              <div class="font26 color666">{{searchData.area || '地区选择'}}</div>
-              <img src="static/img/turnup.png" :class="(turnimg ? 'turnimg' : '_turnimg')">
-            </div>
-            <p class="pwrap bgfff" v-if="show">
-              <v-distpicker type="mobile" @selected="onSelected"></v-distpicker>
-            </p>
-          </div>
+        <div class="site_box" v-if="AREA.length">
+          <v-area
+            :selectArr="AREA"
+            :searchDataSelect="area"
+            :selectName="selectNameArea"
+            :titName="titNameArea"
+            @setSelectData="setSearchDataArea"></v-area>
         </div>
         <!-- 地区选择 end -->
       </div>
@@ -57,7 +54,7 @@ import MyFooter from '@/components/common/footer/myfooter'
 import MyScrollmsg from '@/components/common/myscrollmsg/myscrollmsg'
 import loading from '@/components/common/loading/loading'
 import classify from '@/components/common/classify/classify'
-import VDistpicker from 'v-distpicker'
+import VArea from '@/components/common/AREA/AREA'
 
 export default {
   name: 'listmsg',
@@ -115,10 +112,18 @@ export default {
       // 信息分类选择提示
       selectNameClassifymsg: '全部分类',
       // 信息分类信息标题
-      titNameClassifymsg: '信息分类'
+      titNameClassifymsg: '信息分类',
+      // 地区选择提示
+      selectNameArea: '全部地区',
+      // 地区选择信息标题
+      titNameArea: '地区选择'
     }
   },
   computed: {
+    // 行政区域
+    AREA () {
+      return this.$store.state.AREA
+    },
     // 信息分类
     classifymsg () {
       return this.$store.state.classifymsg
@@ -138,9 +143,40 @@ export default {
     MyScrollmsg,
     loading,
     classify,
-    VDistpicker
+    VArea
   },
   methods: {
+    // 获取行政区域
+    setAREA () {
+      this.$axios.post('Index/index/area').then(result => {
+        if (result.data.code === 0) {
+          let data = result.data.data
+          let arr = []
+          arr[0] = {'value': 0, 'label': '全部地区'}
+          if (data) {
+            for (let i = 0; i < data.length; i++) {
+              let _arr = {}
+              _arr['value'] = data[i].id
+              _arr['label'] = data[i].name
+              if (data[i].children) {
+                _arr['children'] = []
+                let v = data[i].children
+                for (let j = 0; j < v.length; j++) {
+                  let _v = {}
+                  _v['value'] = v[j].id
+                  _v['label'] = v[j].name
+                  _arr['children'].push(_v)
+                }
+              }
+              arr.push(_arr)
+            }
+          }
+          this.$store.commit('setAREA', arr)
+        }
+      }).catch(error => {
+        throw error
+      })
+    },
     // 设置信息分类
     setClassifymsg () {
       // this.$axios.post('Index/index/classify').then(result => {
@@ -244,21 +280,13 @@ export default {
       }
       this.$store.commit('setIsPullingUp', true)
     },
-    // 显示隐藏省市县下拉框
-    choose () {
-      this.show = !this.show
-      this.turnimg = !this.turnimg
-      this.searchData.area = ''
-    },
-    // 省市县三级联动
-    onSelected (data) {
-      this.searchData.area = data.province.value + data.city.value + data.area.value
-      this.show = false
-      this.turnimg = false
-    },
-    // 信息分类发生变化时触发
+    // 修改信息分类的方法
     setSearchDataClassifymsg (classifymsg) {
       this.searchData.classifymsg = classifymsg
+    },
+    // 修改地区的方法
+    setSearchDataArea (area) {
+      this.searchData.area = area
     },
     // 设置查看自己发布的信息时隐藏信息详情部分按钮
     setUserlistshow () {
@@ -282,6 +310,7 @@ export default {
       this.searchData.msg_status = 2
     }
     this.getMsgList()
+    this.setAREA()
   }
 }
 </script>
