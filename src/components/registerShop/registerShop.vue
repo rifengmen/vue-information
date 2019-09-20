@@ -270,6 +270,25 @@ export default {
         throw error
       })
     },
+    // 设置店铺分类
+    setClassify () {
+      this.$axios.post('Index/index/shopclass').then(result => {
+        let data = result.data.data
+        let arr = []
+        arr[0] = {'value': 0, 'label': '全部分类'}
+        if (data) {
+          for (let i = 0; i < data.length; i++) {
+            let _arr = {}
+            _arr['value'] = data[i].id
+            _arr['label'] = data[i].name
+            arr.push(_arr)
+          }
+        }
+        this.$store.commit('setClassify', arr)
+      }).catch(error => {
+        throw error
+      })
+    },
     // 判断是否注册店铺，如已注册则在页面加载前抓取注册信息进行展示
     isRegister () {
       if (this.userInfo.shopid && this.userInfo.shopid !== '0') {
@@ -303,7 +322,7 @@ export default {
     },
     // 后退
     backs () {
-      this.$router.back()
+      this.$router.push('/')
     },
     // 验证是否可以提交信息
     isSend () {
@@ -421,6 +440,7 @@ export default {
     }
   },
   created () {
+    this.setClassify()
     // 加载店铺信息
     this.isRegister()
     // 获取认证金额
