@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const author = () => import(/* webpackChunkName: 'wx' */ '@/components/author/author')
+const author = () => import(/* webpackChunkName: 'wechart' */ '@/components/author/author')
 const index = () => import(/* webpackChunkName: 'shop' */ '@/components/index/index')
 const userInfo = () => import(/* webpackChunkName: 'userinfo' */ '@/components/userInfo/userInfo')
 const userList = () => import(/* webpackChunkName: 'userinfo' */ '@/components/userInfo/userList')

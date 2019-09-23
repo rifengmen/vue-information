@@ -8,7 +8,6 @@ import axios from 'axios'
 import qs from 'qs'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Distpicker from 'v-distpicker'
 import 'normalize.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -20,7 +19,6 @@ Vue.prototype.$axios = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 Vue.prototype.$qs = qs
 Vue.use(ElementUI)
-Vue.use(Distpicker)
 Vue.prototype.IMGURL = 'http://39.98.94.137:81/'
 
 router.beforeEach((to, from, next) => {
