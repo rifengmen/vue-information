@@ -1,22 +1,22 @@
 const state = {
   // 用户信息
   userInfo: {
-    // // 用户id
-    // userId: '1',
-    // // 用户名
-    // username: '我是测试用户名',
-    // // 用户头像
-    // userimg: '',
-    // // 会员到期时间
-    // time: '9999-99-99',
-    // // 注册店铺id
-    // shopid: '5',
-    // // 煤球数量
-    // pointsA: '50',
-    // // 积分数量
-    // pointsB: '80',
-    // // 与排名第一相差煤球数量
-    // difference: '100'
+    // 用户id
+    userId: '1',
+    // 用户名
+    username: '我是测试用户名',
+    // 用户头像
+    userimg: '',
+    // 会员到期时间
+    time: '9999-99-99',
+    // 注册店铺id
+    shopid: '5',
+    // 煤球数量
+    pointsA: '50',
+    // 积分数量
+    pointsB: '80',
+    // 与排名第一相差煤球数量
+    difference: '100'
   },
   // 行政区域
   AREA: [
