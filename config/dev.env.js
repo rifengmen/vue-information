@@ -4,5 +4,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_ROOT: '"http://39.98.94.137:81/"' // 开发环境服务器地址
+  API_ROOT: '"http://h5gq.zhaomeiji.com/"' // 开发环境服务器地址
 })

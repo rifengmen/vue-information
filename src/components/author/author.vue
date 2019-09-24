@@ -10,19 +10,11 @@ export default {
   data () {
     return {
       token: '',
-      code: '',
-      winUrl: ''
+      code: ''
     }
   },
   computed: {},
   methods: {
-    // // 获取携带code的url
-    // getCodeUrl () {
-    //   const APPID = 'wx2ef679f3ae852ad9'
-    //   const REDIRECT_URI = 'http://www.bibejc.com'
-    //   const URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + APPID + '&redirect_uri=' + REDIRECT_URI + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-    //   window.location.href = URL
-    // },
     // 发送token设置用户信息
     setUserInfo () {
       let data = this.$qs.stringify(this.token)
@@ -47,8 +39,8 @@ export default {
     // }
     // 非静默授权，第一次有弹框
     getCode () {
-      const APPID = 'wx2ef679f3ae852ad9'
-      const REDIRECT_URI = 'http://www.bibejc.com'
+      const APPID = 'wx990037c3569aa495'
+      const REDIRECT_URI = 'http://h5gq.zhaomeiji.com/'
       const URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + APPID + '&redirect_uri=' + REDIRECT_URI + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
       // 截取code
       this.getUrlCode()
@@ -56,9 +48,11 @@ export default {
       if (this.code == null || this.code === '') {
         window.location.href = URL
       } else {
+        this.getUrlCode()
         // 自己的业务逻辑
         let data = this.$qs.stringify({code: this.code})
         console.log(data)
+        confirm(location.search)
         // // 发送给后台并请求token
         // this.$axios.post('', data).then(result => {
         //   window.localStorage.setItem('user_token', result.data.token)
@@ -69,7 +63,7 @@ export default {
     },
     // 截取url中的code方法
     getUrlCode () {
-      var url = location.search
+      let url = location.search
       this.code = url.substring(url.indexOf('code=') + 5, url.indexOf('state=') - 1)
     }
   },
