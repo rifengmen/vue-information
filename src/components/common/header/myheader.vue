@@ -24,24 +24,6 @@ export default {
     userInfo () {
       return this.$store.state.userInfo
     }
-  },
-  methods: {
-    // 获取登录用户信息
-    getUserInfo () {
-      console.log('获取登录用户信息')
-      // this.$axios.get('').then(result => {
-      //   if (result.data.code === 0) {
-      //     this.$message.error(result.data.msg)
-      //   } else if (result.data.code === 1) {
-      //     this.$store.commit('setUserInfo', result.data.data)
-      //   }
-      // }).catch(error => {
-      //   throw error
-      // })
-    }
-  },
-  created () {
-    this.getUserInfo()
   }
 }
 </script>
