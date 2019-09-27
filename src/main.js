@@ -23,14 +23,12 @@ Vue.prototype.IMGURL = 'http://h5gq.zhaomeiji.com/'
 
 router.beforeEach((to, from, next) => {
   // 第一次进入项目
-  let token = window.localStorage.getItem('user_token')
-  if (!token && to.path !== '/author') {
+  let token = JSON.parse(window.localStorage.getItem('zmj_user_token'))
+  if (!token && to.fullPath !== '/author') {
     // 保存用户进入的url
-    window.localStorage.setItem('beforeLoginUrl', to.fullPath)
+    window.localStorage.setItem('zmj_beforeLoginUrl', JSON.stringify(to.fullPath))
     next('/author')
     return false
-  } else if (token && !store.getters.userInfo) {
-    next('/author')
   }
   NProgress.start()
   next()

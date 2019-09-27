@@ -186,7 +186,7 @@ export default {
   methods: {
     // 获取行政区域
     setAREA () {
-      this.$axios.post('Index/index/area').then(result => {
+      this.$axios.post('index/index/area').then(result => {
         if (result.data.code === 0) {
           let data = result.data.data
           let arr = []
@@ -217,7 +217,7 @@ export default {
     },
     // 设置店铺分类
     setClassify () {
-      this.$axios.post('Index/index/shopclass').then(result => {
+      this.$axios.post('index/index/shopclass').then(result => {
         let data = result.data.data
         let arr = []
         arr[0] = {'value': 0, 'label': '全部分类'}
@@ -243,7 +243,7 @@ export default {
       this.searchData.page = '1'
       this.isShowLoading = true
       let data = this.$qs.stringify(this.searchData)
-      this.$axios.post('Index/index/shops', data).then(result => {
+      this.$axios.post('index/index/shops', data).then(result => {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
           this.isShowLoading = false
@@ -278,7 +278,7 @@ export default {
       if (currentpage > total) {
         this.loadText = '暂无更多数据'
       } else {
-        this.$axios.post('Index/index/shops', data).then(result => {
+        this.$axios.post('index/index/shops', data).then(result => {
           this.$store.commit('setIsPullingUp', true)
           if (result.data.code === 0) {
             this.isShowLoading = false

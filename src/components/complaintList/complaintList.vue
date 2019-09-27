@@ -75,7 +75,7 @@ export default {
     getComplaintList () {
       let _data = {userId: this.userInfo.userId}
       let data = this.$qs.stringify(_data)
-      this.$axios.post('Index/index/complainlits', data).then(result => {
+      this.$axios.post('index/index/complainlits', data).then(result => {
         this.complaintList = result.data.data
       }).catch(error => {
         throw error

@@ -145,7 +145,7 @@ export default {
   methods: {
     // 获取行政区域
     setAREA () {
-      this.$axios.post('Index/index/area').then(result => {
+      this.$axios.post('index/index/area').then(result => {
         if (result.data.code === 0) {
           let data = result.data.data
           let arr = []
@@ -184,7 +184,7 @@ export default {
     },
     // 设置信息分类
     setClassifymsg () {
-      this.$axios.post('Index/index/classify').then(result => {
+      this.$axios.post('index/index/classify').then(result => {
         let data = result.data.data
         let arr = []
         arr[0] = {'value': 0, 'label': '全部分类'}
@@ -245,7 +245,7 @@ export default {
           phone: this.registerData.phone
         }
         let data = this.$qs.stringify(_data)
-        this.$axios.post('Index/index/askbuyadd', data).then(result => {
+        this.$axios.post('index/index/askbuyadd', data).then(result => {
           if (result.data.code === 0) {
             let _this = this
             this.$message.success({

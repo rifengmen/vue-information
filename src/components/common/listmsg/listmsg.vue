@@ -148,7 +148,7 @@ export default {
   methods: {
     // 获取行政区域
     setAREA () {
-      this.$axios.post('Index/index/area').then(result => {
+      this.$axios.post('index/index/area').then(result => {
         if (result.data.code === 0) {
           let data = result.data.data
           let arr = []
@@ -179,7 +179,7 @@ export default {
     },
     // 设置信息分类
     setClassifymsg () {
-      // this.$axios.post('Index/index/classify').then(result => {
+      // this.$axios.post('index/index/classify').then(result => {
       //   let data = result.data.data
       //   let arr = []
       //   arr[0] = {'value': 0, 'label': '全部分类'}
@@ -205,7 +205,7 @@ export default {
       // }).catch(error => {
       //   throw error
       // })
-      this.$axios.post('Index/index/classify').then(result => {
+      this.$axios.post('index/index/classify').then(result => {
         let data = result.data.data
         let arr = []
         arr[0] = {'value': 0, 'label': '全部分类'}
@@ -233,7 +233,7 @@ export default {
         page: this.searchData.page
       }
       let data = this.$qs.stringify(senddata)
-      this.$axios.post('Index/index/askbuy', data).then(result => {
+      this.$axios.post('index/index/askbuy', data).then(result => {
         this.$store.commit('setIsPullingDown', true)
         if (result.data.code === 0) {
           this.isShowLoading = false
@@ -268,7 +268,7 @@ export default {
       if (currentpage > total) {
         this.loadText = '暂无更多数据'
       } else {
-        this.$axios.post('Index/index/askbuy', data).then(result => {
+        this.$axios.post('index/index/askbuy', data).then(result => {
           this.$store.commit('setIsPullingUp', true)
           if (result.data.code === 0) {
             this.isShowLoading = false

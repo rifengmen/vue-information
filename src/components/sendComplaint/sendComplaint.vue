@@ -127,7 +127,7 @@ export default {
     complaintSend () {
       if (this.send) {
         let data = this.$qs.stringify(this.complaintData)
-        this.$axios.post('Index/index/complainadd', data).then(result => {
+        this.$axios.post('index/index/complainadd', data).then(result => {
           if (result.data.code === 0) {
             let _this = this
             this.$message.success({
