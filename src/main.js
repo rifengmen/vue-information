@@ -21,19 +21,19 @@ Vue.prototype.$qs = qs
 Vue.use(ElementUI)
 Vue.prototype.IMGURL = 'http://h5gq.zhaomeiji.com/'
 
-router.beforeEach((to, from, next) => {
-  // 第一次进入项目
-  let token = JSON.parse(window.localStorage.getItem('zmj_user_token'))
-  if (!token && to.fullPath !== '/author') {
-    // 保存用户进入的url
-    window.localStorage.setItem('zmj_beforeLoginUrl', JSON.stringify(to.fullPath))
-    next('/author')
-    return false
-  }
-  NProgress.start()
-  next()
-})
-
+// router.beforeEach((to, from, next) => {
+//   // 第一次进入项目
+//   let token = JSON.parse(window.localStorage.getItem('zmj_user_token'))
+//   if (!token && to.fullPath !== '/author') {
+//     // 保存用户进入的url
+//     window.localStorage.setItem('zmj_beforeLoginUrl', JSON.stringify(to.fullPath))
+//     next('/author')
+//     return false
+//   }
+//   NProgress.start()
+//   next()
+// })
+NProgress.start()
 router.afterEach(() => {
   NProgress.done()
 })

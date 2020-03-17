@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const author = () => import(/* webpackChunkName: 'wechart' */ '@/components/author/author')
+// const author = () => import(/* webpackChunkName: 'wechart' */ '@/components/author/author')
 const index = () => import(/* webpackChunkName: 'shop' */ '@/components/index/index')
 const userInfo = () => import(/* webpackChunkName: 'userinfo' */ '@/components/userInfo/userInfo')
 const userList = () => import(/* webpackChunkName: 'userinfo' */ '@/components/userInfo/userList')
@@ -19,7 +19,7 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path: '/author', name: 'author', component: author},
+    // {path: '/author', name: 'author', component: author},
     {path: '/', name: 'index', component: index},
     {path: '/userInfo', name: 'userInfo', component: userInfo},
     {path: '/userList', name: 'userList', component: userList},
